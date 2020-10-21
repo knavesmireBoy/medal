@@ -1,5 +1,12 @@
 (function() {
 	"use strict";
+    
+  function doAlty(a){
+      return function(){
+          return a.reverse()[0];
+      }
+  }
+
 
 	function noOp() {
 		return function() {};
@@ -147,6 +154,17 @@
 			return func.apply(null, args.concat(rest));
 		}
 	}
+    
+    function negate(predicate) {
+        return function() {
+            return !predicate.apply(this, arguments);
+        };
+    }
+    
+    function getPredicate(cond, predicate) {
+			return predicate(getResult(cond)) ? predicate : negate(predicate);
+		}
+
 
 	function getNextElement(node) {
 		if (node && node.nodeType === 1) {
@@ -174,17 +192,66 @@
 	function removeElement(node) {
 		return node.parentNode.removeChild(node);
 	}
+    
+    function decrement(){
+         console.log('>>')
+        recur.i -= 1;
+    }
+    function increment(){
+        console.log('<<')
+        recur.i += 1;
+    }
+    
+    function plus(){
+        console.log('plus')
+        recur.i = 200;
+    }
+    
+     function minus(){
+          console.log('minus')
+        recur.i = -200;
+    }
+    
+    function below(){
+        console.log('b')
+        return recur.i <= 0;
+    }
+    
+    function above(){
+        console.log('a')
+        return recur.i >= 100;
+    }
+    
+    var ment = doAlty([increment,decrement]),
+        cond = doAlty([below,above]),
+        dir = doAlty([minus,plus]);
 
+    
 	function recur() {
-		if (recur.i <= 0) {
-			recur.i = 200;
+        var nexty,
+            style = new Map([
+					['opacity', 0]
+				]);
+				attrMap($('base'), new Map([
+					['style', [style]]
+				]));
+                    
+		if (below()){
+            console.log(111)
+			plus();
 			//1 copy base.src to slide.src
 			//2 set base.src to next
 			//3 set opacity of slide to 200            
 			loader(compose(driller(['src']), getChild, $$('base')), 'slide');
-			loader(films.play.bind(films), 'base');
+			loader(films.play.bind(films), 'base').then(arg => console.log(arg));
+             //var func = partial(gtEq, $('slide').clientWidth, $('slide').clientHeight);
+             //best(func, [lcsp, ptrt])();
+            //nexty = ment();
+            //cond();
+            //dir();
 			recur();
 		} else {
+            console.log(99)
 			if ($('slide')) {
 				var style = new Map([
 					['opacity', recur.i / 100]
@@ -193,7 +260,7 @@
 					['style', [style]]
 				]));
 			}
-			recur.i -= 1;
+            decrement();
 			recur.t = window.requestAnimationFrame(recur);
 		}
 	}
@@ -316,7 +383,8 @@
 		validateProperty = (o, p) => o & o[p],
 		invoke = (f, ...args) => f.apply(null, args.map(getResult)),
 		equals = (a, b) => a === b,
-		greaterOrEqual = partial(invoke, (a, b) => a >= b),
+		greaterOrEqual = (invoke, (a, b) => a >= b),
+		gtEq = curryLeft((a, b) => a >= b),
 		doAlt = actions => actions.reverse()[0](),
 		defer_once = (f) => (arg) => () => f(arg),
 		twice = (f) => (arg1) => (arg2) => f(arg2, arg1),
@@ -338,6 +406,10 @@
         divideBy = twice((a, b) => a / b),
 		$ = thrice(caller)('getElementById')(document),
 		$$ = thricedefer(caller)('getElementById')(document),
+        enable = document.body.classList.add.bind(document.body.classList),
+		disable = document.body.classList.remove.bind(document.body.classList),
+        lcsp = curryLeftDefer(enable, 'lscp'),
+        ptrt = curryLeftDefer(disable, 'lscp'),
 		target = twice(getter)('target'),
 		text_target = twice(getter)('innerHTML'),
 		node_target = twice(getter)('nodeName'),
@@ -388,13 +460,12 @@
 					[getLoc, forward],
 					[always(true), back]
 				]);
+
 			};
 		},
 		myconsole = thrice(caller)('log')(console),
 		doParse = compose(zero, parser),
 		imgs = [...document.images],
-		adding = document.body.classList.add.bind(document.body.classList),
-		removing = document.body.classList.remove.bind(document.body.classList),
 		gallery = document.querySelector('#gallery'),
 		getSlideChild = compose(getChild, $$('slide')),
 		buttons_cb = (str) => {
@@ -417,17 +488,20 @@
 		setindex = thrice(caller)('find')(films),
 		nextcaller = thricedefer((v, o, p) => o[p]()[v])('next')(films)('value'),
 		prevcaller = thricedefer((v, o, p) => o[p]()[v])('previous')(films)('value'),
-		showtime = curryLeftDefer(adding, 'showtime'),
-		playtime = curryLeftDefer(adding, 'inplay'),
-		exitplay = curryLeftDefer(removing, 'inplay'),
-		exitshow = curryLeftDefer(removing, 'showtime'),
+		showtime = curryLeftDefer(enable, 'showtime'),
+		playtime = curryLeftDefer(enable, 'inplay'),
+		exitplay = curryLeftDefer(disable, 'inplay'),
+		exitshow = curryLeftDefer(disable, 'showtime'),
+          //orient = best()
 		loader = function(caller, id) {
-			loadImage(caller, id).then(img => {
+			return loadImage(caller, id).then(img => {
 				img.parentNode.href = doParse(img.src);
-			}).catch(error => console.error(error));
+                return [img.width, img.height];
+			}).catch(error => console.error(error))
 		},
 		locate = eventing('click', function(e) {
 			locator(twicedefer(loader)('base')(nextcaller), twicedefer(loader)('base')(prevcaller))(e)[1]();
+            best(partial(gtEq, e.target.width, e.target.height), [lcsp, ptrt])();
 		}, gallery),
 		factory = function() {
 			let playbutton = thricedefer(doMap)('txt')('play')($('play')),

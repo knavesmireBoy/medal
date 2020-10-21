@@ -32,11 +32,11 @@
             text-align: right;
         }
         .inplay {
-            background-color: lemonchiffon;
+            background-color: burlywood;
         }
         div {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(6,1fr);
             width: 100%;
             padding: 6px;
             border: solid 1px;
@@ -49,9 +49,24 @@
             width: 40%;
         }
         
+        .lscp div {
+            width: 80%;
+            border: solid 2px red;
+        }
+        
         div a {
-            flex: 1 1 300px;
             border: solid 6px white;
+            max-height: 230px;
+            overflow: hidden;
+        }
+        div a:nth-child(n+7) {
+         max-height: none;
+        }
+        div a:nth-child(7){
+            grid-column: 1/4;
+        }
+        div a:nth-child(8){
+            grid-column: 4/7;
         }
         a img {
             width: 100%;
@@ -68,6 +83,7 @@
         .showtime div a.show, .inplay #slide, #base, .inplay #pause {
             position: static;
             left: 0;
+            max-height: none;
         }
         
         #controls {
@@ -103,7 +119,7 @@
         <a href="Mary Ellen (nee Sykes) & Percy Oldring 1926.jpg"><img src="Mary Ellen (nee Sykes) & Percy Oldring 1926.jpg"></a>
         <a href="Is this George Henry Sykes.jpg"><img src="Is this George Henry Sykes.jpg"></a>
         <a href="Harry Sykes.jpg"><img src="Harry Sykes.jpg"></a>
-            <a href="Isabel Frances (neeSykes) & Herbert Eustace Noble 1929.jpg"><img src="Isabel Frances (neeSykes) & Herbert Eustace Noble 1929.jpg"></a></div>
+        <a href="Isabel Frances (neeSykes) & Herbert Eustace Noble 1929.jpg"><img src="Isabel Frances (neeSykes) & Herbert Eustace Noble 1929.jpg"></a></div>
         <script>
             for (var i of [...document.images]) {
 		new Image().src = i.src;
