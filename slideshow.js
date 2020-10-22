@@ -75,7 +75,7 @@
 	}
 	/* EXPECTS VALUE BEFORE KEY ON RIGHT CURRY*/
 	function doMap(el, v, k) {
-		return attrMap(el, new Map([
+		return attrMap(getResult(el), new Map([
 			[k, v]
 		]));
 	}
@@ -362,6 +362,7 @@
 				return f(node);
 			}
 		}),
+          
 		locator = function(forward, back) {
 			var getLoc = (function(div, subtract, isGreaterEq) {
 				var getThreshold = compose(div, subtract);
@@ -381,6 +382,7 @@
 		},
 		myconsole = thrice(caller)('log')(console),
 		doParse = compose(zero, parser),
+          setCaption = compose(quart((o, v, k, p) => o[p](k, v))('slice')(0)(-4), decodeURIComponent, doParse),
 		imgs = [...document.images],
 		gallery = document.querySelector('#gallery'),
 		getSlideChild = compose(getChild, $$('slide')),
@@ -411,6 +413,7 @@
         orient = function(l,p){
             return function(img){
                 best(partial(gtEq, img.width, img.height), [l,p])();
+                return img.src;
             };
         },
 		loader = function(caller, id) {
@@ -419,6 +422,7 @@
 		locate = eventing('click', function(e) {
 			locator(twicedefer(loader)('base')(nextcaller), twicedefer(loader)('base')(prevcaller))(e)[1]();
 			best(partial(gtEq, e.target.width, e.target.height), [lcsp, ptrt])();
+            ((v) => thrice(doMap)('txt')(setCaption(v))($$('caption')))(e.target.src);
 		}, gallery),
 		recur = (function(l,p) {
 			var player = maker(),
@@ -436,8 +440,6 @@
 					player = maker();
 					recur();
 				} else {
-					$('base').style.opacity = 0;
-					// console.log(recur.i)
 					if ($('slide')) {
 						var style = new Map([
 							['opacity', recur.i / 100]
@@ -486,7 +488,6 @@
 				removePause = compose(removeNodeOnComplete, $$('pause')),
 				removeSlide = compose(removeNodeOnComplete, $$('slide')),
 				removal = defercall('forEach')([removePause, removeSlide])(getResult),
-
 				machSlide = function(source, target) {
 					return new Promise((resolve, reject) => {
 						var el = anCr($('gallery'))('a'),
@@ -556,7 +557,6 @@
 						}
 					};
 				},
-				//mynext = COR(twice(equals)('next'), next_driver),
 				mynext = COR(partial(invoke, equals, 'next'), next_driver),
 				myprev = COR(partial(invoke, equals, 'previous'), prev_driver),
 				listen,
@@ -569,7 +569,7 @@
 			};
 			mynext.setSuccessor(myprev);
 			myprev.setSuccessor(myplayer);
-			recur.i = 200;
+			recur.i = 300;
 			return mynext;
 		},
 		setup = eventing('click', function(e) {
@@ -577,9 +577,10 @@
 				return;
 			}
 			compose(setindex, driller(['target', 'src']))(e);
-			//compose(showtime, thrice(doMap)('id')('base'), twice((arg, f) => f(arg))(clone), target)(e);
-            machBase(e.target, 'base').then(orient(lcsp,ptrt)).then(showtime);
-			compose(thrice(doMap)('id')('controls'), anCrIn(getNextElement(gallery.nextSibling), document.body))('section');
+            compose(thrice(doMap)('id')('controls'), anCrIn(getNextElement(gallery.nextSibling), document.body))('section');
+            compose(thrice(doMap)('id')('caption'), anCrIn(getNextElement(gallery.nextSibling), document.body))('aside');
+            machBase(e.target, 'base').then(orient(lcsp,ptrt)).then((v) => thrice(doMap)('txt')(setCaption(v))($$('caption'))).then(showtime);
+
 			let buttons = ['previous', 'play', 'next'].map(buttons_cb),
 				chain = factory(),
 				controls = eventing('click', function(e) {
