@@ -1,5 +1,7 @@
 (function() {
 	"use strict";
+    
+    
 	var maker = (function(flag) {
 
 		var fadeOut = {
@@ -15,6 +17,7 @@
 			return actions.reverse()[0];
 		};
 	}());
+    
 
 	function noOp() {
 		return function() {};
@@ -85,15 +88,12 @@
 		return new Promise((resolve, reject) => {
 			//dirty way of avoiding adding listener twice 
 			let img = $(id).firstChild;
-			//img = removeElement(img);
+			img = removeElement(img);
 			$(id).appendChild(img);
-			if (!img.ran) {
 				img.addEventListener('load', e => resolve(img));
 				img.addEventListener('error', () => {
 					reject(new Error(`Failed to load image's URL: ${url()}`));
 				});
-			}
-			img.ran = img.ran || true;
 			img.src = doParse(url());
 		});
 	}
@@ -156,12 +156,14 @@
 			};
 		});
 	}
-	//simple version that simply expects the remainder of the arguments on the second call
+    
+            //simple version that simply expects the remainder of the arguments on the second call
 	function partial(func, ...args) {
 		return function(...rest) {
 			return func.apply(null, args.concat(rest));
 		}
 	}
+
 
 	function negate(predicate) {
 		return function() {
@@ -200,24 +202,35 @@
 		return node.parentNode.removeChild(node);
 	}
 	var recur = (function() {
-		var player = maker();
+        
+		var player = maker(),
+            doc = document.body.classList;
+
+
 		return function() {
             if(!recur.t){
                 //swap next image into base as initial pic is copy of slide
-               loader(films.play.bind(films), 'base').then(arg => console.log(arg));
+               loader(films.play.bind(films), 'base');
             }
 			if (player.validate()) {
 				if (recur.i <= 0) {
-					loader(compose(driller(['src']), getChild, $$('base')), 'slide');
-					loader(films.play.bind(films), 'base').then(arg => console.log(arg));
+					loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(([w,h])=> {
+                        if(w > h){
+                            doc.add('lscp');
+                        }
+                        else {
+                            doc.remove('lscp');
+                        }
+                        
+                    });
+					loader(films.play.bind(films), 'base');
 				}
-				//var func = partial(gtEq, $('slide').clientWidth, $('slide').clientHeight);
-				//best(func, [lcsp, ptrt])();
+				
 				player = maker();
 				recur();
 			} else {
 				$('base').style.opacity = 0;
-                console.log(recur.i)
+               // console.log(recur.i)
 				if ($('slide')) {
 					var style = new Map([
 						['opacity', recur.i / 100]

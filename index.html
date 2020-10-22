@@ -19,7 +19,7 @@
             width: 100%;
             box-sizing: border-box;
         }
-        #slide, #pause {
+        #pause {
             margin-left: -100%;
         }
         .inplay button:nth-child(2)  {
@@ -41,21 +41,33 @@
             padding: 6px;
             border: solid 1px;
             margin: 0 auto;
-            
         }
+
         .showtime div {
             display: block;
             overflow: hidden;
-            width: 40%;
+            width: 30%;
+            transition: all 1s;
+            border-width: 0;
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 1px 1px 20px rgba(166,133,77,.75);
+        }
+        
+        .showtime div a {
+            border: solid 0px seashell;
         }
         
         .lscp div {
             width: 80%;
-            border: solid 2px red;
+        }
+        
+        .inplay #base {
+            display: none;
         }
         
         div a {
-            border: solid 6px white;
+            border: solid 6px seashell;
             max-height: 230px;
             overflow: hidden;
         }
@@ -88,12 +100,13 @@
         
         #controls {
             text-align: center;
-            background-color: rgba(111,111,111,.5);
+            background-color: rgba(166,133,77,.75);
             border-radius: 12px;
             border: solid 1px white;
-            width: 30%;
             margin: 0em auto;
             z-index: 1;
+            transform: translateY(1em);
+            display: inline-block;
             /*
             transition: transform 1s; 
             transform: translateY(-4em);
@@ -113,7 +126,7 @@
     </style>
     </head>
     <body>
-        <!--
+        
         <div id="gallery">
         <a href="Isabella_Frances_Sykes.jpg.jpg"><img src="Isabella_Frances_Sykes.jpg"></a>
         <a href="John George Sykes & Violet King 1928.jpg.jpg"><img src="John George Sykes & Violet King 1928.jpg"></a>
@@ -122,15 +135,15 @@
         <a href="Mary Ellen (nee Sykes) & Percy Oldring 1926.jpg"><img src="Mary Ellen (nee Sykes) & Percy Oldring 1926.jpg"></a>
         <a href="Is this George Henry Sykes.jpg"><img src="Is this George Henry Sykes.jpg"></a>
         <a href="Harry Sykes.jpg"><img src="Harry Sykes.jpg"></a>
-        <a href="Isabel Frances (neeSykes) & Herbert Eustace Noble 1929.jpg"><img src="Isabel Frances (neeSykes) & Herbert Eustace Noble 1929.jpg"></a></div>-->
-          <div id="gallery">
+        <a href="Isabel Frances (neeSykes) & Herbert Eustace Noble 1929.jpg"><img src="Isabel Frances (neeSykes) & Herbert Eustace Noble 1929.jpg"></a></div>
+        <!--<div id="gallery">
         <a href="db005.jpg"><img src="db005.jpg"></a>
         <a href="hb007.jpg"><img src="hb007.jpg"></a>
         <a href="lp001.jpg"><img src="lp001.jpg"></a>
         <a href="ca003.jpg"><img src="ca003.jpg"></a>
         <a href="kd004.jpg"><img src="kd004.jpg"></a>
         <a href="dr016.jpg"><img src="dr016.jpg"></a>
-        </div>
+        </div>-->
         <script>
             for (var i of [...document.images]) {
 		new Image().src = i.src;
