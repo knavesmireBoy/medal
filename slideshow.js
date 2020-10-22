@@ -414,7 +414,7 @@
             };
         },
 		loader = function(caller, id) {
-			return loadImage(caller, id).then(orient(lcsp,ptrt)).catch(error => console.error(error))
+			return loadImage(caller, id).catch(error => console.error(error))
 		},
 		locate = eventing('click', function(e) {
 			locator(twicedefer(loader)('base')(nextcaller), twicedefer(loader)('base')(prevcaller))(e)[1]();
