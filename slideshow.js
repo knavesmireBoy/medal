@@ -422,7 +422,7 @@
 		}, gallery),
 		recur = (function(l,p) {
 			var player = maker(),
-                cb = ([w,h]) => best(partial(gtEq, w,h), [l,p])();
+                cb = (img) => best(partial(gtEq, img.width,img.height), [l,p])();
 			return function() {
 				if (!recur.t) {
 					//swap next image into base as initial pic is copy of slide
@@ -464,6 +464,19 @@
 			window.cancelAnimationFrame(recur.t);
 			recur.t = null;
 		},
+          machBase = function(source, target) {
+              return new Promise((resolve, reject) => {
+						var el = anCr($('gallery'))('a'),
+							img = anCr(el)('img'),
+							ptL = partial(doMap, el);
+						[
+							['href', doParse(source.src)],
+							['id', target]
+						].forEach(([k, v]) => ptL(v, k));
+						img.addEventListener('load', e => resolve(img));
+						img.src = doParse(el.href);
+					});
+				},
 		factory = function() {
 			let playbutton = thricedefer(doMap)('txt')('play')($('play')),
 				pausebutton = thricedefer(doMap)('txt')('pause')($('play')),
@@ -473,6 +486,7 @@
 				removePause = compose(removeNodeOnComplete, $$('pause')),
 				removeSlide = compose(removeNodeOnComplete, $$('slide')),
 				removal = defercall('forEach')([removePause, removeSlide])(getResult),
+
 				machSlide = function(source, target) {
 					return new Promise((resolve, reject) => {
 						var el = anCr($('gallery'))('a'),
@@ -563,7 +577,8 @@
 				return;
 			}
 			compose(setindex, driller(['target', 'src']))(e);
-			compose(showtime, thrice(doMap)('id')('base'), twice((arg, f) => f(arg))(clone), target)(e);
+			//compose(showtime, thrice(doMap)('id')('base'), twice((arg, f) => f(arg))(clone), target)(e);
+            machBase(e.target, 'base').then(orient(lcsp,ptrt)).then(showtime);
 			compose(thrice(doMap)('id')('controls'), anCrIn(getNextElement(gallery.nextSibling), document.body))('section');
 			let buttons = ['previous', 'play', 'next'].map(buttons_cb),
 				chain = factory(),
