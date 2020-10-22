@@ -233,21 +233,23 @@ var maker = (function (flag){
     
     var recur = (function(){
         
-           var player = maker();
+        var player = maker();
 
         
         return function(){
         $('base').style.opacity = 0;
 		if (player.validate()){
-            console.log('swap')
-			loader(compose(driller(['src']), getChild, $$('base')), 'slide');
-			loader(films.play.bind(films), 'base').then(arg => console.log(arg));
+            console.log('current:'+recur.i)
+            if(recur.i <= 0 ){
+               loader(compose(driller(['src']), getChild, $$('base')), 'slide');
+			loader(films.play.bind(films), 'base').then(arg => console.log(arg)); 
+            }
              //var func = partial(gtEq, $('slide').clientWidth, $('slide').clientHeight);
              //best(func, [lcsp, ptrt])();
             player = maker();
 			recur();
 		} else {
-            console.log('fade', recur.i);
+           // console.log('fade', recur.i);
 			if ($('slide')) {
 				var style = new Map([
 					['opacity', recur.i / 100]
