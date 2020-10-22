@@ -1,50 +1,20 @@
 (function() {
 	"use strict";
-    
-var maker = (function (flag){
-        
-           function decrement(){
-         //console.log('>>')
-        recur.i -= 1;
-    }
-    function increment(){
-        //console.log('<<')
-        recur.i += 1;
-    }
-    
-    function plus(){
-        //console.log('plus')
-        recur.i = 200;
-    }
-    
-     function minus(){
-          //console.log('minus')
-        recur.i = -200;
-    }
-    
-    function below(){
-        console.log('b')
-        return recur.i > 150;
-    }
-    
-    function above(){
-        console.log('a')
-        return recur.i < -150;
-    }
-        
-        var fadeOut = {
-                validate: above,
-                inc: decrement,
-            },        
-       fadeIn =  {
-                validate: below,
-                inc: increment,
-            },
-            actions = [fadeIn, fadeOut];
-        return function(){
-            return actions.reverse()[0];
-        };
-  }());
+	var maker = (function(flag) {
+
+		var fadeOut = {
+				validate: () => recur.i <= -51,
+				inc: () => recur.i -= 1		
+        },
+			fadeIn = {
+				validate: () => recur.i >= 200,
+				inc: () => recur.i += 1
+			},
+			actions = [fadeIn, fadeOut];
+		return function() {
+			return actions.reverse()[0];
+		};
+	}());
 
 	function noOp() {
 		return function() {};
@@ -192,17 +162,16 @@ var maker = (function (flag){
 			return func.apply(null, args.concat(rest));
 		}
 	}
-    
-    function negate(predicate) {
-        return function() {
-            return !predicate.apply(this, arguments);
-        };
-    }
-    
-    function getPredicate(cond, predicate) {
-			return predicate(getResult(cond)) ? predicate : negate(predicate);
-		}
 
+	function negate(predicate) {
+		return function() {
+			return !predicate.apply(this, arguments);
+		};
+	}
+
+	function getPredicate(cond, predicate) {
+		return predicate(getResult(cond)) ? predicate : negate(predicate);
+	}
 
 	function getNextElement(node) {
 		if (node && node.nodeType === 1) {
@@ -230,40 +199,38 @@ var maker = (function (flag){
 	function removeElement(node) {
 		return node.parentNode.removeChild(node);
 	}
-    
-    var recur = (function(){
-        
-        var player = maker();
-
-        
-        return function(){
-        $('base').style.opacity = 0;
-		if (player.validate()){
-            console.log('current:'+recur.i)
-            if(recur.i <= 0 ){
-               loader(compose(driller(['src']), getChild, $$('base')), 'slide');
-			loader(films.play.bind(films), 'base').then(arg => console.log(arg)); 
+	var recur = (function() {
+		var player = maker();
+		return function() {
+            if(!recur.t){
+                //swap next image into base as initial pic is copy of slide
+               loader(films.play.bind(films), 'base').then(arg => console.log(arg));
             }
-             //var func = partial(gtEq, $('slide').clientWidth, $('slide').clientHeight);
-             //best(func, [lcsp, ptrt])();
-            player = maker();
-			recur();
-		} else {
-           // console.log('fade', recur.i);
-			if ($('slide')) {
-				var style = new Map([
-					['opacity', recur.i / 100]
-				]);
-				attrMap($('slide'), new Map([
-					['style', [style]]
-				]));
+			if (player.validate()) {
+				if (recur.i <= 0) {
+					loader(compose(driller(['src']), getChild, $$('base')), 'slide');
+					loader(films.play.bind(films), 'base').then(arg => console.log(arg));
+				}
+				//var func = partial(gtEq, $('slide').clientWidth, $('slide').clientHeight);
+				//best(func, [lcsp, ptrt])();
+				player = maker();
+				recur();
+			} else {
+				$('base').style.opacity = 0;
+                console.log(recur.i)
+				if ($('slide')) {
+					var style = new Map([
+						['opacity', recur.i / 100]
+					]);
+					attrMap($('slide'), new Map([
+						['style', [style]]
+					]));
+				}
+				player.inc();
+				recur.t = window.requestAnimationFrame(recur);
 			}
-            player.inc();
-			recur.t = window.requestAnimationFrame(recur);
-		}
-        };
-    }());
-
+		};
+	}());
 
 	function clear(flag) {
 		if ($('slide')) {
@@ -401,15 +368,15 @@ var maker = (function (flag){
 		caller = (v, o, p) => o[p](v),
 		defercall = thricedefer(caller),
 		parser = thrice((o, v, p) => o[p](v))('match')(/[^\/]+\.(jpg|png)$/),
-        add = (a, b) => a + b,
+		add = (a, b) => a + b,
 		subtract = (a, b) => a - b,
-        divideBy = twice((a, b) => a / b),
+		divideBy = twice((a, b) => a / b),
 		$ = thrice(caller)('getElementById')(document),
 		$$ = thricedefer(caller)('getElementById')(document),
-        enable = document.body.classList.add.bind(document.body.classList),
+		enable = document.body.classList.add.bind(document.body.classList),
 		disable = document.body.classList.remove.bind(document.body.classList),
-        lcsp = curryLeftDefer(enable, 'lscp'),
-        ptrt = curryLeftDefer(disable, 'lscp'),
+		lcsp = curryLeftDefer(enable, 'lscp'),
+		ptrt = curryLeftDefer(disable, 'lscp'),
 		target = twice(getter)('target'),
 		text_target = twice(getter)('innerHTML'),
 		node_target = twice(getter)('nodeName'),
@@ -460,7 +427,6 @@ var maker = (function (flag){
 					[getLoc, forward],
 					[always(true), back]
 				]);
-
 			};
 		},
 		myconsole = thrice(caller)('log')(console),
@@ -492,20 +458,20 @@ var maker = (function (flag){
 		playtime = curryLeftDefer(enable, 'inplay'),
 		exitplay = curryLeftDefer(disable, 'inplay'),
 		exitshow = curryLeftDefer(disable, 'showtime'),
-          //orient = best()
+		//orient = best()
 		loader = function(caller, id) {
 			return loadImage(caller, id).then(img => {
 				img.parentNode.href = doParse(img.src);
-                return [img.width, img.height];
+				return [img.width, img.height];
 			}).catch(error => console.error(error))
 		},
 		locate = eventing('click', function(e) {
 			locator(twicedefer(loader)('base')(nextcaller), twicedefer(loader)('base')(prevcaller))(e)[1]();
-            best(partial(gtEq, e.target.width, e.target.height), [lcsp, ptrt])();
+			best(partial(gtEq, e.target.width, e.target.height), [lcsp, ptrt])();
 		}, gallery),
 		factory = function() {
 			let playbutton = thricedefer(doMap)('txt')('play')($('play')),
-                pausebutton = thricedefer(doMap)('txt')('pause')($('play')),
+				pausebutton = thricedefer(doMap)('txt')('pause')($('play')),
 				doButton = defer_once(doAlt)([playbutton, pausebutton]),
 				doSlide = defer_once(doAlt)([clear, recur]),
 				doDisplay = defer_once(doAlt)([playtime]),
@@ -583,7 +549,7 @@ var maker = (function (flag){
 				},
 				//mynext = COR(twice(equals)('next'), next_driver),
 				mynext = COR(partial(invoke, equals, 'next'), next_driver),
-                myprev = COR(partial(invoke, equals, 'previous'), prev_driver),
+				myprev = COR(partial(invoke, equals, 'previous'), prev_driver),
 				listen,
 				myplayer = COR(function() {
 					pauser();
@@ -594,7 +560,7 @@ var maker = (function (flag){
 			};
 			mynext.setSuccessor(myprev);
 			myprev.setSuccessor(myplayer);
-			recur.i = 150;
+			recur.i = 200;
 			return mynext;
 		},
 		setup = eventing('click', function(e) {
@@ -628,5 +594,5 @@ var maker = (function (flag){
 			setup.unrender();
 		}, gallery);
 	setup.render();
-    var list = compose(twice(subtract)(4), divideBy(2), partial(add, 11));
+	var list = compose(twice(subtract)(4), divideBy(2), partial(add, 11));
 }());
