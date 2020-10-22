@@ -1,12 +1,50 @@
 (function() {
 	"use strict";
     
-  function doAlty(a){
-      return function(){
-          return a.reverse()[0];
-      }
-  }
-
+var maker = (function (flag){
+        
+           function decrement(){
+         //console.log('>>')
+        recur.i -= 1;
+    }
+    function increment(){
+        //console.log('<<')
+        recur.i += 1;
+    }
+    
+    function plus(){
+        //console.log('plus')
+        recur.i = 200;
+    }
+    
+     function minus(){
+          //console.log('minus')
+        recur.i = -200;
+    }
+    
+    function below(){
+        console.log('b')
+        return recur.i > 150;
+    }
+    
+    function above(){
+        console.log('a')
+        return recur.i < -150;
+    }
+        
+        var fadeOut = {
+                validate: above,
+                inc: decrement,
+            },        
+       fadeIn =  {
+                validate: below,
+                inc: increment,
+            },
+            actions = [fadeIn, fadeOut];
+        return function(){
+            return actions.reverse()[0];
+        };
+  }());
 
 	function noOp() {
 		return function() {};
@@ -193,65 +231,23 @@
 		return node.parentNode.removeChild(node);
 	}
     
-    function decrement(){
-         console.log('>>')
-        recur.i -= 1;
-    }
-    function increment(){
-        console.log('<<')
-        recur.i += 1;
-    }
-    
-    function plus(){
-        console.log('plus')
-        recur.i = 200;
-    }
-    
-     function minus(){
-          console.log('minus')
-        recur.i = -200;
-    }
-    
-    function below(){
-        console.log('b')
-        return recur.i <= 0;
-    }
-    
-    function above(){
-        console.log('a')
-        return recur.i >= 100;
-    }
-    
-    var ment = doAlty([increment,decrement]),
-        cond = doAlty([below,above]),
-        dir = doAlty([minus,plus]);
+    var recur = (function(){
+        
+           var player = maker();
 
-    
-	function recur() {
-        var nexty,
-            style = new Map([
-					['opacity', 0]
-				]);
-				attrMap($('base'), new Map([
-					['style', [style]]
-				]));
-                    
-		if (below()){
-            console.log(111)
-			plus();
-			//1 copy base.src to slide.src
-			//2 set base.src to next
-			//3 set opacity of slide to 200            
+        
+        return function(){
+        $('base').style.opacity = 0;
+		if (player.validate()){
+            console.log('swap')
 			loader(compose(driller(['src']), getChild, $$('base')), 'slide');
 			loader(films.play.bind(films), 'base').then(arg => console.log(arg));
              //var func = partial(gtEq, $('slide').clientWidth, $('slide').clientHeight);
              //best(func, [lcsp, ptrt])();
-            //nexty = ment();
-            //cond();
-            //dir();
+            player = maker();
 			recur();
 		} else {
-            console.log(99)
+            console.log('fade', recur.i);
 			if ($('slide')) {
 				var style = new Map([
 					['opacity', recur.i / 100]
@@ -260,10 +256,12 @@
 					['style', [style]]
 				]));
 			}
-            decrement();
+            player.inc();
 			recur.t = window.requestAnimationFrame(recur);
 		}
-	}
+        };
+    }());
+
 
 	function clear(flag) {
 		if ($('slide')) {
@@ -594,7 +592,7 @@
 			};
 			mynext.setSuccessor(myprev);
 			myprev.setSuccessor(myplayer);
-			recur.i = 100;
+			recur.i = 150;
 			return mynext;
 		},
 		setup = eventing('click', function(e) {
