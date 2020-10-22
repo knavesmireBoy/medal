@@ -1,13 +1,10 @@
 (function() {
 	"use strict";
-    
-    
 	var maker = (function(flag) {
-
 		var fadeOut = {
 				validate: () => recur.i <= -51,
-				inc: () => recur.i -= 1		
-        },
+				inc: () => recur.i -= 1
+			},
 			fadeIn = {
 				validate: () => recur.i >= 200,
 				inc: () => recur.i += 1
@@ -17,7 +14,6 @@
 			return actions.reverse()[0];
 		};
 	}());
-    
 
 	function noOp() {
 		return function() {};
@@ -90,10 +86,10 @@
 			let img = $(id).firstChild;
 			img = removeElement(img);
 			$(id).appendChild(img);
-				img.addEventListener('load', e => resolve(img));
-				img.addEventListener('error', () => {
-					reject(new Error(`Failed to load image's URL: ${url()}`));
-				});
+			img.addEventListener('load', e => resolve(img));
+			img.addEventListener('error', () => {
+				reject(new Error(`Failed to load image's URL: ${url()}`));
+			});
 			img.src = doParse(url());
 		});
 	}
@@ -156,14 +152,12 @@
 			};
 		});
 	}
-    
-            //simple version that simply expects the remainder of the arguments on the second call
+	//simple version that simply expects the remainder of the arguments on the second call
 	function partial(func, ...args) {
 		return function(...rest) {
 			return func.apply(null, args.concat(rest));
 		}
 	}
-
 
 	function negate(predicate) {
 		return function() {
@@ -200,63 +194,6 @@
 
 	function removeElement(node) {
 		return node.parentNode.removeChild(node);
-	}
-	var recur = (function() {
-        
-		var player = maker(),
-            doc = document.body.classList;
-
-
-		return function() {
-            if(!recur.t){
-                //swap next image into base as initial pic is copy of slide
-               loader(films.play.bind(films), 'base');
-            }
-			if (player.validate()) {
-				if (recur.i <= 0) {
-					loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(([w,h])=> {
-                        if(w > h){
-                            doc.add('lscp');
-                        }
-                        else {
-                            doc.remove('lscp');
-                        }
-                        
-                    });
-					loader(films.play.bind(films), 'base');
-				}
-				
-				player = maker();
-				recur();
-			} else {
-				$('base').style.opacity = 0;
-               // console.log(recur.i)
-				if ($('slide')) {
-					var style = new Map([
-						['opacity', recur.i / 100]
-					]);
-					attrMap($('slide'), new Map([
-						['style', [style]]
-					]));
-				}
-				player.inc();
-				recur.t = window.requestAnimationFrame(recur);
-			}
-		};
-	}());
-
-	function clear(flag) {
-		if ($('slide')) {
-			var val = flag ? 1 : recur.i / 100,
-				style = new Map([
-					['opacity', val]
-				]);
-			attrMap($('slide'), new Map([
-				['style', [style]]
-			]));
-		}
-		window.cancelAnimationFrame(recur.t);
-		recur.t = null;
 	}
 	class Group {
 		constructor() {
@@ -471,17 +408,62 @@
 		playtime = curryLeftDefer(enable, 'inplay'),
 		exitplay = curryLeftDefer(disable, 'inplay'),
 		exitshow = curryLeftDefer(disable, 'showtime'),
-		//orient = best()
+        orient = function(l,p){
+            return function(img){
+                best(partial(gtEq, img.width, img.height), [l,p])();
+            };
+        },
 		loader = function(caller, id) {
-			return loadImage(caller, id).then(img => {
-				img.parentNode.href = doParse(img.src);
-				return [img.width, img.height];
-			}).catch(error => console.error(error))
+			return loadImage(caller, id).then(orient(lcsp,ptrt)).catch(error => console.error(error))
 		},
 		locate = eventing('click', function(e) {
 			locator(twicedefer(loader)('base')(nextcaller), twicedefer(loader)('base')(prevcaller))(e)[1]();
 			best(partial(gtEq, e.target.width, e.target.height), [lcsp, ptrt])();
 		}, gallery),
+		recur = (function(l,p) {
+			var player = maker(),
+                cb = ([w,h]) => best(partial(gtEq, w,h), [l,p])();
+			return function() {
+				if (!recur.t) {
+					//swap next image into base as initial pic is copy of slide
+					loader(films.play.bind(films), 'base');
+				}
+				if (player.validate()) {
+					if (recur.i <= 0) {
+						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(cb);
+						loader(films.play.bind(films), 'base');
+					}
+					player = maker();
+					recur();
+				} else {
+					$('base').style.opacity = 0;
+					// console.log(recur.i)
+					if ($('slide')) {
+						var style = new Map([
+							['opacity', recur.i / 100]
+						]);
+						attrMap($('slide'), new Map([
+							['style', [style]]
+						]));
+					}
+					player.inc();
+					recur.t = window.requestAnimationFrame(recur);
+				}
+			};
+		}(lcsp, ptrt)),
+		clear = function(flag) {
+			if ($('slide')) {
+				var val = flag ? 1 : recur.i / 100,
+					style = new Map([
+						['opacity', val]
+					]);
+				attrMap($('slide'), new Map([
+					['style', [style]]
+				]));
+			}
+			window.cancelAnimationFrame(recur.t);
+			recur.t = null;
+		},
 		factory = function() {
 			let playbutton = thricedefer(doMap)('txt')('play')($('play')),
 				pausebutton = thricedefer(doMap)('txt')('pause')($('play')),
@@ -607,5 +589,4 @@
 			setup.unrender();
 		}, gallery);
 	setup.render();
-	var list = compose(twice(subtract)(4), divideBy(2), partial(add, 11));
 }());
