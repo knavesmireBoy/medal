@@ -87,9 +87,9 @@
 
     
     function lazyVal(v, el, k) {
+        console.log(el,v,k)
         return invoke(doMap, el,v,k);
     }
-    
 
 	function loadImage(url, id) {
 		return new Promise((resolve, reject) => {
@@ -397,6 +397,7 @@
 		gallery = document.querySelector('#gallery'),
 		getSlideChild = compose(getChild, $$('slide')),
 		getBaseChild = compose(getChild, $$('base')),
+        getImgSrc = compose(driller(['src']), getBaseChild),
 		buttons_cb = (str) => {
 			var el = anCr($('controls'))('button');
 			[
@@ -534,17 +535,18 @@
 						eventing('click', invoke_player, el).render();
 					});
 				},
-                doSetCaption = compose(myconsole, thrice(lazyVal)('txt')($$('caption')), setCaption, driller(['src']), getBaseChild);
-            //doSetCaption()($('gallery'));
-            
-            //console.log(doSetCaption())
-            
-				var doPause = defer_once(doAlt)([partial(doWhen, $$('slide'), unpauser), removePause]),
+                observers = [thrice(lazyVal)('txt')($$('caption')), thrice(lazyVal)('href')($$('base'))],
+                doSetCaption = compose(thrice(lazyVal)('txt')($$('caption')), setCaption, driller(['src']), getBaseChild),
+                publish = defercall('forEach')(observers)(function(ptl, i){
+                    var val = i ? getImgSrc() : compose(setCaption, getImgSrc);
+                    return ptl(val);
+                }),
+                doPause = defer_once(doAlt)([partial(doWhen, $$('slide'), unpauser), removePause]),
 				relocate = curryLeftDefer(caller, null, locate, 'render'),
 				doReLocate = curryLeftDefer(doWhen, $$('slide'), relocate),
 				invoke_player = defercall('forEach')([doSlide, doButton, doDisplay, doPause])(getResult),
-				next_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(nextcaller), playbutton('play'), exitplay, doReLocate, removal, partial(orient(lcsp, ptrt), $$('base')), doSetCaption])(getResult),
-				prev_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(prevcaller), playbutton('play'), exitplay, doReLocate, removal, doSetCaption, partial(orient(lcsp, ptrt), $$('base'))])(getResult),
+				next_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(nextcaller), playbutton('play'), exitplay, doReLocate, removal, partial(orient(lcsp, ptrt), $$('base')), publish])(getResult),
+				prev_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(prevcaller), playbutton('play'), exitplay, doReLocate, removal, partial(orient(lcsp, ptrt), $$('base')), publish])(getResult),
 				pauser = function() {
 					if (!$('slide')) {
 						machSlide('base', 'slide').then(el => {
