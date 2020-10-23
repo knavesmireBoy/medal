@@ -79,6 +79,17 @@
 			[k, v]
 		]));
 	}
+    
+    
+     function invoke (f, ...args) {
+        return f.apply(null, args.map(getResult));
+    }
+
+    
+    function lazyVal(v, el, k) {
+        return invoke(doMap, el,v,k);
+    }
+    
 
 	function loadImage(url, id) {
 		return new Promise((resolve, reject) => {
@@ -298,7 +309,6 @@
 		},
 		always = (arg) => () => arg,
 		validateProperty = (o, p) => o & o[p],
-		invoke = (f, ...args) => f.apply(null, args.map(getResult)),
 		equals = (a, b) => a === b,
 		greaterOrEqual = (invoke, (a, b) => a >= b),
 		gtEq = curryLeft((a, b) => a >= b),
@@ -382,10 +392,11 @@
 		},
 		myconsole = thrice(caller)('log')(console),
 		doParse = compose(zero, parser),
-          setCaption = compose(quart((o, v, k, p) => o[p](k, v))('slice')(0)(-4), decodeURIComponent, doParse),
+        setCaption = compose(quart((o, v, k, p) => o[p](k, v))('slice')(0)(-4), decodeURIComponent, doParse),
 		imgs = [...document.images],
 		gallery = document.querySelector('#gallery'),
 		getSlideChild = compose(getChild, $$('slide')),
+		getBaseChild = compose(getChild, $$('base')),
 		buttons_cb = (str) => {
 			var el = anCr($('controls'))('button');
 			[
@@ -523,15 +534,17 @@
 						eventing('click', invoke_player, el).render();
 					});
 				},
-                doSetCaption = compose(thrice(doMap)('txt'), compose(setCaption, driller(['href']), $$('base')));
+                doSetCaption = compose(myconsole, thrice(lazyVal)('txt')($$('caption')), setCaption, driller(['src']), getBaseChild);
             //doSetCaption()($('gallery'));
+            
+            //console.log(doSetCaption())
             
 				var doPause = defer_once(doAlt)([partial(doWhen, $$('slide'), unpauser), removePause]),
 				relocate = curryLeftDefer(caller, null, locate, 'render'),
 				doReLocate = curryLeftDefer(doWhen, $$('slide'), relocate),
 				invoke_player = defercall('forEach')([doSlide, doButton, doDisplay, doPause])(getResult),
-				next_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(nextcaller), playbutton('play'), exitplay, doReLocate, removal, partial(orient(lcsp, ptrt), $$('base'))])(getResult),
-				prev_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(prevcaller), playbutton('play'), exitplay, doReLocate, removal, compose(partial(twice(invoke)($$('caption')), doSetCaption)), partial(orient(lcsp, ptrt), $$('base'))])(getResult),
+				next_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(nextcaller), playbutton('play'), exitplay, doReLocate, removal, partial(orient(lcsp, ptrt), $$('base')), doSetCaption])(getResult),
+				prev_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(prevcaller), playbutton('play'), exitplay, doReLocate, removal, doSetCaption, partial(orient(lcsp, ptrt), $$('base'))])(getResult),
 				pauser = function() {
 					if (!$('slide')) {
 						machSlide('base', 'slide').then(el => {
