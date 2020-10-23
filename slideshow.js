@@ -75,9 +75,15 @@
 	}
 	/* EXPECTS VALUE BEFORE KEY ON RIGHT CURRY*/
 	function doMap(el, v, k) {
+        var arg = v instanceof Map ? v : new Map([
+			[k, v]
+		]);
+        /*
 		return attrMap(getResult(el), new Map([
 			[k, v]
 		]));
+        */
+        return attrMap(getResult(el), arg);
 	}
 
 	function invoke(f, ...args) {
@@ -85,7 +91,6 @@
 	}
 
 	function lazyVal(v, el, k) {
-		console.log(el, v, k)
 		return invoke(doMap, el, v, k);
 	}
 
@@ -276,7 +281,8 @@
 			return result;
 		}
 	}
-	var eventing = function(type, fn, el, actions = ['preventDefault']) {
+	//https://medium.com/@dtipson/creating-an-es6ish-compose-in-javascript-ac580b95104a
+	const eventing = function(type, fn, el, actions = ['preventDefault']) {
 		function preventer(wrapped, actions, e) {
 			actions.forEach(a => e[a]());
 			return wrapped(e);
@@ -293,9 +299,8 @@
 				return this;
 			}
 		};
-	};
-	//https://medium.com/@dtipson/creating-an-es6ish-compose-in-javascript-ac580b95104a
-	const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args))),
+	},
+          compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args))),
 		//https://tech.mybuilder.com/partial-application-currying-and-composition-using-javascript-es6/
 		curryLeft = (fn, ...args) => {
 			let _curry = (args) => args.length < fn.length ? (..._args) => _curry([...args, ..._args]) : fn(...args);
@@ -419,6 +424,11 @@
 		playtime = curryLeftDefer(enable, 'inplay'),
 		exitplay = curryLeftDefer(disable, 'inplay'),
 		exitshow = curryLeftDefer(disable, 'showtime'),
+        setCaptionOn = compose(thrice(lazyVal)('txt')($$('caption')), setCaption),
+        setCaptionOnWrap = setCaptionOn.wrap((f,img) => {
+              f(img.src);
+              return img;
+          }),
 		observers = [thrice(lazyVal)('txt')($$('caption')), thrice(lazyVal)('href')($$('base'))],
 		publish = defercall('forEach')(observers)(function(ptl, i) {
 			var val = i ? getImgSrc() : compose(setCaption, getImgSrc);
@@ -443,12 +453,16 @@
 				cb = (img) => best(partial(gtEq, img.width, img.height), [l, p])();
 			return function() {
 				if (!recur.t) {
-					//swap next image into base as initial pic is copy of slide
+					//swap next image into base because initial pic is a duplicate
 					loader(films.play.bind(films), 'base');
 				}
 				if (player.validate()) {
 					if (recur.i <= 0) {
-						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(cb);
+						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
+                        /*function(img){
+                            setCaptionOn(img.src);
+                            return img;
+                        }*/
 						loader(films.play.bind(films), 'base');
 					}
 					player = maker();
@@ -458,7 +472,7 @@
 						var style = new Map([
 							['opacity', recur.i / 100]
 						]);
-						attrMap($('slide'), new Map([
+                        doMap($('slide'), new Map([
 							['style', [style]]
 						]));
 					}
@@ -473,9 +487,9 @@
 					style = new Map([
 						['opacity', val]
 					]);
-				attrMap($('slide'), new Map([
-					['style', [style]]
-				]));
+				 doMap($('slide'), new Map([
+                     ['style', [style]]
+						]));
 			}
 			window.cancelAnimationFrame(recur.t);
 			recur.t = null;
@@ -496,12 +510,12 @@
 		factory = function() {
 			let playbutton = thricedefer(doMap)('txt')('play')($('play')),
 				pausebutton = thricedefer(doMap)('txt')('pause')($('play')),
+                removePause = compose(removeNodeOnComplete, $$('pause')),
+				removeSlide = compose(removeNodeOnComplete, $$('slide')),
+				removal = defercall('forEach')([removePause, removeSlide])(getResult),
 				doButton = defer_once(doAlt)([playbutton, pausebutton]),
 				doSlide = defer_once(doAlt)([clear, recur]),
 				doDisplay = defer_once(doAlt)([playtime]),
-				removePause = compose(removeNodeOnComplete, $$('pause')),
-				removeSlide = compose(removeNodeOnComplete, $$('slide')),
-				removal = defercall('forEach')([removePause, removeSlide])(getResult),
 				machSlide = function(source, target) {
 					return new Promise((resolve, reject) => {
 						var el = anCr($('gallery'))('a'),
@@ -527,6 +541,7 @@
 							['id', 'pause'],
 							['style', [styleAttrs]]
 						].forEach(([k, v]) => ptL(v, k));
+                        
 						img.addEventListener('load', e => resolve(img));
 						img.src = doParse(src);
 					});
@@ -537,11 +552,12 @@
 					});
 				},
 				doPause = defer_once(doAlt)([partial(doWhen, $$('slide'), unpauser), removePause]),
+                setOrient = partial(orient(lcsp, ptrt), $$('base')),
 				relocate = curryLeftDefer(caller, null, locate, 'render'),
 				doReLocate = curryLeftDefer(doWhen, $$('slide'), relocate),
 				invoke_player = defercall('forEach')([doSlide, doButton, doDisplay, doPause])(getResult),
-				next_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(nextcaller), playbutton('play'), exitplay, doReLocate, removal, partial(orient(lcsp, ptrt), $$('base')), publish])(getResult),
-				prev_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(prevcaller), playbutton('play'), exitplay, doReLocate, removal, partial(orient(lcsp, ptrt), $$('base')), publish])(getResult),
+				next_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(nextcaller), playbutton('play'), exitplay, doReLocate, setOrient, publish, removal])(getResult),
+				prev_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(prevcaller), playbutton('play'), exitplay, doReLocate, setOrient, publish, removal])(getResult),
 				pauser = function() {
 					if (!$('slide')) {
 						machSlide('base', 'slide').then(el => {
