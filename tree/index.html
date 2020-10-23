@@ -12,7 +12,7 @@
     <style>
         
         body {
-            font: .55em Verdana, serif;
+            font: .3em Helvetica, serif;
             margin: 1%;
             text-align: center;
             background-color: cornflowerblue;
@@ -26,7 +26,8 @@
         
         .tree li {
             list-style: none;
-            width: 6em;
+            width: 5em;
+             border: solid 1px red;
         }
         
         .tree > ul li.spacer {
@@ -76,9 +77,13 @@
             margin: .6em 0 0;
         }
         
-        .offspring::before {
+        .tree ul:nth-of-type(2) li:nth-child(even) {
+            margin: 0 2em 0 0;
+        }
+        
+        .tree ul ul:last-child li:before, .offspring::before {
             content: '__';
-            width: 3em;
+            width: 2.5em;
             height: 4em;
             background-color: cornflowerblue;
             color: cornflowerblue;
@@ -87,6 +92,43 @@
             border-width: 0 2px 0 0;
             margin: 0 0 .5em;
         }
+        
+        .tree ul ul:last-child {
+            margin: .75em 0 0;
+        }
+        
+        .tree ul ul:last-child {
+            border: solid 2px;
+            border-width: 2px 0 0;
+        }
+        .tree ul ul:last-child li:first-child {
+            margin: 0 0 0 -1em;
+        }
+        .tree ul ul:last-child li:nth-child(4) {
+            margin: 0 0 0 3em;
+        }
+        .tree ul ul:last-child li:nth-child(6) {
+            margin: 0 0 0 7em;
+        }
+        
+        .tree ul ul:last-child li:nth-child(8) {
+            margin: 0 0 0 7em;
+        }
+        
+         .tree ul ul:last-child li:nth-child(9) {
+            margin: 0 0 0 7em;
+        }
+        
+        .tree ul ul:last-child li:nth-child(11) {
+            margin: 0 0 0 4em;
+        }
+        
+        .tree ul ul:last-child li:nth-child(16) {
+            margin: 0 4em;
+        }
+        
+        
+        
         
        
     </style>
@@ -98,6 +140,7 @@
                 <li><a>ELLEN<br>Sykes</a></li><span></span><span></span><li><a>GEORGE<br>Sykes</a></li>
                 <ul><li><a>ISABELLA<br>Frances<br>Bonner</a></li><span></span><span></span><li><a>GEORGE<br>Henry<br>Sykes</a></li><li class="spacer"></li></ul>
                 <ul><li><a>EMILY<br>Turner<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>George<br>Sykes</a></li><li><a>MATILDA<br>Platten<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>THOMAS<br>Bonner<br>Sykes</a></li><li><a>ROSINA<br>Watkins<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOSEPH<br>Bonner<br>Sykes</a></li><li class="offspring"><a>MARY<br>Ellen<br>Sykes</a></li><span></span><span></span><li><a>PERCY<br>W<br>Oldring</a></li><li class="offspring"><a>ISABELLA<br>Frances<br>Sykes</a></li><span></span><span></span><li><a>HERBERT<br>E<br>Noble</a></li><li><a>VIOLET<br>L<br>King</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>Sykes<br>&nbsp;</a></li><li><a>GLADYS<br>Maud<br>Frederick</a></li><span></span><span></span><li class="offspring"><a>CHARLES<br>Sykes<br>&nbsp;</a></li><li><a>JESSIE<br>Smith<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>HARRY<br>Sykes<br>&nbsp;</a></li></ul>
+                <ul><li><a>JOSEPH<br>Sykes<br>&nbsp;</a></li><li><a>HARRY<br>Sykes<br>&nbsp;</a></li><li><a>EMILY<br>Sykes<br>&nbsp;</a></li><li><a>JOAN<br>Sykes<br>&nbsp;</a></li><li><a>MOLLY<br>Sykes<br>&nbsp;</a></li><li><a>NEVILLE<br>J<br>Sykes</a></li><li><a>IRIS<br>J<br>Sykes</a></li><li><a>CHRISTINE<br>Oldring<br>&nbsp;</a></li><li><a>BERNICE<br>A<br>Noble</a></li><li><a>MALCOLM<br>G<br>Noble</a></li><li><a>JEFFREY<br>SYKES<br>&nbsp;</a></li><li><a>DOROTHY<br>F<br>Sykes</a></li><li><a>NORMAN<br>V<br>Sykes</a></li><li><a>MARGARET<br>R<br>Sykes</a></li><li><a>JOHN<br>Sykes<br>&nbsp;</a></li><li><a>JEAN<br>G<br>SYKES</a></li><li><a>ANNE<br>Sykes<br>&nbsp;</a></li><li><a>RICHARD<br>Sykes<br>&nbsp;</a></li><li><a>KENNETH<br>Sykes<br>&nbsp;</a></li><li><a>PATRICIA<br>Sykes<br>&nbsp;</a></li></ul>
             </ul>
         </div>
         <script>
