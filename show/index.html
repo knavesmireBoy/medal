@@ -4,13 +4,15 @@
    <meta charset="utf-8"><!-- IE compatibility mode issue -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
-	<title></title>
+	<title>Family Tree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
        <script>
 	document.cookie='resolution='+Math.max(screen.width,screen.height)+'; path=/'; 
 	</script>
     <style>
         
         body {
+            font: 1em 'Tangerine', serif;
             margin: 1% 5%;
             text-align: center;
         }
@@ -22,8 +24,15 @@
         #pause {
             margin-left: -100%;
         }
-        .inplay button:nth-child(2)  {
-            color: red;
+        .inplay button:nth-child(even)  {
+            color: brown;
+        }
+        .inplay button:nth-child(odd)  {
+            color: #999;
+        }
+        
+        .inplay button:nth-child(odd):hover  {
+            color: black;
         }
         section {
             clear: left;
@@ -31,8 +40,11 @@
         aside {
             text-align: right;
         }
+        .showtime {
+            background-color: hsl(25, 100%, 97%);
+        }
         .inplay {
-            background-color: seashell;
+            background-color: hsl(30, 100%, 95%);
         }
         div {
             display: grid;
@@ -46,16 +58,27 @@
         .showtime div {
             display: block;
             overflow: hidden;
-            width: 40vh;
+            width: 45vh;
             transition: all 1s;
             border-width: 0;
-            border-radius: 20px;
             padding: 0;
-            box-shadow: 1px 1px 20px rgba(166,133,77,.75);
+            border-radius: 20px;
+                                    box-shadow: 1px 1px 20px rgba(166,133,77,.75);
+
         }
         
         .showtime div a {
-            border: solid 0px seashell;
+            border: solid 1px white;
+             border-radius: 20px;
+            display: block;
+            box-sizing: border-box;
+        }
+        
+        .showtime div a img{
+            display: block;
+            width: 100%;
+            height: auto;
+
         }
         
         .lscp div {
@@ -100,14 +123,26 @@
         
         #caption {
             text-align: center;
-            font: 1em Georgia;
+            font-size: 2em;
             color: darkblue;
-            margin: 1em;
+            margin: .5em 0 .25em 0;
+            background: none;
+            display: block;
+        }
+        
+        .showtime #close {
+            border-radius: 3px;
+        }
+        
+        #close button {
+           margin: 0 0 0 auto;
+            display: block;
+            color: darkblue;
         }
         
         #controls {
             text-align: center;
-            background-color: rgba(166,133,77,.75);
+            background-color: hsl(40, 30%, 50%);
             border-radius: 12px;
             border: solid 1px white;
             margin: 0em auto;

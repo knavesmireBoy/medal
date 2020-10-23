@@ -410,11 +410,11 @@
 		},
 		close_cb = function(ancr) {
 			var el = anCr(ancr)('button');
-			el.innerHTML = 'close';
+			el.innerHTML = '&#10008';
 			return el;
 		},
 		close_aside = function() {
-			return anCrIn(gallery, document.body)('aside');
+			return compose(thrice(doMap)('id')('close'), anCrIn(gallery, document.body))('aside');
 		},
 		films = new LoopIterator(Group.from(imgs.map(img => img.src))),
 		setindex = thrice(caller)('find')(films),
@@ -425,7 +425,7 @@
 		exitplay = curryLeftDefer(disable, 'inplay'),
 		exitshow = curryLeftDefer(disable, 'showtime'),
         setCaptionOn = compose(thrice(lazyVal)('txt')($$('caption')), setCaption),
-        setCaptionOnWrap = setCaptionOn.wrap((f,img) => {
+        setCaptionOnWrap = setCaptionOn.wrap((f, img) => {
               f(img.src);
               return img;
           }),
@@ -459,20 +459,18 @@
 				if (player.validate()) {
 					if (recur.i <= 0) {
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
-                        /*function(img){
-                            setCaptionOn(img.src);
-                            return img;
-                        }*/
 						loader(films.play.bind(films), 'base');
 					}
 					player = maker();
 					recur();
 				} else {
-					if ($('slide')) {
-						var style = new Map([
+                    var style,
+                        slide = $('slide')
+					if (slide) {
+						style = new Map([
 							['opacity', recur.i / 100]
 						]);
-                        doMap($('slide'), new Map([
+                        doMap(slide, new Map([
 							['style', [style]]
 						]));
 					}
@@ -625,7 +623,7 @@
 					chain = chain.validate('next');
 					chain.handle('next');
 					exitshow();
-					[this, $('controls'), $('base'), $('slide')].forEach(removeNodeOnComplete);
+					[this.parentNode, $('caption'), $('controls'), $('base'), $('slide')].forEach(removeNodeOnComplete);
 					locate.unrender();
 					setup.render();
 				}, compose(close_cb, close_aside));
