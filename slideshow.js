@@ -79,17 +79,15 @@
 			[k, v]
 		]));
 	}
-    
-    
-     function invoke (f, ...args) {
-        return f.apply(null, args.map(getResult));
-    }
 
-    
-    function lazyVal(v, el, k) {
-        console.log(el,v,k)
-        return invoke(doMap, el,v,k);
-    }
+	function invoke(f, ...args) {
+		return f.apply(null, args.map(getResult));
+	}
+
+	function lazyVal(v, el, k) {
+		console.log(el, v, k)
+		return invoke(doMap, el, v, k);
+	}
 
 	function loadImage(url, id) {
 		return new Promise((resolve, reject) => {
@@ -372,7 +370,6 @@
 				return f(node);
 			}
 		}),
-          
 		locator = function(forward, back) {
 			var getLoc = (function(div, subtract, isGreaterEq) {
 				var getThreshold = compose(div, subtract);
@@ -392,12 +389,12 @@
 		},
 		myconsole = thrice(caller)('log')(console),
 		doParse = compose(zero, parser),
-        setCaption = compose(quart((o, v, k, p) => o[p](k, v))('slice')(0)(-4), decodeURIComponent, doParse),
+		setCaption = compose(quart((o, v, k, p) => o[p](k, v))('slice')(0)(-4), decodeURIComponent, doParse),
 		imgs = [...document.images],
 		gallery = document.querySelector('#gallery'),
 		getSlideChild = compose(getChild, $$('slide')),
 		getBaseChild = compose(getChild, $$('base')),
-        getImgSrc = compose(driller(['src']), getBaseChild),
+		getImgSrc = compose(driller(['src']), getBaseChild),
 		buttons_cb = (str) => {
 			var el = anCr($('controls'))('button');
 			[
@@ -422,24 +419,28 @@
 		playtime = curryLeftDefer(enable, 'inplay'),
 		exitplay = curryLeftDefer(disable, 'inplay'),
 		exitshow = curryLeftDefer(disable, 'showtime'),
-        orient = function(l,p){
-            return function(img){
-                best(partial(gtEq, getResult(img).clientWidth, getResult(img).clientHeight), [l,p])();
-                return img.src;
-            };
-        },
+		observers = [thrice(lazyVal)('txt')($$('caption')), thrice(lazyVal)('href')($$('base'))],
+		publish = defercall('forEach')(observers)(function(ptl, i) {
+			var val = i ? getImgSrc() : compose(setCaption, getImgSrc);
+			return ptl(val);
+		}),
+		orient = function(l, p) {
+			return function(img) {
+				best(partial(gtEq, getResult(img).clientWidth, getResult(img).clientHeight), [l, p])();
+				return img.src;
+			};
+		},
 		loader = function(caller, id) {
 			return loadImage(caller, id).catch(error => console.error(error))
 		},
-          
 		locate = eventing('click', function(e) {
 			locator(twicedefer(loader)('base')(nextcaller), twicedefer(loader)('base')(prevcaller))(e)[1]();
-            orient(lcsp,ptrt)(e.target);
-            ((v) => thrice(doMap)('txt')(setCaption(v))($$('caption')))(e.target.src);
+			orient(lcsp, ptrt)(e.target);
+			publish();
 		}, gallery),
-		recur = (function(l,p) {
+		recur = (function(l, p) {
 			var player = maker(),
-                cb = (img) => best(partial(gtEq, img.width,img.height), [l,p])();
+				cb = (img) => best(partial(gtEq, img.width, img.height), [l, p])();
 			return function() {
 				if (!recur.t) {
 					//swap next image into base as initial pic is copy of slide
@@ -479,19 +480,19 @@
 			window.cancelAnimationFrame(recur.t);
 			recur.t = null;
 		},
-          machBase = function(source, target) {
-              return new Promise((resolve, reject) => {
-						var el = anCr($('gallery'))('a'),
-							img = anCr(el)('img'),
-							ptL = partial(doMap, el);
-						[
-							['href', doParse(source.src)],
-							['id', target]
-						].forEach(([k, v]) => ptL(v, k));
-						img.addEventListener('load', e => resolve(img));
-						img.src = doParse(el.href);
-					});
-				},
+		machBase = function(source, target) {
+			return new Promise((resolve, reject) => {
+				var el = anCr($('gallery'))('a'),
+					img = anCr(el)('img'),
+					ptL = partial(doMap, el);
+				[
+					['href', doParse(source.src)],
+					['id', target]
+				].forEach(([k, v]) => ptL(v, k));
+				img.addEventListener('load', e => resolve(img));
+				img.src = doParse(el.href);
+			});
+		},
 		factory = function() {
 			let playbutton = thricedefer(doMap)('txt')('play')($('play')),
 				pausebutton = thricedefer(doMap)('txt')('pause')($('play')),
@@ -535,13 +536,7 @@
 						eventing('click', invoke_player, el).render();
 					});
 				},
-                observers = [thrice(lazyVal)('txt')($$('caption')), thrice(lazyVal)('href')($$('base'))],
-                doSetCaption = compose(thrice(lazyVal)('txt')($$('caption')), setCaption, driller(['src']), getBaseChild),
-                publish = defercall('forEach')(observers)(function(ptl, i){
-                    var val = i ? getImgSrc() : compose(setCaption, getImgSrc);
-                    return ptl(val);
-                }),
-                doPause = defer_once(doAlt)([partial(doWhen, $$('slide'), unpauser), removePause]),
+				doPause = defer_once(doAlt)([partial(doWhen, $$('slide'), unpauser), removePause]),
 				relocate = curryLeftDefer(caller, null, locate, 'render'),
 				doReLocate = curryLeftDefer(doWhen, $$('slide'), relocate),
 				invoke_player = defercall('forEach')([doSlide, doButton, doDisplay, doPause])(getResult),
@@ -596,10 +591,9 @@
 				return;
 			}
 			compose(setindex, driller(['target', 'src']))(e);
-            compose(thrice(doMap)('id')('controls'), anCrIn(getNextElement(gallery.nextSibling), document.body))('section');
-            compose(thrice(doMap)('id')('caption'), anCrIn(getNextElement(gallery.nextSibling), document.body))('aside');
-            machBase(e.target, 'base').then(orient(lcsp,ptrt)).then((v) => thrice(doMap)('txt')(setCaption(v))($$('caption'))).then(showtime);
-
+			compose(thrice(doMap)('id')('controls'), anCrIn(getNextElement(gallery.nextSibling), document.body))('section');
+			compose(thrice(doMap)('id')('caption'), anCrIn(getNextElement(gallery.nextSibling), document.body))('aside');
+			machBase(e.target, 'base').then(orient(lcsp, ptrt)).then((v) => thrice(doMap)('txt')(setCaption(v))($$('caption'))).then(showtime);
 			let buttons = ['previous', 'play', 'next'].map(buttons_cb),
 				chain = factory(),
 				controls = eventing('click', function(e) {
