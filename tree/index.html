@@ -12,16 +12,75 @@
     <style>
         
         body {
-            font: 1em 'Tangerine', serif;
+            font: .75em Verdana, serif;
             margin: 1% 5%;
             text-align: center;
+            background-color: cornflowerblue;
+            color: white;
         }
+        
+        ul, li {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .tree li {
+            list-style: none;
+            width: 6em;
+        }
+        
+        .tree li:last-child {
+            list-style: none;
+            width: 10em;
+        }
+        .tree span {
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            top: 1.5em;
+            width: 2em;
+            height: 4em;
+            border: solid 1px white;
+        }
+        
+        .tree ul>ul span {
+            top: .75em;
+        }
+        
+        .tree span {
+            border-width: 2px 1px 0 0;
+        }
+        
+        .tree span+span {
+            border-width: 2px 0 0 1px;
+        }
+        
+        ul>ul {
+            margin: 2em 0 0;
+        }
+        
+        .tree li a {
+            display: block;
+            border: solid 0;
+        }
+        .tree li {
+            display: inline-block;
+        }
+        li:nth-child(even) a{
+        }
+         li:nth-child(odd) a{
+        }
+        
        
     </style>
     </head>
     <body>
         
-        <div>
+        <div class="tree">
+            <ul>
+                <li><a>ELLEN<br>Sykes</a></li><span></span><span></span><li><a>GEORGE<br>Sykes</a></li>
+                <ul><li><a>ISABELLA<br>Frances<br>Bonner</a></li><span></span><span></span><li><a>GEORGE<br>Henry<br>Sykes</a></li><li></li></ul>
+            </ul>
         </div>
         <script>
             for (var i of [...document.images]) {
