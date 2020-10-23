@@ -12,8 +12,8 @@
     <style>
         
         body {
-            font: .75em Verdana, serif;
-            margin: 1% 5%;
+            font: .55em Verdana, serif;
+            margin: 1%;
             text-align: center;
             background-color: cornflowerblue;
             color: white;
@@ -29,7 +29,7 @@
             width: 6em;
         }
         
-        .tree li:last-child {
+        .tree > ul li.spacer {
             list-style: none;
             width: 10em;
         }
@@ -70,6 +70,23 @@
         }
          li:nth-child(odd) a{
         }
+        .tree ul:nth-of-type(2){
+            border: solid 2px;
+            border-width: 2px 0 0;
+            margin: .6em 0 0;
+        }
+        
+        .offspring::before {
+            content: '__';
+            width: 3em;
+            height: 4em;
+            background-color: cornflowerblue;
+            color: cornflowerblue;
+            display: block;
+            border: solid 2px white;
+            border-width: 0 2px 0 0;
+            margin: 0 0 .5em;
+        }
         
        
     </style>
@@ -79,7 +96,8 @@
         <div class="tree">
             <ul>
                 <li><a>ELLEN<br>Sykes</a></li><span></span><span></span><li><a>GEORGE<br>Sykes</a></li>
-                <ul><li><a>ISABELLA<br>Frances<br>Bonner</a></li><span></span><span></span><li><a>GEORGE<br>Henry<br>Sykes</a></li><li></li></ul>
+                <ul><li><a>ISABELLA<br>Frances<br>Bonner</a></li><span></span><span></span><li><a>GEORGE<br>Henry<br>Sykes</a></li><li class="spacer"></li></ul>
+                <ul><li><a>EMILY<br>Turner<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>George<br>Sykes</a></li><li><a>MATILDA<br>Platten<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>THOMAS<br>Bonner<br>Sykes</a></li><li><a>ROSINA<br>Watkins<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOSEPH<br>Bonner<br>Sykes</a></li><li class="offspring"><a>MARY<br>Ellen<br>Sykes</a></li><span></span><span></span><li><a>PERCY<br>W<br>Oldring</a></li><li class="offspring"><a>ISABELLA<br>Frances<br>Sykes</a></li><span></span><span></span><li><a>HERBERT<br>E<br>Noble</a></li><li><a>VIOLET<br>L<br>King</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>Sykes<br>&nbsp;</a></li><li><a>GLADYS<br>Maud<br>Frederick</a></li><span></span><span></span><li class="offspring"><a>CHARLES<br>Sykes<br>&nbsp;</a></li><li><a>JESSIE<br>Smith<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>HARRY<br>Sykes<br>&nbsp;</a></li></ul>
             </ul>
         </div>
         <script>
@@ -88,6 +106,5 @@
             }
         
         </script>
-        <script src="slideshow.js"></script>
  
     </body>
