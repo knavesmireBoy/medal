@@ -101,8 +101,23 @@
             border: solid 2px white;
             border-width: 0 2px 0 0;
             margin: 0 0 .5em;
+            
         }
-        
+        .tree ul ul:last-child li {
+            position: relative;
+        }
+        .tree li.break:after{
+            position: absolute;
+            top: 0;
+            left: 5em;
+            content: '';
+            width: 4em;
+            height: 1em;
+            background-color: cornflowerblue;
+            color: cornflowerblue;
+            margin-top: -0.5em;
+        },
+  
         .tree ul ul:last-child {
             margin: .75em 0 0;
         }
@@ -110,6 +125,7 @@
         .tree ul ul:last-child {
             border: solid 2px;
             border-width: 2px 0 0;
+            margin: .7em 0 0;
         }
         .tree ul ul:last-child li:first-child {
             margin: 0 0 0 -2.4em;
@@ -139,6 +155,28 @@
             margin: 0 3.9em 0 3.2em;
         }
         
+              .tree li.break:nth-child(5):after{
+            width: 6.8em;
+        }
+        
+             .tree li.break:nth-child(7):after{
+            width: 8.8em;
+        }
+        
+           .tree li.break:nth-child(8):after{
+            width: 9.2em;
+        }
+        
+         .tree li.break:nth-child(10):after{
+            width: 3em;
+        }
+          .tree li.break:nth-child(15):after{
+            width: 3.5em;
+        }
+          .tree li.break:last-child:after{
+            width: 3.5em;
+        }
+        
         
         
         
@@ -152,7 +190,7 @@
                 <li><a>ELLEN<br>Sykes</a></li><span></span><span></span><li><a>GEORGE<br>Sykes</a></li>
                 <ul><li><a>ISABELLA<br>Frances<br>Bonner</a></li><span></span><span></span><li><a>GEORGE<br>Henry<br>Sykes</a></li><li class="spacer"></li></ul>
                 <ul><li><a>EMILY<br>Turner<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>George<br>Sykes</a></li><li><a>MATILDA<br>Platten<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>THOMAS<br>Bonner<br>Sykes</a></li><li><a>ROSINA<br>Watkins<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOSEPH<br>Bonner<br>Sykes</a></li><li class="offspring"><a>MARY<br>Ellen<br>Sykes</a></li><span></span><span></span><li><a>PERCY<br>W<br>Oldring</a></li><li class="offspring"><a>ISABELLA<br>Frances<br>Sykes</a></li><span></span><span></span><li><a>HERBERT<br>E<br>Noble</a></li><li><a>VIOLET<br>L<br>King</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>Sykes<br>&nbsp;</a></li><li><a>GLADYS<br>Maud<br>Frederick</a></li><span></span><span></span><li class="offspring"><a>CHARLES<br>Sykes<br>&nbsp;</a></li><li><a>JESSIE<br>Smith<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>HARRY<br>Sykes<br>&nbsp;</a></li></ul>
-                <ul><li><a>JOSEPH<br>Sykes<br>&nbsp;</a></li><li><a>HARRY<br>Sykes<br>&nbsp;</a></li><li><a>EMILY<br>Sykes<br>&nbsp;</a></li><li><a>JOAN<br>Sykes<br>&nbsp;</a></li><li><a>MOLLY<br>Sykes<br>&nbsp;</a></li><li><a>NEVILLE<br>J<br>Sykes</a></li><li><a>IRIS<br>J<br>Sykes</a></li><li><a>CHRISTINE<br>Oldring<br>&nbsp;</a></li><li><a>BERNICE<br>A<br>Noble</a></li><li><a>MALCOLM<br>G<br>Noble</a></li><li><a>JEFFREY<br>SYKES<br>&nbsp;</a></li><li><a>DOROTHY<br>F<br>Sykes</a></li><li><a>NORMAN<br>V<br>Sykes</a></li><li><a>MARGARET<br>R<br>Sykes</a></li><li><a>JOHN<br>Sykes<br>&nbsp;</a></li><li><a>JEAN<br>G<br>SYKES</a></li><li><a>ANNE<br>Sykes<br>&nbsp;</a></li><li><a>RICHARD<br>Sykes<br>&nbsp;</a></li><li><a>KENNETH<br>Sykes<br>&nbsp;</a></li><li><a>PATRICIA<br>Sykes<br>&nbsp;</a></li></ul>
+                <ul><li><a>JOSEPH<br>Sykes<br>&nbsp;</a></li><li><a>HARRY<br>Sykes<br>&nbsp;</a></li><li class="break"><a>EMILY<br>Sykes<br>&nbsp;</a></li><li><a>JOAN<br>Sykes<br>&nbsp;</a></li><li class="break"><a>MOLLY<br>Sykes<br>&nbsp;</a></li><li><a>NEVILLE<br>J<br>Sykes</a></li><li class="break"><a>IRIS<br>J<br>Sykes</a></li><li class="break"><a>CHRISTINE<br>Oldring<br>&nbsp;</a></li><li><a>BERNICE<br>A<br>Noble</a></li><li class="break"><a>MALCOLM<br>G<br>Noble</a></li><li><a>JEFFREY<br>SYKES<br>&nbsp;</a></li><li><a>DOROTHY<br>F<br>Sykes</a></li><li><a>NORMAN<br>V<br>Sykes</a></li><li><a>MARGARET<br>R<br>Sykes</a></li><li class="break"><a>JOHN<br>Sykes<br>&nbsp;</a></li><li class="break"><a>JEAN<br>G<br>SYKES</a></li><li><a>ANNE<br>Sykes<br>&nbsp;</a></li><li><a>RICHARD<br>Sykes<br>&nbsp;</a></li><li><a>KENNETH<br>Sykes<br>&nbsp;</a></li><li class="break"><a>PATRICIA<br>Sykes<br>&nbsp;</a></li></ul>
             </ul>
         </div>
         <script>
