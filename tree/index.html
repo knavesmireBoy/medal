@@ -15,7 +15,7 @@
             font: .3em Helvetica, serif;
             margin: 1%;
             text-align: center;
-            background-color: cornflowerblue;
+            background-color: hsl(219, 79%, 66%);
             color: white;
         }
         
@@ -66,10 +66,7 @@
         .tree li {
             display: inline-block;
         }
-        li:nth-child(even) a{
-        }
-         li:nth-child(odd) a{
-        }
+
         .tree ul:nth-of-type(2){
             border: solid 2px;
             border-width: 2px 0 0;
@@ -95,15 +92,15 @@
             content: '__';
             width: 2.5em;
             height: 4em;
-            background-color: cornflowerblue;
-            color: cornflowerblue;
+            background-color: hsl(219, 79%, 66%);
+            color: hsl(219, 79%, 66%);
             display: block;
             border: solid 2px white;
             border-width: 0 2px 0 0;
             margin: 0 0 .5em;
             
         }
-        .tree ul ul:last-child li {
+        .tree ul ul li {
             position: relative;
         }
         .tree li.break:after{
@@ -113,8 +110,8 @@
             content: '';
             width: 4em;
             height: 1em;
-            background-color: cornflowerblue;
-            color: cornflowerblue;
+            background-color: hsl(219, 79%, 66%);
+            color: hsl(219, 79%, 66%);
             margin-top: -0.5em;
         },
   
@@ -139,7 +136,6 @@
         
         .tree ul ul:last-child li:nth-child(8) {
             margin: 0 9em 0 8.6em;
-            position: relative;
         }
         
          .tree ul ul:last-child li:nth-child(9) {
@@ -155,7 +151,7 @@
             margin: 0 3.9em 0 3.2em;
         }
         
-              .tree li.break:nth-child(5):after{
+            .tree li.break:nth-child(5):after{
             width: 6.8em;
         }
         
@@ -177,10 +173,26 @@
             width: 3.5em;
         }
         
+        li a i {
+            position: absolute;
+            bottom: -12px;
+            left: -9999px;
+            font: 8px normal Helvetica, sans-serif;
+            background-color: hsl(219, 79%, 50%);
+        }
+        ul li a:hover i, ul li a.show i {
+            left: 4px !important;
+        }
+        
+ 
+        /*
+               ul:nth-of-type(3) li:nth-child(-n+5) a:hover i, ul:nth-of-type(3) li:nth-child(8) a:hover i, ul:nth-of-type(3) li:nth-child(11) a:hover i, ul:nth-of-type(3) li:nth-child(15) a:hover i, ul:nth-of-type(3) li:nth-child(n+17) a:hover i {
+             left: 4px;
+             bottom: -2px;
+        }
+        */
         
         
-        
-       
     </style>
     </head>
     <body>
@@ -188,15 +200,25 @@
         <div class="tree">
             <ul>
                 <li><a>ELLEN<br>Sykes</a></li><span></span><span></span><li><a>GEORGE<br>Sykes</a></li>
-                <ul><li><a>ISABELLA<br>Frances<br>Bonner</a></li><span></span><span></span><li><a>GEORGE<br>Henry<br>Sykes</a></li><li class="spacer"></li></ul>
-                <ul><li><a>EMILY<br>Turner<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>George<br>Sykes</a></li><li><a>MATILDA<br>Platten<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>THOMAS<br>Bonner<br>Sykes</a></li><li><a>ROSINA<br>Watkins<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOSEPH<br>Bonner<br>Sykes</a></li><li class="offspring"><a>MARY<br>Ellen<br>Sykes</a></li><span></span><span></span><li><a>PERCY<br>W<br>Oldring</a></li><li class="offspring"><a>ISABELLA<br>Frances<br>Sykes</a></li><span></span><span></span><li><a>HERBERT<br>E<br>Noble</a></li><li><a>VIOLET<br>L<br>King</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>Sykes<br>&nbsp;</a></li><li><a>GLADYS<br>Maud<br>Frederick</a></li><span></span><span></span><li class="offspring"><a>CHARLES<br>Sykes<br>&nbsp;</a></li><li><a>JESSIE<br>Smith<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>HARRY<br>Sykes<br>&nbsp;</a></li></ul>
-                <ul><li><a>JOSEPH<br>Sykes<br>&nbsp;</a></li><li><a>HARRY<br>Sykes<br>&nbsp;</a></li><li class="break"><a>EMILY<br>Sykes<br>&nbsp;</a></li><li><a>JOAN<br>Sykes<br>&nbsp;</a></li><li class="break"><a>MOLLY<br>Sykes<br>&nbsp;</a></li><li><a>NEVILLE<br>J<br>Sykes</a></li><li class="break"><a>IRIS<br>J<br>Sykes</a></li><li class="break"><a>CHRISTINE<br>Oldring<br>&nbsp;</a></li><li><a>BERNICE<br>A<br>Noble</a></li><li class="break"><a>MALCOLM<br>G<br>Noble</a></li><li><a>JEFFREY<br>SYKES<br>&nbsp;</a></li><li><a>DOROTHY<br>F<br>Sykes</a></li><li><a>NORMAN<br>V<br>Sykes</a></li><li><a>MARGARET<br>R<br>Sykes</a></li><li class="break"><a>JOHN<br>Sykes<br>&nbsp;</a></li><li class="break"><a>JEAN<br>G<br>SYKES</a></li><li><a>ANNE<br>Sykes<br>&nbsp;</a></li><li><a>RICHARD<br>Sykes<br>&nbsp;</a></li><li><a>KENNETH<br>Sykes<br>&nbsp;</a></li><li class="break"><a>PATRICIA<br>Sykes<br>&nbsp;</a></li></ul>
+                <ul><li><a>ISABELLA<br>Frances<br>Bonner<i>Born 1870</i></a></li><span></span><span></span><li><a>GEORGE<br>Henry<br>Sykes</a></li><li class="spacer"></li></ul>
+                
+                <ul><li><a>EMILY<br>Turner<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>George<br>Sykes</a></li><li><a>MATILDA<br>Platten<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>THOMAS<br>Bonner<br>Sykes</a></li><li><a>ROSINA<br>Watkins<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOSEPH<br>Bonner<br>Sykes</a></li><li class="offspring"><a>MARY<br>Ellen<br>Sykes</a></li><span></span><span></span><li><a>PERCY<br>W<br>Oldring</a></li><li class="offspring"><a>ISABELLA<br>Frances<br>Sykes</a></li><span></span><span></span><li><a>HERBERT<br>E<br>Noble</a></li><li><a>VIOLET<br>L<br>King</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>Sykes<br>&nbsp;<i>Born 1905</i></a></li><li><a>GLADYS<br>Maud<br>Frederick</a></li><span></span><span></span><li class="offspring"><a>CHARLES<br>Sykes<br>&nbsp;<i>Born 1907</i></a></li><li><a>JESSIE<br>Smith<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>HARRY<br>Sykes<br>&nbsp;<i>Born 1908</i></a></li></ul>
+                
+                <ul><li><a>JOSEPH<br>Sykes<br>&nbsp;<br><i>Born 1909</i></a></li><li><a>HARRY<br>Sykes<br>&nbsp;<i>Born 1911</i></a></li><li class="break"><a>EMILY<br>Sykes<br>&nbsp;<i>Born 1912</i></a></li><li><a>JOAN<br>Sykes<br>&nbsp;<i>Born 1917</i></a></li><li class="break"><a>MOLLY<br>Sykes<br>&nbsp;<i>Born 1921</i></a></li><li><a>NEVILLE<br>J<br>Sykes<i>Born 1925</i></a></li><li class="break"><a>IRIS<br>J<br>Sykes<i>Born 1928</i></a></li><li class="break"><a>CHRISTINE<br>Oldring<br>&nbsp;<i>Born 1942</i></a></li><li><a>BERNICE<br>A<br>Noble<i>Born 1932</i></a></li><li class="break"><a>MALCOLM<br>G<br>Noble<i>Born 1935</i></a></li><li><a>JEFFREY<br>Sykes<br>&nbsp;<i>Born 1929</i></a></li><li><a>DOROTHY<br>F<br>Sykes<i>Born 1932</i></a></li><li><a>NORMAN<br>V<br>Sykes<i>Born 1935</i></a></li><li><a>MARGARET<br>R<br>Sykes<i>Born 1940</i></a></li><li class="break"><a>JOHN<br>Sykes<br>&nbsp;<i>Born 1945</i></a></li><li class="break"><a>JEAN<br>G<br>Sykes<i>Born 1934</i></a></li><li><a>ANNE<br>Sykes<br>&nbsp;<i>Born 1945</i></a></li><li><a>RICHARD<br>Sykes<br>&nbsp;<i>Born 1946</i></a></li><li><a>KENNETH<br>Sykes<br>&nbsp;<i>Born 1949</i></a></li><li class="break"><a>PATRICIA<br>Sykes<br>&nbsp;<i>Born 1952</i></a></li></ul>
             </ul>
         </div>
         <script>
             for (var i of [...document.images]) {
 		new Image().src = i.src;
             }
+            /*
+            document.querySelector('ul').addEventListener('mouseover', function(e){
+                console.log(e.target.lastChild)
+                   if(e.target.lastChild && e.target.lastChild.nodeName && e.target.lastChild.nodeName === 'I'){
+                       e.target.classList.add('show');
+                   }
+            },false);
+            */
         
         </script>
  
