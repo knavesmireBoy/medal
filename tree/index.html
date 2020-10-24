@@ -13,7 +13,7 @@
         
         body {
             font: 1em Helvetica, serif;
-            margin: 1%;
+            margin: 2% 0;
             text-align: center;
             background-color: hsl(219, 79%, 66%);
             color: white;
@@ -192,7 +192,7 @@
             bottom: -30px;
             left: 4px;
             z-index: 1;
-        }
+            }
         
  
         
@@ -201,7 +201,31 @@
                   bottom: -2px;
         }
         
-       
+        li figure {
+            position: absolute;
+            bottom: 3em;
+            left: -4.7em;
+            width: 5em;
+            font-size: 8px;
+            box-sizing: border-box;
+            background-color: hsl(219, 79%, 50%);
+            opacity: 0;
+        }
+        
+        li:hover figure {
+            opacity: 1;
+            transition: opacity 2s;
+        }
+        
+        
+        li figure img {
+            width: 100%;
+            height: auto;
+        }
+        figure > * {
+            position: relative;
+            display: block;
+        }
         
         
         
@@ -212,9 +236,9 @@
         <div class="tree">
             <ul>
                 <li><a>ELLEN<br>Sykes</a></li><span></span><span></span><li><a>GEORGE<br>Sykes</a></li>
-                <ul><li><a>ISABELLA<br>Frances<br>Bonner<i>Born 1870; Died 4 Nov 1940</i></a></li><span></span><span></span><li><a>GEORGE<br>Henry<br>Sykes<i>Born 1870; Died 14 Nov 1920</i></a></li><li class="spacer"></li></ul>
+                <ul><li><figure><img src="tree_isabella.jpg"><figcaption>Born 1870 Died 4 Nov 1940</figcaption></figure><a>ISABELLA<br>Frances<br>Bonner</a></li><span></span><span></span><li><a>GEORGE<br>Henry<br>Sykes<i>Born 1870 Died 14 Nov 1920</i></a></li><li class="spacer"></li></ul>
                 
-                <ul><li><a>EMILY<br>Turner<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>George<br>Sykes<i>Born 1890</i></a></li><li><a>MATILDA<br>Platten<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>THOMAS<br>Bonner<br>Sykes<i>Born 1892</i></a></li><li><a>ROSINA<br>Watkins<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOSEPH<br>Bonner<br>Sykes<i>Born 1894</i></a></li><li class="offspring"><a>MARY<br>Ellen<br>Sykes<i>Born 1896</i></a></li><span></span><span></span><li><a>PERCY<br>W<br>Oldring</a></li><li class="offspring"><a>ISABELLA<br>Frances<br>Sykes<i>Born 1901</i></a></li><span></span><span></span><li><a>HERBERT<br>E<br>Noble</a></li><li><a>VIOLET<br>L<br>King</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>Sykes<br>&nbsp;<i>Born 1905</i></a></li><li><a>GLADYS<br>Maud<br>Frederick</a></li><span></span><span></span><li class="offspring"><a>CHARLES<br>Sykes<br>&nbsp;<i>Born 1907</i></a></li><li><a>JESSIE<br>Smith<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>HARRY<br>Sykes<br>&nbsp;<i>Born 1908</i></a></li></ul>
+                <ul><li><a>EMILY<br>Turner<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>JOHN<br>George<br>Sykes<i>Born 1890</i></a></li><li><a>MATILDA<br>Platten<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><a>THOMAS<br>Bonner<br>Sykes<i>Born 1892</i></a></li><li><a>ROSINA<br>Watkins<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><figure><img src="joseph.jpg"><figcaption>Born 1894</figcaption></figure><a>JOSEPH<br>Bonner<br>Sykes</a></li><li class="offspring"><figure><img src="mary.jpg"><figcaption>Born 1896</figcaption></figure><a>MARY<br>Ellen<br>Sykes</a></li><span></span><span></span><li><a>PERCY<br>W<br>Oldring</a></li><li class="offspring"><figure><img src="bella.jpg"><figcaption>Born 1901</figcaption></figure><a>ISABELLA<br>Frances<br>Sykes</a></li><span></span><span></span><li><a>HERBERT<br>E<br>Noble</a></li><li><a>VIOLET<br>L<br>King</a></li><span></span><span></span><li class="offspring"><figure><img src="jack.jpg"><figcaption>Born 1905</figcaption></figure><a>JOHN<br>Sykes<br>&nbsp;</a></li><li><a>GLADYS<br>Maud<br>Frederick</a></li><span></span><span></span><li class="offspring"><a>CHARLES<br>Sykes<br>&nbsp;<i>Born 1907</i></a></li><li><a>JESSIE<br>Smith<br>&nbsp;</a></li><span></span><span></span><li class="offspring"><figure><img src="harry.jpg"><figcaption>Born 1908</figcaption></figure><a>HARRY<br>Sykes<br>&nbsp;</a></li></ul>
                 
                 <ul><li><a>JOSEPH<br>Sykes<br>&nbsp;<br><i>Born 1909</i></a></li><li><a>HARRY<br>Sykes<br>&nbsp;<i>Born 1911</i></a></li><li class="break"><a>EMILY<br>Sykes<br>&nbsp;<i>Born 1912</i></a></li><li><a>JOAN<br>Sykes<br>&nbsp;<i>Born 1917</i></a></li><li class="break"><a>MOLLY<br>Sykes<br>&nbsp;<i>Born 1921</i></a></li><li><a>NEVILLE<br>J<br>Sykes<i>Born 1925</i></a></li><li class="break"><a>IRIS<br>J<br>Sykes<i>Born 1928</i></a></li><li class="break"><a>CHRISTINE<br>Oldring<br>&nbsp;<i>Born 1942</i></a></li><li><a>BERNICE<br>A<br>Noble<i>Born 1932</i></a></li><li class="break"><a>MALCOLM<br>G<br>Noble<i>Born 1935</i></a></li><li><a>JEFFREY<br>Sykes<br>&nbsp;<i>Born 1929</i></a></li><li><a>DOROTHY<br>F<br>Sykes<i>Born 1932</i></a></li><li><a>NORMAN<br>V<br>Sykes<i>Born 1935</i></a></li><li><a>MARGARET<br>R<br>Sykes<i>Born 1940</i></a></li><li class="break"><a>JOHN<br>Sykes<br>&nbsp;<i>Born 1945</i></a></li><li class="break"><a>JEAN<br>G<br>Sykes<i>Born 1934</i></a></li><li><a>ANNE<br>Sykes<br>&nbsp;<i>Born 1945</i></a></li><li><a>RICHARD<br>Sykes<br>&nbsp;<i>Born 1946</i></a></li><li><a>KENNETH<br>Sykes<br>&nbsp;<i>Born 1949</i></a></li><li class="break"><a>PATRICIA<br>Sykes<br>&nbsp;<i>Born 1952</i></a></li></ul>
             </ul>
