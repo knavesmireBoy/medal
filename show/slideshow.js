@@ -52,6 +52,28 @@
 		}
 	}
 	Function.prototype.wrap = wrap;
+    
+    function curryFactory(i, defer){
+        let once = {
+            defer: (f) => (arg) => () => f(arg),
+            imm: (f) => (arg) => f(arg),
+        },
+            twice = {
+                imm: (f) => (arg1) => (arg2) => f(arg2, arg1),
+                defer: (f) => (arg1) => (arg2) => () => f(arg2, arg1)
+            },
+            thrice = {
+                imm: (f) => (arg1) => (arg2) => (arg3) => f(arg3, arg2, arg1),
+                defer: (f) => (arg1) => (arg2) => (arg3) => () => f(arg3, arg2, arg1),
+            },
+            quart = {
+                imm: (f) => (arg1) => (arg2) => (arg3) => (arg4) => f(arg4, arg3, arg2, arg1),
+                defer: (f) => (arg1) => (arg2) => (arg3) => (arg4) => () => f(arg4, arg3, arg2, arg1)
+            },
+            coll = [once, twice, thrice, quart],
+            ret = coll[i];
+        return ret && defer ? ret.defer : ret ? ret.imm : function(){};
+    }
 
 	function attrMap(el, map, style) {
 		for (let [k, v] of map) {
@@ -96,7 +118,7 @@
 
 	function loadImage(url, id) {
 		return new Promise((resolve, reject) => {
-			//dirty way of avoiding adding listener twice 
+            //remove then append to produce a fresh promise 
 			let img = $(id).firstChild;
 			img = removeElement(img);
 			$(id).appendChild(img);
@@ -242,7 +264,6 @@
 			if (!flag && this.rev) {
 				return this.previous(true);
 			}
-			//this.position += 1;
 			this.position++;
 			this.position = this.position % this.group.members.length;
 			let result = {
@@ -316,12 +337,12 @@
 		greaterOrEqual = (invoke, (a, b) => a >= b),
 		gtEq = curryLeft((a, b) => a >= b),
 		doAlt = actions => actions.reverse()[0](),
-		defer_once = (f) => (arg) => () => f(arg),
-		twice = (f) => (arg1) => (arg2) => f(arg2, arg1),
-		twicedefer = (f) => (arg1) => (arg2) => () => f(arg2, arg1),
-		thricedefer = (f) => (arg1) => (arg2) => (arg3) => () => f(arg3, arg2, arg1),
-		quart = (f) => (arg1) => (arg2) => (arg3) => (arg4) => f(arg4, arg3, arg2, arg1),
-		thrice = (f) => (arg1) => (arg2) => (arg3) => f(arg3, arg2, arg1),
+		defer_once = curryFactory(0, true),
+		twice = curryFactory(1),
+		twicedefer = curryFactory(1, true),
+        thrice = curryFactory(2),
+		thricedefer = curryFactory(2, true),
+		quart = curryFactory(3),
 		driller = twice(searcher),
 		getter = (o, p) => o[p],
 		zero = twice(getter)(0),
