@@ -1,0 +1,236 @@
+.medal {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 40%;
+    justify-items: center;
+    align-items: center;
+}
+
+.container {
+   width: 80%;
+    margin: 0 auto 1em;
+    display: flex; 
+    flex-wrap: wrap;
+    border-radius: 11px;
+    border: solid 1px white;
+    
+}
+.container  * {
+    border-radius: 11px;
+}
+
+.container > * {
+    margin: .5em;
+    opacity: .9;
+}
+
+.container > a {
+    flex: 1 1 100%;
+}
+
+.lnk {
+    position: relative;
+    z-index: 2;
+}
+a {
+    text-decoration: none;
+    color: hsl(0, 30%, 30%);
+}
+a:hover {
+    text-decoration: underline;
+}
+.medal a {
+    width: 100%;
+}
+
+.medal a:first-child {
+    flex: 20 1 2em;    
+}
+
+.medal a:last-child {
+    flex: 19 1 2em;    
+}
+
+a img {
+    width: 100%;
+    display: block;
+
+}
+
+body {
+text-align: center;
+font: 1em Georgia, serif;
+margin: 5% 0;
+background-color: hsl(40, 66%, 88%);
+}
+
+
+#ghs {
+    width: 30%;
+    display: block;
+    margin: -4.5em auto 2em;
+    box-shadow: 0px 0px 50px white;
+}
+
+#ghs img {
+    border: dotted 1px gold;
+}
+
+h1 {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+.starbust-wheel {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  height: 1200px;
+  border-radius: 10%;
+  overflow: hidden;
+  animation: spin 8s infinite linear;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: inset 0px 0px 500px hsl(40, 66%, 80%);
+}
+
+.front {
+   z-index: 1; 
+    opacity: .1;
+}
+.back {
+   z-index: -1;
+}
+.starbust-wheel > li {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 50%;
+  padding: 0;
+  margin: 0;
+  transform-origin: 0 0;
+}
+.starbust-wheel > li:nth-child(odd) {
+  background-image: linear-gradient(-197deg, hsl(40, 66%, 78%), white 77%);
+}
+
+.starbust-wheel > li:nth-child(1) {
+    transform: rotate(18deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(2) {
+    transform: rotate(36deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(3) {
+    transform: rotate(54deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(4) {
+    transform: rotate(72deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(5) {
+    transform: rotate(90deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(6) {
+    transform: rotate(108deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(7) {
+    transform: rotate(126deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(8) {
+    transform: rotate(144deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(9) {
+    transform: rotate(162deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(10) {
+    transform: rotate(180deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(11) {
+    transform: rotate(198deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(12) {
+    transform: rotate(216deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(13) {
+    transform: rotate(234deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(14) {
+    transform: rotate(252deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(15) {
+    transform: rotate(270deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(16) {
+    transform: rotate(288deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(17) {
+    transform: rotate(306deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(18) {
+    transform: rotate(324deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(19) {
+    transform: rotate(342deg) skewX(72deg);
+}
+.starbust-wheel > li:nth-child(20) {
+    transform: rotate(360deg)  skewX(72deg);
+}
+
+
+/*
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+*/
+
+html, body {
+  height: 100%;
+    max-height: 100vh;  
+}
+body {
+  display: flex;
+  flex-direction: column;
+    font-family: 'Syne Mono', monospace;
+}
+.content {
+  flex: 1 0 auto;
+}
+footer {
+  flex-shrink: 0;
+    background-color: hsl(0, 30%, 30%);
+}
+
+footer::before {
+  content: '';
+  background: red;
+  width: 200%;
+  position: absolute;
+  left: 50%; 
+  top: -100%;
+  transform: translateX(-50%);
+  height: 100%;
+  border-radius: 50%;
+  z-index: -1;
+}
