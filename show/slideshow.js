@@ -304,12 +304,14 @@
 	}
 	//https://medium.com/@dtipson/creating-an-es6ish-compose-in-javascript-ac580b95104a
 	const eventing = function(type, fn, el, actions = ['preventDefault']) {
+        
 		function preventer(wrapped, actions, e) {
 			actions.forEach(a => e[a]());
 			return wrapped(e);
 		}
 		fn = fn.wrap(preventer, actions);
 		el = getResult(el);
+        
 		return {
 			render: function() {
 				el.addEventListener(type, fn, false);
@@ -331,7 +333,7 @@
 			let _curry = (args) => args.length < fn.length ? (..._args) => _curry([...args, ..._args]) : fn(...args);
 			return () => _curry(args);
 		},
-		always = (arg) => () => arg,
+		always = (arg) => () => { arg },
 		validateProperty = (o, p) => o & o[p],
 		equals = (a, b) => a === b,
 		greaterOrEqual = (invoke, (a, b) => a >= b),
@@ -356,6 +358,7 @@
 		subtract = (a, b) => a - b,
 		divideBy = twice((a, b) => a / b),
 		$ = thrice(caller)('getElementById')(document),
+		$q = thrice(caller)('querySelector')(document),
 		$$ = thricedefer(caller)('getElementById')(document),
 		enable = document.body.classList.add.bind(document.body.classList),
 		disable = document.body.classList.remove.bind(document.body.classList),
@@ -417,7 +420,7 @@
 		doParse = compose(zero, parser),
 		setCaption = compose(quart((o, v, k, p) => o[p](k, v))('slice')(0)(-4), decodeURIComponent, doParse),
 		imgs = [...document.images],
-		gallery = document.querySelector('#gallery'),
+		gallery = document.querySelector('.gallery'),
 		getSlideChild = compose(getChild, $$('slide')),
 		getBaseChild = compose(getChild, $$('base')),
 		getImgSrc = compose(driller(['src']), getBaseChild),
@@ -515,7 +518,7 @@
 		},
 		machBase = function(source, target) {
 			return new Promise((resolve, reject) => {
-				var el = anCr($('gallery'))('a'),
+				var el = anCr($q('.gallery'))('a'),
 					img = anCr(el)('img'),
 					ptL = partial(doMap, el);
 				[
@@ -537,7 +540,7 @@
 				doDisplay = defer_once(doAlt)([playtime]),
 				machSlide = function(source, target) {
 					return new Promise((resolve, reject) => {
-						var el = anCr($('gallery'))('a'),
+						var el = anCr($q('.gallery'))('a'),
 							img = anCr(el)('img'),
 							ptL = partial(doMap, el);
 						[
@@ -550,7 +553,7 @@
 				},
 				machPause = function(src) {
 					return new Promise((resolve, reject) => {
-						var el = anCr($('gallery'))('a'),
+						var el = anCr($q('.gallery'))('a'),
 							img = anCr(el)('img'),
 							ptL = partial(doMap, el),
 							styleAttrs = new Map([
@@ -629,6 +632,7 @@
 			compose(thrice(doMap)('id')('controls'), anCrIn(getNextElement(gallery.nextSibling), document.body))('section');
 			compose(thrice(doMap)('id')('caption'), anCrIn(getNextElement(gallery.nextSibling), document.body))('aside');
 			machBase(e.target, 'base').then(orient(lcsp, ptrt)).then((v) => thrice(doMap)('txt')(setCaption(v))($$('caption'))).then(showtime);
+            
 			let buttons = ['previous', 'play', 'next'].map(buttons_cb),
 				chain = factory(),
 				controls = eventing('click', function(e) {

@@ -2,41 +2,39 @@
        	font: 1em 'Tangerine', serif;
        	margin: 0;
        	text-align: center;
-               display: flex;
-	flex-direction: column;
+        background-color: hsl(40, 66%, 88%);
+           /*
+        display: flex;
+       	flex-direction: column;
+           */
        }
-
-html, body {
-	height: 100%;
-	min-height: 100vh;
-}
-
+       html, body {
+       	height: 100%;
+       	min-height: 100vh;
+       }
        h1 {
        	font-size: 3.2em;
        	color: white;
-       	background-image: linear-gradient(black, hsla(0, 30%, 30%, 1) 60%);
+       	background-image: linear-gradient(black, hsla(0, 30%, 30%, 1) 50%);
        	margin: 0;
-       	padding: 1em 0 0;
+       	padding: .5em 0 0;
        	line-height: .1;
        }
-
-h2 {
+       h2 {
        	color: white;
-       	background-image: linear-gradient(hsla(0, 30%, 30%, 1) 70%, black);
+       	background-image: linear-gradient(hsla(0, 30%, 30%, 1) 50%, black);
        	margin: 0;
-       	line-height: .1;
-       }
-       #gallery {
-       	width: 80%;
+       	line-height: 1;
+           height: 3em;
        }
        h1:after {
        	content: 'Gallery';
        	position: relative;
-       	background-color: hsla(0, 30%, 30%, 1);
+       	background-color: hsl(0, 30%, 30%);
        	display: block;
        	border-radius: 50%;
        	width: 120%;
-       	height: 1.5em;
+       	height: 1em;
        	left: 62%;
        	transform: translate(-60%, 30%);
        	box-shadow: 4px 4px 4px black;
@@ -49,23 +47,20 @@ h2 {
        	display: block;
        	border-radius: 50%;
        	width: 120%;
-       	height: 5em;
+       	height: 1.5em;
        	left: 62%;
        	transform: translate(-60%, -30%);
        	box-shadow: -4px -4px 4px black;
        	text-shadow: 4px 4px 4px black;
        }
-
-footer {
-    margin: 1.5em 0;
-}
-
-.content {
-	overflow: hidden;
-	flex: 1 0 auto;
-}
-
-       .showtime #gallery a {
+       footer {
+       	margin: 1.5em 0;
+       }
+       .content {
+       	overflow: hidden;
+       	flex: 1 0 auto;
+       }
+       .showtime .gallery a {
        	float: left;
        	width: 100%;
        	box-sizing: border-box;
@@ -94,15 +89,19 @@ footer {
        .inplay {
        	background-color: hsl(30, 100%, 95%);
        }
-       #gallery {
+       .gallery {
        	display: grid;
        	grid-template-columns: repeat(6, 1fr);
        	width: 80%;
        	padding: 10px;
        	border: solid 1px;
-       	margin: 1em auto 0;
+       	margin: 4em auto 2em;
+       	position: relative;
+       	z-index: 4;
+       	background: seashell;
+        border-radius: 11px;
        }
-       .showtime div {
+       .showtime .gallery {
        	display: block;
        	overflow: hidden;
        	width: 45vh;
@@ -112,35 +111,37 @@ footer {
        	border-radius: 20px;
        	box-shadow: 1px 1px 20px rgba(166, 133, 77, .75);
        }
-       .showtime div a {
+       .showtime .gallery a {
        	border: solid 1px white;
        	border-radius: 20px;
        	display: block;
        	box-sizing: border-box;
        }
-       .showtime div a img {
+       .showtime .gallery a img {
        	display: block;
        	width: 100%;
        	height: auto;
+           
        }
-       .lscp div {
+       .lscp .gallery {
        	width: 70vw;
        }
        .inplay #base {
        	display: none;
        }
-       #gallery a {
+       .gallery a {
        	border: solid 6px seashell;
        	max-height: 270px;
        	overflow: hidden;
+        border-radius: 11px;
        }
-       div a:nth-child(n+7) {
+       .gallery a:nth-child(n+7) {
        	max-height: none;
        }
-       div a:nth-child(7) {
+       .gallery a:nth-child(7) {
        	grid-column: 1/4;
        }
-       div a:nth-child(8) {
+       .gallery a:nth-child(8) {
        	grid-column: 4/7;
        }
        a img {
@@ -150,11 +151,11 @@ footer {
        	margin: 0;
        	display: block;
        }
-       .showtime div a {
+       .showtime .gallery a {
        	position: absolute;
        	left: -9999px;
        }
-       .showtime div a.show, .inplay #slide, #base, .inplay #pause {
+       .showtime .gallery a.show, .inplay #slide, #base, .inplay #pause {
        	position: static;
        	left: 0;
        	max-height: none;
