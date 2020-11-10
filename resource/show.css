@@ -3,10 +3,8 @@
        	margin: 0;
        	text-align: center;
         background-color: hsl(40, 66%, 88%);
-           /*
         display: flex;
        	flex-direction: column;
-           */
        }
        html, body {
        	height: 100%;
@@ -55,6 +53,7 @@
        }
        footer {
        	margin: 1.5em 0;
+           flex: 1 0 auto;
        }
        .content {
        	overflow: hidden;
@@ -90,10 +89,6 @@
        	background-color: hsl(30, 100%, 95%);
        }
        .gallery {
-           /*
-       	display: grid;
-       	grid-template-columns: repeat(6, 1fr);
-           */
            display: flex;
            flex-wrap: wrap;
        	width: 80%;
@@ -104,7 +99,9 @@
        	z-index: 4;
        	background: seashell;
         border-radius: 11px;
+           flex: 1 0 auto;
        }
+
 
 .gallery > * {
     flex: 1 1 8em;
