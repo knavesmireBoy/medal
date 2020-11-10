@@ -1,203 +1,214 @@
 body {
-text-align: center;
-font: 1em Georgia, serif;
-margin: 0 0 5%;
-background-color: hsl(40, 66%, 88%);
-}
-.content {
-        overflow: hidden;
-
-}
-
-h1 {
-    font-size: 3em;
-    color: white;
-    background-image: linear-gradient(black, hsla(0, 30%, 30%, 1) 60%);
-    margin: 0;
-    padding: 1em 0 0;
-    line-height: .1;
-}
-
-h1:after {
-    content: 'George Henry Sykes';
-    position: relative;
-    background-color: hsla(0, 30%, 30%, 1);
-    display: block;
-    border-radius: 50%;
-    width: 120%;
-    height: 1.5em;
-    left: 60%;
-    transform: translate(-60%, 30%);
-    box-shadow: 4px 4px 4px black;
-    text-shadow: 4px 4px 4px black;
-}
-
-h2 {
-    color: white;   
-    text-shadow: 1px 1px 1px black;
-    font-size: 2.5em;
-    margin: 1.5em 0 0;
-}
-
-a {
-    text-decoration: none;
-    color: hsl(0, 30%, 30%);
-    display: block;
-}
-a:hover {
-    text-decoration: underline;
-}
-
-.medal {
+	text-align: center;
+	font: 1em Georgia, serif;
+	margin: 0;
+    padding: 0;
+    font-family: 'Bookman-Old-Style, monospace';
+    background-color: hsla(40, 66%, 88%, .7);
     display: flex;
-    flex-wrap: wrap;
+	flex-direction: column;
+}
+body > * {
+}
+html, body {
+	height: 100%;
+	min-height: 100vh;
 }
 
-.container {
-   width: 80%;
-    margin: 0 auto 1em;
-    display: flex; 
-    flex-wrap: wrap;
-    border-radius: 11px;
-    border: solid 1px white;
-}
-.container  * {
-    border-radius: 11px;
-}
-
-.container > a {
-    margin: -5em auto;
+footer {
+	flex: 0 0 auto;
+    display: flex;
+	background-image: url("medal_side_ko.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+    text-align: left;
+    justify-content: space-between;
+    padding: 2% 10%;
 }
 
-.lnk {
+footer a {
+    flex: 0 1 6em;
     position: relative;
-    z-index: 2;
+    top: 1em;
 }
 
-.medal a:first-child {
-    flex: 20 1 2em;
-    margin: -11em -8em 0 0;
-    z-index: 3;
+footer a:last-child {
 }
 
-.medal a:last-child {
-    flex: 19 1 2em;
-     margin: -11em  0 0 -8em;
-    z-index: 3;
+footer a:first-child {
 }
+
 
 a img {
-    width: 100%;
-    display: block;
+	width: 100%;
+	display: block;
 }
-
-
+h1 {
+	font-size: 3.2em;
+	color: white;
+	background-image: linear-gradient(black, hsla(0, 30%, 30%, 1) 60%);
+	margin: 0;
+	padding: 1em 0 0;
+	line-height: .1;
+}
+h1:after {
+	content: 'George Henry Sykes';
+	position: relative;
+	background-color: hsla(0, 30%, 30%, 1);
+	display: block;
+	border-radius: 50%;
+	width: 120%;
+	height: 1.5em;
+	left: 62%;
+	transform: translate(-60%, 30%);
+	box-shadow: 4px 4px 4px black;
+	text-shadow: 4px 4px 4px black;
+}
+h2 {
+	color: hsl(25, 100%, 92%, .95);
+	text-shadow: 1px 1px 1px black;
+	font-size: 2.5em;
+	margin: 1.6em 0 0;
+}
+a {
+	text-decoration: none;
+	color: hsl(0, 30%, 30%);
+	display: block;
+}
+a:hover {
+	text-decoration: underline;
+}
+.content {
+	overflow: hidden;
+	flex: 1 0 auto;
+}
+.medal {
+	display: flex;
+	flex-wrap: wrap;
+}
+.container {
+	width: 80%;
+	margin: -1em auto 1em;
+	padding: 1em 1em 0;
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 11px;
+	border: double 4px hsl(0, 30%, 30%);
+}
+.lnk {
+	position: relative;
+	z-index: 2;
+}
+.medal a:first-child {
+	flex: 20 1 2em;
+	margin: -11em -8em 0 0;
+	z-index: 3;
+}
+.medal a:last-child {
+	flex: 19 1 2em;
+	margin: -11em 0 0 -8em;
+	z-index: 3;
+}
 #ghs {
-    margin: -6.6em auto 2em;
-    box-shadow: 0px 0px 50px white;
-    flex: 50 1 2em; 
+	margin: -6em auto 0em;
+	box-shadow: 0px 0px 50px white;
+	flex: 50 1 2em;
 }
-
 .starbust-wheel {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  width: 100%;
-  height: 80em;
-  border-radius: 10%;
-  overflow: hidden;
-  animation: spin 8s infinite linear;
-    margin: 0 auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    box-shadow: inset 0px 0px 500px hsl(40, 66%, 80%);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	height: 84em;
+	overflow: hidden;
+	animation: spin 8s infinite linear;
+	margin: 0 auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-shadow: inset 0px 0px 500px hsl(40, 66%, 80%);
 }
-
 .front {
-   z-index: 1; 
-    opacity: .1;
+	z-index: 1;
+	opacity: .05;
 }
 .back {
-   z-index: -1;
+	z-index: -1;
 }
-.starbust-wheel > li {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 50%;
-  height: 50%;
-  padding: 0;
-  margin: 0;
-  transform-origin: 0 0;
+.starbust-wheel>li {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	height: 50%;
+	padding: 0;
+	margin: 0;
+	transform-origin: 0 0;
 }
-.starbust-wheel > li:nth-child(odd) {
-  background-image: linear-gradient(-197deg, hsl(40, 66%, 78%), white 77%);
+.starbust-wheel>li:nth-child(odd) {
+	background-image: linear-gradient(-197deg, hsl(40, 66%, 78%), white 77%);
 }
-
-.starbust-wheel > li:nth-child(1) {
-    transform: rotate(18deg) skewX(72deg);
+.starbust-wheel>li:nth-child(1) {
+	transform: rotate(18deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(2) {
-    transform: rotate(36deg) skewX(72deg);
+.starbust-wheel>li:nth-child(2) {
+	transform: rotate(36deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(3) {
-    transform: rotate(54deg) skewX(72deg);
+.starbust-wheel>li:nth-child(3) {
+	transform: rotate(54deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(4) {
-    transform: rotate(72deg) skewX(72deg);
+.starbust-wheel>li:nth-child(4) {
+	transform: rotate(72deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(5) {
-    transform: rotate(90deg) skewX(72deg);
+.starbust-wheel>li:nth-child(5) {
+	transform: rotate(90deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(6) {
-    transform: rotate(108deg) skewX(72deg);
+.starbust-wheel>li:nth-child(6) {
+	transform: rotate(108deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(7) {
-    transform: rotate(126deg) skewX(72deg);
+.starbust-wheel>li:nth-child(7) {
+	transform: rotate(126deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(8) {
-    transform: rotate(144deg) skewX(72deg);
+.starbust-wheel>li:nth-child(8) {
+	transform: rotate(144deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(9) {
-    transform: rotate(162deg) skewX(72deg);
+.starbust-wheel>li:nth-child(9) {
+	transform: rotate(162deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(10) {
-    transform: rotate(180deg) skewX(72deg);
+.starbust-wheel>li:nth-child(10) {
+	transform: rotate(180deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(11) {
-    transform: rotate(198deg) skewX(72deg);
+.starbust-wheel>li:nth-child(11) {
+	transform: rotate(198deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(12) {
-    transform: rotate(216deg) skewX(72deg);
+.starbust-wheel>li:nth-child(12) {
+	transform: rotate(216deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(13) {
-    transform: rotate(234deg) skewX(72deg);
+.starbust-wheel>li:nth-child(13) {
+	transform: rotate(234deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(14) {
-    transform: rotate(252deg) skewX(72deg);
+.starbust-wheel>li:nth-child(14) {
+	transform: rotate(252deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(15) {
-    transform: rotate(270deg) skewX(72deg);
+.starbust-wheel>li:nth-child(15) {
+	transform: rotate(270deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(16) {
-    transform: rotate(288deg) skewX(72deg);
+.starbust-wheel>li:nth-child(16) {
+	transform: rotate(288deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(17) {
-    transform: rotate(306deg) skewX(72deg);
+.starbust-wheel>li:nth-child(17) {
+	transform: rotate(306deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(18) {
-    transform: rotate(324deg) skewX(72deg);
+.starbust-wheel>li:nth-child(18) {
+	transform: rotate(324deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(19) {
-    transform: rotate(342deg) skewX(72deg);
+.starbust-wheel>li:nth-child(19) {
+	transform: rotate(342deg) skewX(72deg);
 }
-.starbust-wheel > li:nth-child(20) {
-    transform: rotate(360deg)  skewX(72deg);
+.starbust-wheel>li:nth-child(20) {
+	transform: rotate(360deg) skewX(72deg);
 }
-
-
 /*
 @-webkit-keyframes spin {
   0% {
@@ -222,40 +233,30 @@ a img {
 }
 */
 
-html, body {
-  height: 100%;
-    max-height: 100vh;  
-}
-body {
-  display: flex;
-  flex-direction: column;
-    font-family: 'Bookman-Old-Style, monospace;
-}
-.content {
-  flex: 1 0 auto;
-}
-footer {
-  flex-shrink: 0;
-    background-color: hsl(0, 30%, 30%);
-    background-image: url("medal_side.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-
-
 #medalcard {
-    position: absolute;
-    top: 55em;
-    right: 1em;
-    width: 30em;
-    transform: rotate(-3deg);
-    opacity: .9;
-    padding: 1em 11em 0;
-    border: dotted 1px white;
-    border-width: 1px 0 0;
+	position: absolute;
+	top: 55em;
+	right: 1em;
+	width: 30em;
+	transform: rotate(-3deg);
+	opacity: .9;
+}
+#medalcard img {
+	box-shadow: 1px 1px 10px;
 }
 
-#medalcard img {
-    box-shadow: 1px 1px 10px;    
+#grave {
+	position: absolute;
+	top: 62em;
+	left: 19em;
+	width: 14em;
+    background-image: url("GHS-York-Cemetery-memorial-crop.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 16em;
+    height: 13.33em;
+    box-shadow: 0px 0px 22px black;
+    opacity: .6;
+    border-radius: 50%;
+    transform: rotate(-3deg);
 }
