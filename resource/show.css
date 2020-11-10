@@ -90,8 +90,12 @@
        	background-color: hsl(30, 100%, 95%);
        }
        .gallery {
+           /*
        	display: grid;
        	grid-template-columns: repeat(6, 1fr);
+           */
+           display: flex;
+           flex-wrap: wrap;
        	width: 80%;
        	padding: 10px;
        	border: solid 1px;
@@ -101,6 +105,14 @@
        	background: seashell;
         border-radius: 11px;
        }
+
+.gallery > * {
+    flex: 1 1 8em;
+}
+.gallery a:nth-child(n+7) {
+    flex: 1 1 20em;
+    
+}
        .showtime .gallery {
        	display: block;
        	overflow: hidden;
@@ -121,7 +133,6 @@
        	display: block;
        	width: 100%;
        	height: auto;
-           
        }
        .lscp .gallery {
        	width: 70vw;
@@ -131,7 +142,6 @@
        }
        .gallery a {
        	border: solid 6px seashell;
-       	max-height: 270px;
        	overflow: hidden;
         border-radius: 11px;
        }
