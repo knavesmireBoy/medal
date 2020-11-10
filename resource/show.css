@@ -1,0 +1,202 @@
+       body {
+       	font: 1em 'Tangerine', serif;
+       	margin: 0;
+       	text-align: center;
+               display: flex;
+	flex-direction: column;
+       }
+
+html, body {
+	height: 100%;
+	min-height: 100vh;
+}
+
+       h1 {
+       	font-size: 3.2em;
+       	color: white;
+       	background-image: linear-gradient(black, hsla(0, 30%, 30%, 1) 60%);
+       	margin: 0;
+       	padding: 1em 0 0;
+       	line-height: .1;
+       }
+
+h2 {
+       	color: white;
+       	background-image: linear-gradient(hsla(0, 30%, 30%, 1) 70%, black);
+       	margin: 0;
+       	line-height: .1;
+       }
+       #gallery {
+       	width: 80%;
+       }
+       h1:after {
+       	content: 'Gallery';
+       	position: relative;
+       	background-color: hsla(0, 30%, 30%, 1);
+       	display: block;
+       	border-radius: 50%;
+       	width: 120%;
+       	height: 1.5em;
+       	left: 62%;
+       	transform: translate(-60%, 30%);
+       	box-shadow: 4px 4px 4px black;
+       	text-shadow: 4px 4px 4px black;
+       }
+       h2:before {
+       	content: '';
+       	position: relative;
+       	background-color: hsla(0, 30%, 30%, 1);
+       	display: block;
+       	border-radius: 50%;
+       	width: 120%;
+       	height: 5em;
+       	left: 62%;
+       	transform: translate(-60%, -30%);
+       	box-shadow: -4px -4px 4px black;
+       	text-shadow: 4px 4px 4px black;
+       }
+
+footer {
+    margin: 1.5em 0;
+}
+
+.content {
+	overflow: hidden;
+	flex: 1 0 auto;
+}
+
+       .showtime #gallery a {
+       	float: left;
+       	width: 100%;
+       	box-sizing: border-box;
+       }
+       #pause {
+       	margin-left: -100%;
+       }
+       .inplay button:nth-child(even) {
+       	color: brown;
+       }
+       .inplay button:nth-child(odd) {
+       	color: #999;
+       }
+       .inplay button:nth-child(odd):hover {
+       	color: black;
+       }
+       section {
+       	clear: left;
+       }
+       aside {
+       	text-align: right;
+       }
+       .showtime {
+       	background-color: hsl(25, 100%, 97%);
+       }
+       .inplay {
+       	background-color: hsl(30, 100%, 95%);
+       }
+       #gallery {
+       	display: grid;
+       	grid-template-columns: repeat(6, 1fr);
+       	width: 80%;
+       	padding: 10px;
+       	border: solid 1px;
+       	margin: 1em auto 0;
+       }
+       .showtime div {
+       	display: block;
+       	overflow: hidden;
+       	width: 45vh;
+       	transition: all 1s;
+       	border-width: 0;
+       	padding: 0;
+       	border-radius: 20px;
+       	box-shadow: 1px 1px 20px rgba(166, 133, 77, .75);
+       }
+       .showtime div a {
+       	border: solid 1px white;
+       	border-radius: 20px;
+       	display: block;
+       	box-sizing: border-box;
+       }
+       .showtime div a img {
+       	display: block;
+       	width: 100%;
+       	height: auto;
+       }
+       .lscp div {
+       	width: 70vw;
+       }
+       .inplay #base {
+       	display: none;
+       }
+       #gallery a {
+       	border: solid 6px seashell;
+       	max-height: 270px;
+       	overflow: hidden;
+       }
+       div a:nth-child(n+7) {
+       	max-height: none;
+       }
+       div a:nth-child(7) {
+       	grid-column: 1/4;
+       }
+       div a:nth-child(8) {
+       	grid-column: 4/7;
+       }
+       a img {
+       	width: 100%;
+       	height: auto;
+       	padding: 0;
+       	margin: 0;
+       	display: block;
+       }
+       .showtime div a {
+       	position: absolute;
+       	left: -9999px;
+       }
+       .showtime div a.show, .inplay #slide, #base, .inplay #pause {
+       	position: static;
+       	left: 0;
+       	max-height: none;
+       }
+       #caption {
+       	text-align: center;
+       	font-size: 2em;
+       	color: darkblue;
+       	margin: .5em 0 .25em 0;
+       	background: none;
+       	display: block;
+       }
+       .showtime #close {
+       	border-radius: 3px;
+       }
+       #close button {
+       	margin: 0 0 0 auto;
+       	display: block;
+       	color: darkblue;
+       }
+       #controls {
+       	text-align: center;
+       	background-color: hsl(40, 30%, 50%);
+       	border-radius: 12px;
+       	border: solid 1px white;
+       	margin: 0em auto;
+       	z-index: 1;
+       	transform: translateY(0em);
+       	display: inline-block;
+       	/*
+            transition: transform 1s; 
+            transform: translateY(-4em);
+            */
+       	padding: .4em;
+       }
+       /*
+        .inplay #controls:hover {
+            transform: translateY(-4em);
+        }
+        
+        .inplay #controls {
+            transform: translateY(1em);
+
+        }
+    */
