@@ -18,16 +18,16 @@ footer {
     display: flex;
 	background-image: url("medal_side_ko3.png");
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: 100%;
     text-align: left;
     justify-content: space-between;
     padding: 1.5% 5%;
 }
 
 footer a {
-    flex: 0 1 8rem;
+    flex: 0 1 8em;
     position: relative;
-    top: 1rem;
+    top: 1em;
 }
 
 a img {
@@ -42,7 +42,7 @@ h1 {
 	line-height: .2;
     font-size: 3em;
 	text-shadow: 4px 4px 4px black;
-    	position: relative;
+    position: relative;
 
 }
 h1:after {
@@ -60,15 +60,20 @@ h1:after {
 }
 h3 {
     position: relative;
-    bottom: 3rem;
+    bottom: 2.2em;
     z-index: 6;
-    color: darkblue;
+    font-size: 1.75em;
+    color: rgb(0,177,222);
 }
 h2 {
 	color: seashell;
 	text-shadow: 1px 1px 1px darkblue;
-	font-size: 2.5rem;
-	margin: 1.6rem 0 0;
+	font-size: 2.5em;
+	margin: 1em 0 0;
+    position: relative;
+    top: .5em;
+    display: inline-block;
+    max-width: 35vw;
 }
 a {
 	text-decoration: none;
@@ -87,32 +92,34 @@ a:hover {
 	flex-wrap: wrap;
 }
 .container {
-	width: 80vw;
-	margin: -1rem auto 1rem;
-	padding: 1rem 1rem 0;
-	display: flex;
-	flex-wrap: wrap;
+	width: 85vw;
+	margin: -3em auto 1em;
+	padding: 1em 1em 0;
 	border-radius: 11px;
 	border: double 5px hsl(0, 30%, 30%);
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .lnk {
 	position: relative;
 	z-index: 2;
 }
 .medal a:first-child {
-	flex: 2 1 2rem;
-	margin: -11rem -8rem 0 0;
+	flex: 2 1 2em;
+	margin: -11em -8em 0 0;
 	z-index: 3;
 }
 .medal a:last-child {
-	flex: 2 1 2rem;
-	margin: -11rem 0 0 -8rem;
+	flex: 2 1 2em;
+	margin: -11em 0 0 -8em;
 	z-index: 3;
 }
 #ghs {
-	margin: -5rem auto 0rem;
+	margin: -5em auto 0;
 	box-shadow: 0px 0px 50px white;
-	flex: 5 1 2rem;
+	flex: 5 1 2em;
 }
 .starbust-wheel {
 	list-style: none;
@@ -120,7 +127,7 @@ a:hover {
 	padding: 0;
 	position: relative;
 	width: 100%;
-	height: 84rem;
+	height: 84em;
 	overflow: hidden;
 	animation: spin 8s infinite linear;
 	margin: 0 auto;
@@ -234,34 +241,37 @@ a:hover {
 */
 
 #medalcard {
-	position: absolute;
-	top: 55rem;
-	right: 2rem;
-	width: 33vw;
 	transform: rotate(-3deg);
 	opacity: .9;
+    flex: 5 1 1em;
+    margin: -25em 2.5em 0;
 }
 #medalcard img {
 	box-shadow: 1px 1px 10px;
 }
 
 #grave {
-	position: absolute;
-	top: 62rem;
-	left: 19rem;
-	width: 14rem;
     background-image: url("GHS-York-Cemetery-memorial-crop.png");
     background-repeat: no-repeat;
-    background-size: contain;
-    width: 18vw;
-    height: 15vw;
+    background-size: cover;
+    height: 12em;
     box-shadow: 0px 0px 22px black;
     opacity: .75;
+    flex: 1 1 8em;
     border-radius: 50%;
-    border: ridge 2px hsla(40, 66%, 88%, .7);
+    margin: -13em 0 0 12em;
 }
 @media screen and (max-width: 667px) {
     body {
-        font: .5em 'Domine', 'Georgia', serif;
+        font: .75em 'Domine', 'Georgia', serif;
     }
+
+    .container {
+	width: 90vw;
+	margin: -1em auto 1em;
+}
+    #ghs {
+	flex: 10 1 2em;
+}
+    
 }
