@@ -18,12 +18,13 @@
        	padding: .5em 0 0;
        	line-height: .1;
        }
-       h2 {
+       footer a {
        	color: white;
        	background-image: linear-gradient(hsla(0, 30%, 30%, 1) 50%, black);
        	margin: 0;
        	line-height: 1;
            height: 3em;
+           display: block;
        }
        h1:after {
        	content: 'Gallery';
@@ -38,7 +39,7 @@
        	box-shadow: 4px 4px 4px black;
        	text-shadow: 4px 4px 4px black;
        }
-       h2:before {
+       footer a:before {
        	content: '';
        	position: relative;
        	background-color: hsla(0, 30%, 30%, 1);
@@ -53,7 +54,8 @@
        }
        footer {
        	margin: 1.5em 0;
-           flex: 1 0 auto;
+        flex: 1 0 auto;
+        overflow: hidden;
        }
        .content {
        	overflow: hidden;
@@ -99,7 +101,7 @@
        	z-index: 4;
        	background: seashell;
         border-radius: 11px;
-           flex: 1 0 auto;
+        flex: 1 0 auto;
        }
 
 

@@ -310,6 +310,7 @@
 			return wrapped(e);
 		}
 		fn = fn.wrap(preventer, actions);
+        
 		el = getResult(el);
         
 		return {
@@ -438,7 +439,7 @@
 			return el;
 		},
 		close_aside = function() {
-			return compose(thrice(doMap)('id')('close'), anCrIn(gallery, document.body))('aside');
+			return compose(thrice(doMap)('id')('close'), anCrIn(gallery, document.querySelector('main')))('aside');
 		},
 		films = new LoopIterator(Group.from(imgs.map(img => img.src))),
 		setindex = thrice(caller)('find')(films),
@@ -629,8 +630,11 @@
 				return;
 			}
 			compose(setindex, driller(['target', 'src']))(e);
-			compose(thrice(doMap)('id')('controls'), anCrIn(getNextElement(gallery.nextSibling), document.body))('section');
-			compose(thrice(doMap)('id')('caption'), anCrIn(getNextElement(gallery.nextSibling), document.body))('aside');
+            
+			//compose(thrice(doMap)('id')('controls'), anCrIn(getNextElement(gallery.nextSibling), document.body))('section');
+			 compose(thrice(doMap)('id')('caption'), anCr(document.querySelector('main')))('aside');
+             compose(thrice(doMap)('id')('controls'), anCr(document.querySelector('main')))('section');
+
 			machBase(e.target, 'base').then(orient(lcsp, ptrt)).then((v) => thrice(doMap)('txt')(setCaption(v))($$('caption'))).then(showtime);
             
 			let buttons = ['previous', 'play', 'next'].map(buttons_cb),
@@ -652,9 +656,11 @@
 					locate.unrender();
 					setup.render();
 				}, compose(close_cb, close_aside));
+                
 			//listeners...
 			[controls, exit, locate].forEach(o => o.render());
 			setup.unrender();
 		}, gallery);
+    
 	setup.render();
 }());
