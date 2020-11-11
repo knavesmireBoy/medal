@@ -419,9 +419,13 @@
 		},
 		myconsole = thrice(caller)('log')(console),
 		doParse = compose(zero, parser),
-		setCaption = compose(quart((o, v, k, p) => o[p](k, v))('slice')(0)(-4), decodeURIComponent, doParse),
-		imgs = [...document.images],
-		gallery = document.querySelector('.gallery'),
+		setCap = compose(quart((o, v, k, p) => o[p](k, v))('slice')(0)(-4), decodeURIComponent, doParse),
+          setCaption = setCap.wrap(function(f, str){
+              var res = f(str);
+              return res.match(/^Is\s.+/i) ? res+'?' : res;
+          }),
+		imgs = [...document.images].slice(0, -1),//kitchener
+          gallery = document.querySelector('.gallery'),
 		getSlideChild = compose(getChild, $$('slide')),
 		getBaseChild = compose(getChild, $$('base')),
 		getImgSrc = compose(driller(['src']), getBaseChild),
@@ -434,9 +438,8 @@
 			return el;
 		},
 		close_cb = function(ancr) {
-			var el = anCr(ancr)('button');
-			el.innerHTML = '&#10008';
-			return el;
+            return ancr;
+            return compose(thrice(doMap)('class')('contain'),thrice(doMap)('src')('poppy.png'), anCr(ancr))('img');
 		},
 		close_aside = function() {
 			return compose(thrice(doMap)('id')('close'), anCrIn(gallery, document.querySelector('main')))('aside');
@@ -630,11 +633,8 @@
 				return;
 			}
 			compose(setindex, driller(['target', 'src']))(e);
-            
-			//compose(thrice(doMap)('id')('controls'), anCrIn(getNextElement(gallery.nextSibling), document.body))('section');
 			 compose(thrice(doMap)('id')('caption'), anCr(document.querySelector('main')))('aside');
              compose(thrice(doMap)('id')('controls'), anCr(document.querySelector('main')))('section');
-
 			machBase(e.target, 'base').then(orient(lcsp, ptrt)).then((v) => thrice(doMap)('txt')(setCaption(v))($$('caption'))).then(showtime);
             
 			let buttons = ['previous', 'play', 'next'].map(buttons_cb),
@@ -652,7 +652,7 @@
 					chain = chain.validate('next');
 					chain.handle('next');
 					exitshow();
-					[this.parentNode, $('caption'), $('controls'), $('base'), $('slide')].forEach(removeNodeOnComplete);
+					[this, $('caption'), $('controls'), $('base'), $('slide')].forEach(removeNodeOnComplete);
 					locate.unrender();
 					setup.render();
 				}, compose(close_cb, close_aside));

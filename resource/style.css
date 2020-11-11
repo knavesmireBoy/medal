@@ -1,9 +1,8 @@
 body {
 	text-align: center;
-	font: 1em Georgia, serif;
+    font: 1em 'Domine', 'Georgia', serif;
 	margin: 0;
     padding: 0;
-    font-family: 'Bookman-Old-Style, monospace';
     background-color: hsla(40, 66%, 88%, .7);
     display: flex;
 	flex-direction: column;
@@ -17,7 +16,7 @@ html, body {
 footer {
 	flex: 0 0 auto;
     display: flex;
-	background-image: url("medal_side_ko.png");
+	background-image: url("medal_side_ko3.png");
 	background-repeat: no-repeat;
 	background-size: cover;
     text-align: left;
@@ -56,9 +55,15 @@ h1:after {
 	box-shadow: 4px 4px 4px black;
 	text-shadow: 4px 4px 4px black;
 }
+h3 {
+    position: relative;
+    bottom: 2em;
+    z-index: 6;
+    color: darkblue;
+}
 h2 {
-	color: hsl(25, 100%, 92%, .95);
-	text-shadow: 1px 1px 1px black;
+	color: seashell;
+	text-shadow: 1px 1px 1px darkblue;
 	font-size: 2.5em;
 	margin: 1.6em 0 0;
 }
@@ -85,7 +90,7 @@ a:hover {
 	display: flex;
 	flex-wrap: wrap;
 	border-radius: 11px;
-	border: double 4px hsl(0, 30%, 30%);
+	border: double 5px hsl(0, 30%, 30%);
 }
 .lnk {
 	position: relative;
