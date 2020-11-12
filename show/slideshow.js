@@ -417,7 +417,7 @@
 				]);
 			};
 		},
-		myconsole = thrice(caller)('log')(console),
+		//myconsole = thrice(caller)('log')(console),
 		doParse = compose(zero, parser),
 		setCap = compose(quart((o, v, k, p) => o[p](k, v))('slice')(0)(-4), decodeURIComponent, doParse),
           setCaption = setCap.wrap(function(f, str){
