@@ -570,6 +570,7 @@
                         
 						img.addEventListener('load', e => resolve(img));
 						img.src = doParse(src);
+						img.id = "pauser";
 					});
 				},
 				unpauser = function() {
