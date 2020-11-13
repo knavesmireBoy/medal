@@ -242,11 +242,6 @@ a:hover {
 		flex: 8 1 2em;
 		margin: -2em -18vw 0;
 	}
-    
-    h2 {
-		color: red;
-	}
-    
 }
 
 @media screen and (max-width: 667px) {

@@ -85,6 +85,12 @@
        #pause {
        	margin-left: -100%;
        }
+ button {
+       	color: darkblue;
+       }
+button:nth-child(even) {
+       	font-weight: bold;
+       }
        .inplay button:nth-child(even) {
        	color: brown;
        }
@@ -217,17 +223,18 @@
        #close button {
        	margin: 0 0 0 auto;
        	display: block;
-       	color: darkblue;
        }
        #controls {
        	text-align: center;
-       	background-color: hsl(40, 30%, 50%);
+       	background-color: hsl(0, 30%, 30%);
        	border-radius: 12px;
        	border: solid 1px white;
        	margin: 0em auto;
        	z-index: 1;
        	transform: translateY(0em);
        	display: inline-block;
+        color: darkblue;
+
        	/*
             transition: transform 1s; 
             transform: translateY(-4em);
