@@ -1,229 +1,209 @@
-        
-        body {
-            font: .75em Helvetica, serif;
-            margin: 2% 0;
-            text-align: center;
-            background-color: hsl(0, 30%, 30%);
-            color: white;
-            display: flex;
-        }
-        
-        ul, li {
-            padding: 0;
-            margin: 0;
-        }
-        .tree {
-            font-size: .55rem;
-            overflow: auto;
-            flex: 1 0 1280px;
-            padding-bottom: 2em;
-        }
-        
-        .tree li {
-            list-style: none;
-            width: 5.2em;
-        }
-        
-        .tree > ul li.spacer {
-            list-style: none;
-            width: 10em;
-        }
-        .tree span {
-            display: inline-block;
-            vertical-align: middle;
-            position: relative;
-            top: 1.5em;
-            width: 2em;
-            height: 4em;
-            border: solid 1px white;
-        }
-        
-        .tree ul>ul span {
-            top: .75em;
-        }
-        
-        .tree span {
-            border-width: 2px 1px 0 0;
-        }
-        
-        .tree span+span {
-            border-width: 2px 0 0 1px;
-        }
-        
-        ul>ul {
-            margin: 2em 0 0;
-        }
-        
-        .tree li a {
-            display: block;
-        }
-        .tree li {
-            display: inline-block;
-        }
-
-        .tree ul:nth-of-type(2){
-            border: solid 2px;
-            border-width: 2px 0 0;
-            margin: .6em 0 0;
-        }
-        
-        .tree ul:nth-of-type(2) li:first-child {
-            margin: 0 0 0 -1.1em;
-        }
-        
-        .tree ul:nth-of-type(2) li:nth-child(even) {
-            margin: 0 2em 0 0;
-        }
-        
-        .tree ul:nth-of-type(2) li:nth-of-type(12) {
-            margin: 0 4em 0 0;
-        }
-         .tree ul:nth-of-type(2) li:nth-of-type(11) {
-            margin: 0 0 0 4.8em;
-        }
-        
-        .tree ul ul:last-child li:before, .offspring::before {
-            content: '__';
-            width: 2.5em;
-            height: 4em;
-            background-color: hsl(0, 30%, 30%);
-            color: hsl(0, 30%, 30%);
-            display: block;
-            border: solid 2px white;
-            border-width: 0 2px 0 0;
-            margin: 0 0 .5em;
-            
-        }
-        .tree ul ul li {
-            position: relative;
-        }
-        .tree li.break:after{
-            position: absolute;
-            top: 0;
-            left: 5em;
-            content: '';
-            width: 4em;
-            height: 1em;
-            background-color: hsl(0, 30%, 30%);
-            color: hsl(0, 30%, 30%);
-            margin-top: -0.5em;
-        },
-  
-        .tree ul ul:last-child {
-            margin: .75em 0 0;
-        }
-        
-        .tree ul ul:last-child {
-            border: solid 2px;
-            border-width: 2px 0 0;
-            margin: .7em 0 0;
-        }
-        .tree ul ul:last-child li:first-child {
-            margin: 0 0 0 -.3em;
-        }
-        .tree ul ul:last-child li:nth-child(4) {
-            margin: 0 0 0 3.5em;
-        }
-        .tree ul ul:last-child li:nth-child(6) {
-            margin: 0 0 0 6.5em;
-        }
-        
-        .tree ul ul:last-child li:nth-child(8) {
-            margin: 0 9em 0 8.7em;
-        }
-        
-         .tree ul ul:last-child li:nth-child(9) {
-            margin: 0 0 0 0em;
-             
-        }
-        
-        .tree ul ul:last-child li:nth-child(11) {
-            margin: 0 0 0 3em;
-        }
-        
-        .tree ul ul:last-child li:nth-child(16) {
-            margin: 0 3.9em 0 3em;
-        }
-        
-            .tree li.break:nth-child(5):after{
-            width: 6.8em;
-        }
-        
-             .tree li.break:nth-child(7):after{
-            width: 8.8em;
-        }
-        
-           .tree li.break:nth-child(8):after{
-            width: 9.2em;
-        }
-        
-         .tree li.break:nth-child(10):after{
-            width: 3em;
-        }
-          .tree li.break:nth-child(15):after{
-            width: 3.5em;
-        }
-          .tree li.break:last-child:after{
-            width: 3.5em;
-        }
-        
-        li a i {
-            position: absolute;
-            bottom: -12px;
-            left: -9999px;
-            font: 8px normal Helvetica, sans-serif;
-            background-color: hsl(219, 79%, 50%);
-        }
-        ul li a:hover i, ul li a.show i {
-            left: 4px !important;
-        }
-        
-        
-         ul ul:nth-of-type(1) li a:hover i {
-            bottom: -30px;
-            left: 4px;
-            z-index: 1;
-            }
-        
- 
-        
-              ul:nth-of-type(2) li:nth-of-type(2n+12) a:hover i, ul:nth-of-type(3) li:nth-child(-n+5) a:hover i, ul:nth-of-type(3) li:nth-child(8) a:hover i, ul:nth-of-type(3) li:nth-child(11) a:hover i, ul:nth-of-type(3) li:nth-child(15) a:hover i, ul:nth-of-type(3) li:nth-child(n+17) a:hover i {
-                  left: 4px;
-                  bottom: -2px;
-        }
-        
-        li figure {
-            position: absolute;
-            bottom: 3em;
-            left: -4.7em;
-            width: 5em;
-            font-size: 8px;
-            box-sizing: border-box;
-            background-color: hsl(219, 79%, 50%);
-            opacity: 0;
-        }
-        
-        li:hover figure {
-            opacity: 1;
-            transition: opacity 2s;
-        }
-        
-        
-        li figure img {
-            width: 100%;
-            height: auto;
-        }
-        figure > * {
-            position: relative;
-            display: block;
-        }
-
-@media screen and (max-width: 667px){
-    body {
-         font: 2em Helvetica, serif;
-    }
-    
+body {
+	font: .75em Helvetica, serif;
+	margin: 2% 0;
+	text-align: center;
+	background-color: hsl(0, 30%, 30%);
+	color: white;
+	display: flex;
+}
+ul, li {
+	padding: 0;
+	margin: 0;
+}
+.tree {
+	font-size: .55rem;
+	overflow: auto;
+	flex: 0 0 1280px;
+	padding-bottom: 2em;
+}
+.tree li {
+	list-style: none;
+	width: 5.2em;
+}
+.tree>ul li.spacer {
+	list-style: none;
+	width: 10em;
+}
+.tree span {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	top: 1.5em;
+	width: 2em;
+	height: 4em;
+	border: solid 1px white;
+}
+.tree ul>ul span {
+	top: .75em;
+}
+.tree span {
+	border-width: 2px 1px 0 0;
+}
+.tree span+span {
+	border-width: 2px 0 0 1px;
+}
+ul>ul {
+	margin: 2em 0 0;
+}
+.tree li a {
+	display: block;
+}
+.tree li {
+	display: inline-block;
+}
+.tree ul:nth-of-type(2) {
+	border: solid 2px;
+	border-width: 2px 0 0;
+	margin: .6em 0 0;
+}
+.tree ul:nth-of-type(2) li:first-child {
+	margin: 0 0 0 -1.1em;
+}
+.tree ul:nth-of-type(2) li:nth-child(even) {
+	margin: 0 2em 0 0;
+}
+.tree ul:nth-of-type(2) li:nth-of-type(12) {
+	margin: 0 4em 0 0;
+}
+.tree ul:nth-of-type(2) li:nth-of-type(11) {
+	margin: 0 0 0 4.8em;
+}
+.tree ul ul:last-child li:before, .offspring::before {
+	content: '__';
+	width: 2.5em;
+	height: 4em;
+	background-color: hsl(0, 30%, 30%);
+	color: hsl(0, 30%, 30%);
+	display: block;
+	border: solid 2px white;
+	border-width: 0 2px 0 0;
+	margin: 0 0 .5em;
+}
+.tree ul ul li {
+	position: relative;
+}
+.tree li.break:after {
+	position: absolute;
+	top: 0;
+	left: 5em;
+	content: '';
+	width: 4em;
+	height: 1em;
+	background-color: hsl(0, 30%, 30%);
+	color: hsl(0, 30%, 30%);
+	margin-top: -0.5em;
+}
+, .tree ul ul:last-child {
+	margin: .75em 0 0;
+}
+.tree ul ul:last-child {
+	border: solid 2px;
+	border-width: 2px 0 0;
+	margin: .7em 0 0;
+}
+.tree ul ul:last-child li:first-child {
+	margin: 0 0 0 -.3em;
+}
+.tree ul ul:last-child li:nth-child(4) {
+	margin: 0 0 0 3.5em;
+}
+.tree ul ul:last-child li:nth-child(6) {
+	margin: 0 0 0 6.5em;
+}
+.tree ul ul:last-child li:nth-child(8) {
+	margin: 0 9em 0 8.7em;
+}
+.tree ul ul:last-child li:nth-child(9) {
+	margin: 0 0 0 0em;
+}
+.tree ul ul:last-child li:nth-child(11) {
+	margin: 0 0 0 3em;
+}
+.tree ul ul:last-child li:nth-child(16) {
+	margin: 0 3.9em 0 3em;
+}
+.tree li.break:nth-child(5):after {
+	width: 6.8em;
+}
+.tree li.break:nth-child(7):after {
+	width: 8.8em;
+}
+.tree li.break:nth-child(8):after {
+	width: 9.2em;
+}
+.tree li.break:nth-child(10):after {
+	width: 3em;
+}
+.tree li.break:nth-child(15):after {
+	width: 3.5em;
+}
+.tree li.break:last-child:after {
+	width: 3.5em;
+}
+li a i {
+	position: absolute;
+	bottom: -12px;
+	left: -9999px;
+	font: 8px normal Helvetica, sans-serif;
+	background-color: hsl(0, 40%, 30%);
+}
+ul li.show a i {
+	left: 4px !important;
 }
 
-       
-        
+ul ul:nth-of-type(1) li a:hover i {
+	bottom: -30px;
+	left: 4px;
+	z-index: 1;
+}
+/*
+ul:nth-of-type(2) li:nth-of-type(2n+12) a:hover i, ul:nth-of-type(3) li:nth-child(-n+5) a:hover i, ul:nth-of-type(3) li:nth-child(8) a:hover i, ul:nth-of-type(3) li:nth-child(11) a:hover i, ul:nth-of-type(3) li:nth-child(15) a:hover i, ul:nth-of-type(3) li:nth-child(n+17) a:hover i {
+	left: 4px;
+	bottom: -2px;
+}
+*/
+ul:nth-of-type(2) li.show:nth-of-type(2n+12) a i, ul:nth-of-type(3) li.show:nth-child(-n+5) a i, ul:nth-of-type(3) li.show:nth-child(8) a i, ul:nth-of-type(3) li.show:nth-child(11) a i, ul:nth-of-type(3) li.show:nth-child(15) a i, ul:nth-of-type(3) li.show:nth-child(n+17) a i {
+	left: 4px;
+	bottom: -2px;
+}
+
+li figure {
+	position: absolute;
+	bottom: 4em;
+	left: -4.5em;
+	width: 5em;
+	font-size: 8px;
+	box-sizing: border-box;
+	background-color: hsl(0, 40%, 30%);
+	opacity: 0;
+    z-index: 4;
+}
+#ifb figure {
+    bottom: -1em;
+	left: -11em;
+}
+
+#ghs figure {
+    bottom: -1em;
+	left: 11em;
+}
+li.show figure {
+	opacity: 1;
+	transition: opacity 2s;
+}
+li figure img {
+	width: 100%;
+	height: auto;
+}
+li.hi a {
+    color: rgb(255,222,100);
+}
+figure>* {
+	position: relative;
+	display: block;
+}
+@media screen and (max-width: 667px) {
+	body {
+		font: 2em Helvetica, serif;
+	}
+}
