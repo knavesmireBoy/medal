@@ -85,10 +85,10 @@
        #pause {
        	margin-left: -100%;
        }
- button {
+       button {
        	color: darkblue;
        }
-button:nth-child(even) {
+       button:nth-child(even) {
        	font-weight: bold;
        }
        .inplay button:nth-child(even) {
@@ -171,13 +171,12 @@ button:nth-child(even) {
        .inplay #base {
        	display: none;
        }
-
        .gallery a {
        	border: solid 6px seashell;
        	overflow: hidden;
        	border-radius: 11px;
        }
-/*
+       /*
        .gallery a:nth-child(n+7) {
        	max-height: none;
        }
@@ -188,6 +187,7 @@ button:nth-child(even) {
        	grid-column: 4/7;
        }
 */
+
        a img {
        	width: 100%;
        	height: auto;
@@ -199,7 +199,6 @@ button:nth-child(even) {
        .showtime a img, a:hover img {
        	opacity: 1;
        }
-
        .showtime .gallery a {
        	position: absolute;
        	left: -9999px;
@@ -233,8 +232,7 @@ button:nth-child(even) {
        	z-index: 1;
        	transform: translateY(0em);
        	display: inline-block;
-        color: darkblue;
-
+       	color: darkblue;
        	/*
             transition: transform 1s; 
             transform: translateY(-4em);
@@ -251,9 +249,9 @@ button:nth-child(even) {
 
         }
     */
-@media screen and (max-width: 960px) {
-     .gallery>* {
-       	flex: 1 1 12em;
+
+       @media screen and (max-width: 960px) {
+       	.gallery>* {
+       		flex: 1 1 12em;
+       	}
        }
-    
-}
