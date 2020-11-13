@@ -145,7 +145,10 @@ li a i {
 	bottom: -12px;
 	left: -9999px;
 	font: 8px normal Helvetica, sans-serif;
-	background-color: hsl(0, 40%, 30%);
+	background-color: black;
+}
+ul:nth-of-type(2) li:nth-of-type(odd), ul:nth-of-type(2) li:nth-of-type(8), ul:nth-of-type(2) li:nth-of-type(10) {
+    color: rgb(199,177,155);
 }
 ul li.show a i {
 	left: 4px !important;
@@ -174,18 +177,18 @@ li figure {
 	width: 5em;
 	font-size: 8px;
 	box-sizing: border-box;
-	background-color: hsl(0, 40%, 30%);
+	background-color: black;
 	opacity: 0;
     z-index: 4;
 }
 #ifb figure {
-    bottom: -1em;
+    bottom: -3em;
 	left: -11em;
 }
 
 #ghs figure {
-    bottom: -1em;
-	left: 11em;
+    bottom: -3em;
+	left: 2em;
 }
 li.show figure {
 	opacity: 1;
