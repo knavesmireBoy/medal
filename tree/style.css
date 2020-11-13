@@ -2,7 +2,7 @@ body {
 	font: 1em 'Domine', 'Georgia', serif;
 	margin: 0;
 	text-align: center;
-	background-color: hsl(0, 30%, 30%);
+	background-color: hsl(0, 40%, 20%);
 	color: white;
 	display: flex;
 	flex-direction: column;
@@ -18,7 +18,7 @@ ul, li {
 h1 {
 	font-size: 3.2em;
 	color: white;
-	background-image: linear-gradient(black, hsla(0, 30%, 30%, 1) 50%);
+	background-image: linear-gradient(black, hsl(0, 30%, 30%) 50%);
 	margin: 0;
 	padding: .5em 0 0;
 	line-height: .1;
@@ -90,8 +90,8 @@ ul>ul {
 	content: '__';
 	width: 2.5em;
 	height: 4em;
-	background-color: hsl(0, 30%, 30%);
-	color: hsl(0, 30%, 30%);
+	background-color: hsl(0, 40%, 20%);
+	color: hsl(0, 40%, 20%);
 	display: block;
 	border: solid 2px white;
 	border-width: 0 2px 0 0;
@@ -107,8 +107,8 @@ ul>ul {
 	content: '';
 	width: 4em;
 	height: 1em;
-	background-color: hsl(0, 30%, 30%);
-	color: hsl(0, 30%, 30%);
+	background-color: hsl(0, 40%, 20%);
+	color: hsl(0, 40%, 20%);
 	margin-top: -0.5em;
 }
 , .tree ul ul:last-child {
@@ -250,7 +250,7 @@ h1:after {
 footer a:before {
 	content: '';
 	position: relative;
-	background-color: hsla(0, 30%, 30%, 1);
+	background-color: hsl(0, 40%, 20%);
 	display: block;
 	border-radius: 50%;
 	width: 120%;
@@ -264,6 +264,7 @@ footer {
 	margin: 1.5em 0 0;
 	flex: 1 0 auto;
 	overflow: hidden;
+    background-color: hsl(0, 40%, 20%);
 }
 @media screen and (max-width: 667px) {
 	body {
