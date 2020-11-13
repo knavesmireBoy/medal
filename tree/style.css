@@ -1,20 +1,38 @@
 body {
-	font: .75em Helvetica, serif;
-	margin: 2% 0;
+	font: 1em 'Domine', 'Georgia', serif;
+	margin: 0;
 	text-align: center;
 	background-color: hsl(0, 30%, 30%);
 	color: white;
 	display: flex;
+	flex-direction: column;
+}
+html, body {
+	height: 100%;
+	min-height: 100vh;
 }
 ul, li {
 	padding: 0;
 	margin: 0;
 }
+h1 {
+	font-size: 3.2em;
+	color: white;
+	background-image: linear-gradient(black, hsla(0, 30%, 30%, 1) 50%);
+	margin: 0;
+	padding: .5em 0 0;
+	line-height: .1;
+}
+.content {
+	overflow: hidden;
+	flex: 1 0 auto;
+}
 .tree {
 	font-size: .55rem;
 	overflow: auto;
-	flex: 0 0 1280px;
 	padding-bottom: 2em;
+    margin-top: 8em;
+	flex: 0 0 1280px;
 }
 .tree li {
 	list-style: none;
@@ -148,12 +166,11 @@ li a i {
 	background-color: black;
 }
 ul:nth-of-type(2) li:nth-of-type(odd), ul:nth-of-type(2) li:nth-of-type(8), ul:nth-of-type(2) li:nth-of-type(10) {
-    color: rgb(199,177,155);
+	color: rgb(199, 177, 155);
 }
 ul li.show a i {
 	left: 4px !important;
 }
-
 ul ul:nth-of-type(1) li a:hover i {
 	bottom: -30px;
 	left: 4px;
@@ -165,11 +182,11 @@ ul:nth-of-type(2) li:nth-of-type(2n+12) a:hover i, ul:nth-of-type(3) li:nth-chil
 	bottom: -2px;
 }
 */
+
 ul:nth-of-type(2) li.show:nth-of-type(2n+12) a i, ul:nth-of-type(3) li.show:nth-child(-n+5) a i, ul:nth-of-type(3) li.show:nth-child(8) a i, ul:nth-of-type(3) li.show:nth-child(11) a i, ul:nth-of-type(3) li.show:nth-child(15) a i, ul:nth-of-type(3) li.show:nth-child(n+17) a i {
 	left: 4px;
 	bottom: -2px;
 }
-
 li figure {
 	position: absolute;
 	bottom: 4em;
@@ -179,15 +196,14 @@ li figure {
 	box-sizing: border-box;
 	background-color: black;
 	opacity: 0;
-    z-index: 4;
+	z-index: 4;
 }
 #ifb figure {
-    bottom: -3em;
+	bottom: -3em;
 	left: -11em;
 }
-
 #ghs figure {
-    bottom: -3em;
+	bottom: -3em;
 	left: 2em;
 }
 li.show figure {
@@ -199,11 +215,55 @@ li figure img {
 	height: auto;
 }
 li.hi a {
-    color: rgb(255,222,100);
+	color: rgb(255, 222, 100);
 }
 figure>* {
 	position: relative;
 	display: block;
+}
+footer h2 {
+	width: 2em;
+	height: 2.5em;
+}
+footer h2 {
+	position: relative;
+	margin: auto;
+	bottom: -1em;
+}
+footer h2 img {
+	width: 100%;
+	display: block;
+}
+h1:after {
+	content: 'Family Tree';
+	position: relative;
+	background-color: hsl(0, 30%, 30%);
+	display: block;
+	border-radius: 50%;
+	width: 120%;
+	height: 1em;
+	left: 62%;
+	transform: translate(-60%, 30%);
+	box-shadow: 4px 4px 4px black;
+	text-shadow: 4px 4px 4px black;
+}
+footer a:before {
+	content: '';
+	position: relative;
+	background-color: hsla(0, 30%, 30%, 1);
+	display: block;
+	border-radius: 50%;
+	width: 120%;
+	height: 1em;
+	left: 62%;
+	transform: translate(-60%, -30%);
+	box-shadow: -4px -4px 4px black;
+	text-shadow: 4px 4px 4px black;
+}
+footer {
+	margin: 1.5em 0 0;
+	flex: 1 0 auto;
+	overflow: hidden;
 }
 @media screen and (max-width: 667px) {
 	body {
