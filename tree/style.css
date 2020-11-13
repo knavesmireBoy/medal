@@ -23,6 +23,9 @@ h1 {
 	padding: .5em 0 0;
 	line-height: .1;
 }
+ main > a {
+            text-decoration: none;
+        }
 .content {
 	overflow: hidden;
 	flex: 1 0 auto;

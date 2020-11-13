@@ -14,7 +14,7 @@ html, body {
 footer {
 	flex: 0 0 auto;
 	display: flex;
-	background-image: url("medal_side_ko3.png");
+	background-image: url("images/medal_side_ko3.png");
 	background-repeat: no-repeat;
 	background-size: 100%;
 	text-align: left;
