@@ -1,11 +1,14 @@
 body {
-	font: 1em 'Domine', 'Georgia', serif;
+	font: .9em 'Domine', 'Georgia', serif;
 	margin: 0;
 	text-align: center;
 	background-color: hsl(0, 40%, 20%);
 	color: white;
 	display: flex;
 	flex-direction: column;
+}
+   html {
+       -webkit-text-size-adjust: none;
 }
 html, body {
 	height: 100%;
@@ -24,18 +27,21 @@ h1 {
 	line-height: .1;
 }
  main > a {
-            text-decoration: none;
+     text-decoration: none;
         }
 .content {
-	overflow: hidden;
 	flex: 1 0 auto;
+    overflow: hidden;
 }
+
 .tree {
 	font-size: .55rem;
-	overflow: auto;
+	overflow: visible;
 	padding-bottom: 2em;
     margin-top: 8em;
-	flex: 1 1 1280px;
+    width: 1280px;
+           -webkit-text-size-adjust: none;
+
 }
 .tree li {
 	list-style: none;
@@ -43,7 +49,7 @@ h1 {
 }
 .tree>ul li.spacer {
 	list-style: none;
-	width: 10em;
+	width: 8em;
 }
 .tree span {
 	display: inline-block;
@@ -261,7 +267,6 @@ footer a:before {
 	left: 62%;
 	transform: translate(-60%, -30%);
 	box-shadow: -4px -4px 4px black;
-	text-shadow: 4px 4px 4px black;
 }
 footer {
 	margin: 1.5em 0 0;
@@ -269,8 +274,40 @@ footer {
 	overflow: hidden;
     background-color: hsl(0, 40%, 20%);
 }
-@media screen and (max-width: 667px) {
-	body {
-		font: 2em 'Domine', 'Georgia', serif;
-	}
+@media (pointer: coarse) {
+
+    .content {
+	flex: 1 0 auto;
+    overflow: visible;
+}
+    
+    h1:after {
+	border-radius: 0;
+	width: 100%;
+	height: 0;
+	left: 0%;
+	transform: translate(0, 0);
+	box-shadow: none;
+}
+    h1 {
+	background: none;
+    width: 1280px;
+
+}
+    
+    footer {
+        width: 1280px;
+    }
+    footer a:before {
+	border-radius: 0;
+	width: 100%;
+	height: 0;
+	left: 0;
+	transform: translate(0, 0);
+	box-shadow: none
+}
+    footer h2 {
+	bottom: 1em;
+}
+
 }

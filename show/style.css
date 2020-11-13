@@ -92,9 +92,7 @@
        .inplay button:nth-child(even) {
        	color: brown;
        }
-       .inplay button:nth-child(odd) {
-       	color: #999;
-       }
+
        .inplay button:nth-child(odd):hover {
        	color: black;
        }
@@ -275,8 +273,50 @@ https://hankchizljaw.com/wrote/creating-a-full-bleed-css-utility/*/
 	width: 100vw;
 }
 
+
+
        @media screen and (max-width: 960px) {
        	.gallery>* {
        		flex: 1 1 12em;
        	}
        }
+
+@media screen and (max-width: 667px) {
+    #pauser {
+	margin-left: -36.5vw;
+	width: 92vw;
+}
+    
+    #close {
+       	width: 4.2em;
+       	height: 6em;
+       	transform: translate(20vw, 2em);
+
+       }
+       #close:hover {
+       	background-position: center 96.5%;
+       }
+       .lscp #close {
+       	transform: translate(40vw, 2em);
+       }
+    
+         .gallery>* {
+       	flex: 1 1 8em;
+       }
+       .gallery a:nth-child(n+7) {
+       }
+}
+
+@media screen and (max-width: 667px) and (orientation: portrait){
+    #pauser {
+	margin-left: -105vw;
+	width: 275vw;
+        max-width: 500vw;
+}
+         .gallery>* {
+       	flex: 1 1 6em;
+       }
+       .gallery a:nth-child(n+7) {
+           flex: 1 1 10em;
+       }
+}
