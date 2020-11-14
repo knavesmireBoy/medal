@@ -1,5 +1,5 @@
 body {
-	font: .9em 'Domine', 'Georgia', serif;
+	font: 1em 'Domine', 'Georgia', serif;
 	margin: 0;
 	text-align: center;
 	background-color: hsl(0, 40%, 20%);
@@ -22,7 +22,7 @@ h1 {
 	font-size: 3.2em;
 	color: white;
 	background-image: linear-gradient(black, hsl(0, 30%, 30%) 50%);
-	margin: 0;
+	margin: 0 0 1em;
 	padding: .5em 0 0;
 	line-height: .1;
 }
@@ -33,6 +33,7 @@ h1 {
 	flex: 1 0 auto;
     overflow: hidden;
 }
+/*https://stackoverflow.com/questions/53856831/rem-font-size-not-adjusting-below-arbitrary-threshold*/
 .tree {
 	overflow: visible;
     font-size: 0;
@@ -41,12 +42,12 @@ h1 {
     width: 1280px;
 }
 .tree ul {
-    font-size: .52rem;
+    font-size: .53rem;
 }
 
 .tree li {
 	list-style: none;
-	width: 5.2em;
+	width: 5.4em;
 }
 .tree>ul li.spacer {
 	list-style: none;
@@ -85,13 +86,13 @@ ul>ul {
 	margin: .6em 0 0;
 }
 .tree ul:nth-of-type(2) li:first-child {
-	margin: 0 0 0 -1.1em;
+	margin: 0 0 0 -1.5em;
 }
 .tree ul:nth-of-type(2) li:nth-child(even) {
 	margin: 0 2em 0 0;
 }
 .tree ul:nth-of-type(2) li:nth-of-type(12) {
-	margin: 0 4em 0 0;
+	margin: 0 4.2em 0 0;
 }
 .tree ul:nth-of-type(2) li:nth-of-type(11) {
 	margin: 0 0 0 4.8em;
