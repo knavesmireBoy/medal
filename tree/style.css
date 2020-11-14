@@ -33,16 +33,17 @@ h1 {
 	flex: 1 0 auto;
     overflow: hidden;
 }
-
 .tree {
-	font-size: .55rem;
 	overflow: visible;
+    font-size: 0;
 	padding-bottom: 2em;
     margin-top: 8em;
     width: 1280px;
-           -webkit-text-size-adjust: none;
-
 }
+.tree ul {
+    font-size: .52rem;
+}
+
 .tree li {
 	list-style: none;
 	width: 5.2em;
