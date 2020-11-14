@@ -404,8 +404,10 @@
 			var getLoc = (function(div, subtract, isGreaterEq) {
 				var getThreshold = compose(div, subtract);
 				return function(e) {
-					var box = e.target.getBoundingClientRect();
-					return isGreaterEq(partial(subtract, e.clientX, box.left), partial(getThreshold, box.right, box.left));
+					var box = e.target.getBoundingClientRect(),
+                        res = isGreaterEq(partial(subtract, e.clientX, box.left), partial(getThreshold, box.right, box.left));
+                   // console.log(e.clientX-box.left > (box.right-box.left)/2);
+					return e.clientX-box.left > (box.right-box.left)/2;
 				};
 			}(divideBy(2), subtract, greaterOrEqual));
 			return function(e) {
