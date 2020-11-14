@@ -337,7 +337,7 @@
 		always = (arg) => () => { arg },
 		validateProperty = (o, p) => o & o[p],
 		equals = (a, b) => a === b,
-		greaterOrEqual = (invoke, (a, b) => a >= b),
+		greaterOrEqual = partial(invoke, (a, b) => a >= b),
 		gtEq = curryLeft((a, b) => a >= b),
 		doAlt = actions => actions.reverse()[0](),
 		defer_once = curryFactory(0, true),
@@ -406,8 +406,8 @@
 				return function(e) {
 					var box = e.target.getBoundingClientRect(),
                         res = isGreaterEq(partial(subtract, e.clientX, box.left), partial(getThreshold, box.right, box.left));
-                   // console.log(e.clientX-box.left > (box.right-box.left)/2);
-					return e.clientX-box.left > (box.right-box.left)/2;
+					//return e.clientX-box.left > (box.right-box.left)/2;
+					return res;
 				};
 			}(divideBy(2), subtract, greaterOrEqual));
 			return function(e) {
