@@ -276,7 +276,7 @@ footer {
 	overflow: hidden;
     background-color: hsl(0, 40%, 20%);
 }
-@media (pointer: coarse) {
+@media (pointer: coarse) and (max-width: 667px){
 
     .content {
 	flex: 1 0 auto;
