@@ -55,8 +55,8 @@
     
     function curryFactory(i, defer){
         let once = {
-            defer: (f) => (arg) => () => f(arg),
             imm: (f) => (arg) => f(arg),
+            defer: (f) => (arg) => () => f(arg)
         },
             twice = {
                 imm: (f) => (arg1) => (arg2) => f(arg2, arg1),
@@ -334,7 +334,7 @@
 			let _curry = (args) => args.length < fn.length ? (..._args) => _curry([...args, ..._args]) : fn(...args);
 			return () => _curry(args);
 		},
-		always = (arg) => () => { arg },
+		always = (arg) => () =>  arg,
 		validateProperty = (o, p) => o & o[p],
 		equals = (a, b) => a === b,
 		greaterOrEqual = partial(invoke, (a, b) => a >= b),
@@ -666,4 +666,10 @@
 		}, gallery);
     
 	setup.render();
+    /*
+    var x = partial(invoke, subtract);
+    console.log(x(...[22,5]));
+    console.log(x.apply(null,[22,5]));
+    */
 }());
+
