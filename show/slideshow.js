@@ -9,7 +9,11 @@
 				validate: () => recur.i >= 200,
 				inc: () => recur.i += 1
 			},
-			actions = [fadeIn, fadeOut];
+            fade = {
+				validate: () => recur.i >= 300,
+				inc: () => recur.i += 1
+			},
+			actions = flag ? [fade] : [fadeIn, fadeOut];
 		return function() {
 			return actions.reverse()[0];
 		};
@@ -255,10 +259,12 @@
 		}
 	}
 	class LoopIterator {
+        
 		constructor(group) {
 			this.group = group;
 			this.position = 0;
 			this.rev = false;
+            this.outcomes = [(arg) => arg.width > arg.height, (arg) => !(arg.width > arg.height)];
 		}
 		next(flag) {
 			if (!flag && this.rev) {
@@ -272,6 +278,12 @@
 			};
 			return result;
 		}
+    enquire(){
+        var i = (this.position+1) % this.group.members.length;
+        return {
+            value: this.group.members[i]
+        }
+    }
 		previous(flag) {
 			if (!this.rev || flag) {
 				this.group.members = this.group.members.reverse();
@@ -291,16 +303,34 @@
 			return result;
 		}
 		play() {
+            this.compare();
 			return this.next(true).value;
 		}
 		find(tgt) {
 			this.position = this.group.members.findIndex(m => m === tgt);
+            if(!this.outcomes[0](this.getImg(tgt))){
+                this.outcomes = this.outcomes.reverse();
+            }
 			let result = {
 				value: this.group.members[this.position],
 				index: this.position
 			};
 			return result;
 		}
+        compare(){
+            var next = this.getImg(this.enquire().value),
+                current = this.getImg(this.current().value);
+                if([next, current].every(this.outcomes[0])){
+                    console.log('swap')
+                     this.outcomes = this.outcomes.reverse();
+                }
+            
+        }
+        getImg(tgt){
+            var pic = new Image();
+            pic.src = tgt.value ? tgt.value : tgt;
+            return pic;
+        }
 	}
 	//https://medium.com/@dtipson/creating-an-es6ish-compose-in-javascript-ac580b95104a
 	const eventing = function(type, fn, el, actions = ['preventDefault']) {
@@ -495,7 +525,7 @@
 					recur();
 				} else {
                     var style,
-                        slide = $('slide')
+                        slide = $('slide');
 					if (slide) {
 						style = new Map([
 							['opacity', recur.i / 100]
@@ -636,8 +666,8 @@
 				return;
 			}
 			compose(setindex, driller(['target', 'src']))(e);
-			 compose(thrice(doMap)('id')('caption'), anCr(document.querySelector('main')))('aside');
-             compose(thrice(doMap)('id')('controls'), anCr(document.querySelector('main')))('section');
+            compose(thrice(doMap)('id')('caption'), anCr(document.querySelector('main')))('aside');
+            compose(thrice(doMap)('id')('controls'), anCr(document.querySelector('main')))('section');
 			machBase(e.target, 'base').then(orient(lcsp, ptrt)).then((v) => thrice(doMap)('txt')(setCaption(v))($$('caption'))).then(showtime);
             
 			let buttons = ['previous', 'play', 'next'].map(buttons_cb),
