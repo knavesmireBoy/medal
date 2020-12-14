@@ -164,7 +164,7 @@ section {
 }
 .inplay #base {
 	display: none;
-	display: block;
+	display: block ;
 }
 .gallery a {
 	border: solid 6px seashell;
@@ -191,7 +191,7 @@ a img {
 	left: 0;
 	max-height: none;
 }
-.inplay #pause {
+.inplay #pause, .inplay #slide {
 	margin-left: -100%;
 	z-index: 11;
 	position: relative;

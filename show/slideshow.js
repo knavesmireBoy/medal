@@ -11,9 +11,9 @@
 			},
             fade = {
 				validate: () => recur.i >= 300,
-				inc: () => recur.i += 1
+				inc: () => recur.i -= 1
 			},
-			actions = flag ? [fade] : [fadeIn, fadeOut];
+			actions = !flag ? [fade] : [fadeIn, fadeOut];
 		return function() {
 			return actions.reverse()[0];
 		};
