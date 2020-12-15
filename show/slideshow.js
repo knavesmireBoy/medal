@@ -3,15 +3,18 @@
 	var maker = (function(flag) {
 		var fadeOut = {
 				validate: () => recur.i <= -51,
-				inc: () => recur.i -= 1
+				inc: () => recur.i -= 1,
+            reset: () => {}
 			},
 			fadeIn = {
 				validate: () => recur.i >= 200,
-				inc: () => recur.i += 1
+				inc: () => recur.i += 1,
+        reset: () => {}
 			},
             fade = {
-				validate: () => recur.i >= 300,
-				inc: () => recur.i -= 1
+				validate: () => recur.i <= 0,
+				inc: () => recur.i -= 1,
+                    reset: () => {recur.i = 300}
 			},
 			actions = !flag ? [fade] : [fadeIn, fadeOut];
 		return function() {
@@ -319,11 +322,16 @@
 		}
         compare(){
             var next = this.getImg(this.enquire().value),
-                current = this.getImg(this.current().value);
-                if([next, current].every(this.outcomes[0])){
-                    console.log('swap')
-                     this.outcomes = this.outcomes.reverse();
+                current = this.getImg(this.current().value),
+                pass = [next, current].filter(this.outcomes[0]);
+            console.log(pass.length);
+                if(!pass){
+                    console.log('swap');
+                    //this.outcomes = this.outcomes.reverse();
                 }
+            else {
+                console.log('steady');
+            }
             
         }
         getImg(tgt){
@@ -512,12 +520,15 @@
 			var player = maker(),
 				cb = (img) => best(partial(gtEq, img.width, img.height), [l, p])();
 			return function() {
-				if (!recur.t) {
+				if (!recur.t) {//initial
 					//swap next image into base because initial pic is a duplicate
 					loader(films.play.bind(films), 'base');
 				}
+                console.log(recur.i+'!');
 				if (player.validate()) {
 					if (recur.i <= 0) {
+                       console.log('switch');
+                        player.reset();
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
 						loader(films.play.bind(films), 'base');
 					}

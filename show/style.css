@@ -162,10 +162,7 @@ section {
 .lscp .gallery {
 	width: 70vw;
 }
-.inplay #base {
-	display: none;
-	display: block ;
-}
+
 .gallery a {
 	border: solid 6px seashell;
 	overflow: hidden;
@@ -191,11 +188,15 @@ a img {
 	left: 0;
 	max-height: none;
 }
-.inplay #pause, .inplay #slide {
+.inplay #pause, .inplay #slide{
 	margin-left: -100%;
 	z-index: 11;
 	position: relative;
 	left: 0;
+}
+.inplay #base {
+	display: none;
+	display: block;
 }
 #caption {
 	text-align: center;
