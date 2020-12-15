@@ -4,21 +4,28 @@
 		var fadeOut = {
 				validate: () => recur.i <= -51,
 				inc: () => recur.i -= 1,
-            reset: () => {}
+            reset: () => {
+            return document.body.classList.contains('swap');
+        }
 			},
 			fadeIn = {
 				validate: () => recur.i >= 200,
 				inc: () => recur.i += 1,
-        reset: () => {}
+        reset: () => {
+        return document.body.classList.contains('swap');
+    }
 			},
             fade = {
 				validate: () => recur.i <= 0,
 				inc: () => recur.i -= 1,
-                    reset: () => {recur.i = 300}
-			},
-			actions = !flag ? [fade] : [fadeIn, fadeOut];
-		return function() {
-			return actions.reverse()[0];
+                    reset: () => {
+                        recur.i = 300;
+                        return document.body.classList.contains('swap');
+                    }
+			};
+ return function(flag) {
+    var actions = !flag ? [fade] : [fadeIn, fadeOut];
+    return actions.reverse()[0];
 		};
 	}());
 
@@ -323,14 +330,13 @@
         compare(){
             var next = this.getImg(this.enquire().value),
                 current = this.getImg(this.current().value),
-                pass = [next, current].filter(this.outcomes[0]);
-            console.log(pass.length);
+                pass = [next, current].every(this.outcomes[0]);
                 if(!pass){
-                    console.log('swap');
-                    //this.outcomes = this.outcomes.reverse();
+                    this.outcomes = this.outcomes.reverse();
+                    document.body.classList.add('swap');
                 }
             else {
-                console.log('steady');
+                 document.body.classList.remove('swap');
             }
             
         }
@@ -518,21 +524,20 @@
 		}, gallery),
 		recur = (function(l, p) {
 			var player = maker(),
+                pass = false,
 				cb = (img) => best(partial(gtEq, img.width, img.height), [l, p])();
 			return function() {
 				if (!recur.t) {//initial
 					//swap next image into base because initial pic is a duplicate
 					loader(films.play.bind(films), 'base');
 				}
-                console.log(recur.i+'!');
 				if (player.validate()) {
 					if (recur.i <= 0) {
-                       console.log('switch');
-                        player.reset();
+                        pass = player.reset();
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
 						loader(films.play.bind(films), 'base');
 					}
-					player = maker();
+					player = maker(pass);
 					recur();
 				} else {
                     var style,

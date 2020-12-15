@@ -194,9 +194,8 @@ a img {
 	position: relative;
 	left: 0;
 }
-.inplay #base {
-	display: none;
-	display: block;
+.swap #base {
+    visibility: hidden;
 }
 #caption {
 	text-align: center;
