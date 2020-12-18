@@ -538,9 +538,9 @@
 				if (player.validate()) {
 					if (recur.i <= 0) {
                         pass = player.reset();
-                        console.log(player.limit)
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
 						loader(films.play.bind(films), 'base');
+                        console.log('limit" '+player.limit+' '+pass+' '+getImgSrc($('base')));
 					}
 					player = maker(pass);
 					recur();
