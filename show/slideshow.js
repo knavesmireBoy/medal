@@ -1,19 +1,22 @@
 (function() {
 	"use strict";
 	var maker = (function(flag) {
+        
 		var fadeOut = {
 				validate: () => recur.i <= -51,
 				inc: () => recur.i -= 1,
             reset: () => {
             return document.body.classList.contains('swap');
-        }
+        },
+            limit: -51
 			},
 			fadeIn = {
 				validate: () => recur.i >= 200,
 				inc: () => recur.i += 1,
         reset: () => {
         return document.body.classList.contains('swap');
-    }
+    },
+                 limit: 200
 			},
             fade = {
 				validate: () => recur.i <= 0,
@@ -21,11 +24,12 @@
                     reset: () => {
                         recur.i = 300;
                         return document.body.classList.contains('swap');
-                    }
-			};
+                    },
+                        limit: 0
+			},
+    actions = [fadeIn, fadeOut];
  return function(flag) {
-    var actions = !flag ? [fade] : [fadeIn, fadeOut];
-    return actions.reverse()[0];
+    return flag ? actions.reverse()[0] : fade;
 		};
 	}());
 
@@ -534,6 +538,7 @@
 				if (player.validate()) {
 					if (recur.i <= 0) {
                         pass = player.reset();
+                        console.log(player.limit)
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
 						loader(films.play.bind(films), 'base');
 					}
