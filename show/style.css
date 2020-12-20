@@ -118,6 +118,9 @@ section {
 .inplay {
 	background-color: hsl(30, 100%, 95%);
 }
+body.swap {
+    background-color: lime;
+}
 .gallery {
 	display: flex;
 	flex-wrap: wrap;

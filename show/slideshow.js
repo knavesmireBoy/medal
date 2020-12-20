@@ -12,7 +12,13 @@
 			},
 			fadeIn = {
 				validate: () => recur.i >= 200,
-				inc: () => recur.i += 1,
+				inc: () => {
+        recur.i += 1;
+        if(recur.i >= 100){
+        console.log('remove');
+        document.body.classList.remove('swap');
+            }
+                 },
         reset: () => {
         return document.body.classList.contains('swap');
     },
@@ -29,6 +35,7 @@
 			},
     actions = [fadeIn, fadeOut];
  return function(flag) {
+    console.log('flag: '+flag);
     return flag ? actions.reverse()[0] : fade;
 		};
 	}());
@@ -337,11 +344,9 @@
                 pass = [next, current].every(this.outcomes[0]);
                 if(!pass){
                     this.outcomes = this.outcomes.reverse();
+                    console.log('addswap');
                     document.body.classList.add('swap');
                 }
-            else {
-                 document.body.classList.remove('swap');
-            }
             
         }
         getImg(tgt){
@@ -529,6 +534,7 @@
 		recur = (function(l, p) {
 			var player = maker(),
                 pass = false,
+                limit = 0,
 				cb = (img) => best(partial(gtEq, img.width, img.height), [l, p])();
 			return function() {
 				if (!recur.t) {//initial
@@ -536,12 +542,15 @@
 					loader(films.play.bind(films), 'base');
 				}
 				if (player.validate()) {
-					if (recur.i <= 0) {
+                    limit = Math.min(player.limit, 0);
+					if (recur.i <= limit) {
                         pass = player.reset();
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
 						loader(films.play.bind(films), 'base');
-                        console.log('limit" '+player.limit+' '+pass+' '+getImgSrc($('base')));
+                        console.log(player.limit);
+                        console.log('limit '+limit+' '+pass+' '+'recur: '+recur.i);
 					}
+
 					player = maker(pass);
 					recur();
 				} else {
