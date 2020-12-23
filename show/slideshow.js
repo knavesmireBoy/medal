@@ -4,39 +4,45 @@
         
 		var fadeOut = {
 				validate: () => recur.i <= -51,
-				inc: () => recur.i -= 1,
+				inc: () => {
+                if(recur.i >= 100){
+            console.log('fadeout');
+        //document.body.classList.remove('swap');
+            }
+            recur.i -= 1;
+        },
             reset: () => {
             return document.body.classList.contains('swap');
         },
             limit: -51
 			},
 			fadeIn = {
-				validate: () => recur.i >= 200,
+				validate: () => recur.i >= 250,
 				inc: () => {
+    console.log('fadein');
         recur.i += 1;
-        if(recur.i >= 100){
-        console.log('remove');
-        document.body.classList.remove('swap');
-            }
                  },
         reset: () => {
         return document.body.classList.contains('swap');
     },
-                 limit: 200
+                 limit: 250
 			},
             fade = {
 				validate: () => recur.i <= 0,
-				inc: () => recur.i -= 1,
+				inc: () => {
+                console.log('just fade');
+                recur.i -= 1;
+            },
                     reset: () => {
-                        recur.i = 300;
+                        recur.i = 360;
                         return document.body.classList.contains('swap');
                     },
                         limit: 0
 			},
-    actions = [fadeIn, fadeOut];
+    actions = [fadeOut, fadeIn];
  return function(flag) {
-    console.log('flag: '+flag);
     return flag ? actions.reverse()[0] : fade;
+    //return flag ? fadeIn : fade;
 		};
 	}());
 
@@ -342,11 +348,15 @@
             var next = this.getImg(this.enquire().value),
                 current = this.getImg(this.current().value),
                 pass = [next, current].every(this.outcomes[0]);
+            console.log(current, next, pass);
                 if(!pass){
+                    console.log('outcomes');
                     this.outcomes = this.outcomes.reverse();
-                    console.log('addswap');
                     document.body.classList.add('swap');
                 }
+            else {
+                document.body.classList.remove('swap');
+            }
             
         }
         getImg(tgt){
@@ -542,17 +552,20 @@
 					loader(films.play.bind(films), 'base');
 				}
 				if (player.validate()) {
+                    
                     limit = Math.min(player.limit, 0);
 					if (recur.i <= limit) {
-                        pass = player.reset();
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
+                        pass = player.reset();
 						loader(films.play.bind(films), 'base');
-                        console.log(player.limit);
-                        console.log('limit '+limit+' '+pass+' '+'recur: '+recur.i);
+                        //console.log('limit '+limit+' '+pass+' '+'recur: '+recur.i);
 					}
-
+                    pass = player.reset();
 					player = maker(pass);
-					recur();
+                    console.log('pass: '+pass);
+                    console.log('limit: '+player.limit);
+                    player.inc();
+                    recur();
 				} else {
                     var style,
                         slide = $('slide');
