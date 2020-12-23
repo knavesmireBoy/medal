@@ -23,6 +23,7 @@
         recur.i += 1;
                  },
         reset: () => {
+    recur.i = 0;
         return document.body.classList.contains('swap');
     },
                  limit: 250
@@ -552,19 +553,25 @@
 					loader(films.play.bind(films), 'base');
 				}
 				if (player.validate()) {
-                    
+                    //reach the desired goal
                     limit = Math.min(player.limit, 0);
 					if (recur.i <= limit) {
+                        //usually zero
+                        //swap base into slide
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
                         pass = player.reset();
+                        //reset opacity
+                        //swap next into base
 						loader(films.play.bind(films), 'base');
                         //console.log('limit '+limit+' '+pass+' '+'recur: '+recur.i);
 					}
-                    pass = player.reset();
+                   
 					player = maker(pass);
+                    pass = player.reset();
+                    console.log('recur: '+recur.i);
                     console.log('pass: '+pass);
                     console.log('limit: '+player.limit);
-                    player.inc();
+                    //player.inc();
                     recur();
 				} else {
                     var style,
