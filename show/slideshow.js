@@ -12,13 +12,18 @@
             recur.i -= 1;
         },
             reset: () => {
+        recur.i = 0;
             return document.body.classList.contains('swap');
         },
-            limit: -51
+            limit: -51,
+                toString: () => 'mefadeout'
 			},
 			fadeIn = {
 				validate: () => recur.i >= 250,
 				inc: () => {
+    if(recur.i >= 100){
+    document.body.classList.remove('swap');
+}
     console.log('fadein');
         recur.i += 1;
                  },
@@ -26,7 +31,8 @@
     recur.i = 0;
         return document.body.classList.contains('swap');
     },
-                 limit: 250
+                 limit: 250,
+                     toString: () => 'mefadeIN'
 			},
             fade = {
 				validate: () => recur.i <= 0,
@@ -38,12 +44,12 @@
                         recur.i = 360;
                         return document.body.classList.contains('swap');
                     },
-                        limit: 0
+                        limit: 0,
+                            toString: () => 'me jez fade'
 			},
-    actions = [fadeOut, fadeIn];
+    actions = [fadeIn, fadeOut];
  return function(flag) {
-    return flag ? actions.reverse()[0] : fade;
-    //return flag ? fadeIn : fade;
+     return document.body.classList.contains('swap') ? actions.reverse()[0] : fade;
 		};
 	}());
 
@@ -349,15 +355,10 @@
             var next = this.getImg(this.enquire().value),
                 current = this.getImg(this.current().value),
                 pass = [next, current].every(this.outcomes[0]);
-            console.log(current, next, pass);
                 if(!pass){
-                    console.log('outcomes');
                     this.outcomes = this.outcomes.reverse();
                     document.body.classList.add('swap');
                 }
-            else {
-                document.body.classList.remove('swap');
-            }
             
         }
         getImg(tgt){
@@ -544,8 +545,8 @@
 		}, gallery),
 		recur = (function(l, p) {
 			var player = maker(),
-                pass = false,
                 limit = 0,
+                pass = false,
 				cb = (img) => best(partial(gtEq, img.width, img.height), [l, p])();
 			return function() {
 				if (!recur.t) {//initial
@@ -553,27 +554,33 @@
 					loader(films.play.bind(films), 'base');
 				}
 				if (player.validate()) {
+                    //console.log('hello1')
                     //reach the desired goal
                     limit = Math.min(player.limit, 0);
 					if (recur.i <= limit) {
+                        console.log('hello2')
                         //usually zero
                         //swap base into slide
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
-                        pass = player.reset();
                         //reset opacity
                         //swap next into base
+                        player.reset();
 						loader(films.play.bind(films), 'base');
                         //console.log('limit '+limit+' '+pass+' '+'recur: '+recur.i);
 					}
-                   
-					player = maker(pass);
-                    pass = player.reset();
+                    //console.log('hello2a')
+                    //pass = player.reset();
+                   player = maker();
+                   // pass = player.reset();
+/*
                     console.log('recur: '+recur.i);
                     console.log('pass: '+pass);
-                    console.log('limit: '+player.limit);
-                    //player.inc();
-                    recur();
+                    console.log('recur: '+recur.i);
+                    */
+                    console.log('limit: '+player.toString());
+                  if(!pass) recur();
 				} else {
+                   // console.log('hello3')
                     var style,
                         slide = $('slide');
 					if (slide) {
