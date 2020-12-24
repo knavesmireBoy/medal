@@ -1,52 +1,31 @@
 (function() {
 	"use strict";
 	var maker = (function(flag) {
-        
-		var fadeOut = {
-				validate: () => recur.i <= -51,
-				inc: () => {
-                if(recur.i >= 100){
-            console.log('fadeout');
-        //document.body.classList.remove('swap');
-            }
-            recur.i -= 1;
-        },
+        var fadeOut = {
+            validate: () => recur.i <= -51,
+            inc: () => recur.i -= 1,
             reset: () => {
-        recur.i = 0;
-            return document.body.classList.contains('swap');
+            recur.i = -51;
         },
-            limit: -51,
-                toString: () => 'mefadeout'
-			},
-			fadeIn = {
-				validate: () => recur.i >= 250,
-				inc: () => {
-    if(recur.i >= 100){
-    document.body.classList.remove('swap');
-}
-    console.log('fadein');
-        recur.i += 1;
-                 },
-        reset: () => {
-    recur.i = 0;
-        return document.body.classList.contains('swap');
+            limit: -51
     },
+                 fadeIn = {
+        validate: () => recur.i >= 250,
+        inc: () => {
+        if(recur.i >= 100){
+        document.body.classList.remove('swap');
+    }
+                 recur.i += 1;
+                 },
+                 reset: () => recur.i = 0,
                  limit: 250,
-                     toString: () => 'mefadeIN'
 			},
-            fade = {
-				validate: () => recur.i <= 0,
-				inc: () => {
-                console.log('just fade');
-                recur.i -= 1;
-            },
-                    reset: () => {
-                        recur.i = 360;
-                        return document.body.classList.contains('swap');
-                    },
-                        limit: 0,
-                            toString: () => 'me jez fade'
-			},
+                fade = {
+                    validate: () => recur.i <= 0,
+				inc: () => recur.i -= 1,
+                    reset: () => recur.i = 360,
+                    limit: 0,
+                },
     actions = [fadeIn, fadeOut];
  return function(flag) {
      return document.body.classList.contains('swap') ? actions.reverse()[0] : fade;
@@ -558,7 +537,7 @@
                     //reach the desired goal
                     limit = Math.min(player.limit, 0);
 					if (recur.i <= limit) {
-                        console.log('hello2')
+                        //console.log('hello2')
                         //usually zero
                         //swap base into slide
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
@@ -566,19 +545,10 @@
                         //swap next into base
                         player.reset();
 						loader(films.play.bind(films), 'base');
-                        //console.log('limit '+limit+' '+pass+' '+'recur: '+recur.i);
 					}
-                    //console.log('hello2a')
-                    //pass = player.reset();
-                   player = maker();
-                   // pass = player.reset();
-/*
-                    console.log('recur: '+recur.i);
-                    console.log('pass: '+pass);
-                    console.log('recur: '+recur.i);
-                    */
-                    console.log('limit: '+player.toString());
-                  if(!pass) recur();
+                    player = maker();
+                    recur();
+                    
 				} else {
                    // console.log('hello3')
                     var style,
