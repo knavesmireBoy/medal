@@ -335,6 +335,7 @@
                 current = this.getImg(this.current().value),
                 pass = [next, current].every(this.outcomes[0]);
                 if(!pass){
+                    console.log('swap!');
                     this.outcomes = this.outcomes.reverse();
                     document.body.classList.add('swap');
                 }
