@@ -335,9 +335,9 @@
                 current = this.getImg(this.current().value),
                 pass = [next, current].every(this.outcomes[0]);
                 if(!pass){
-                    console.log('swap!');
-                    this.outcomes = this.outcomes.reverse();
-                    document.body.classList.add('swap');
+                    console.log('swap!*');
+                    //this.outcomes = this.outcomes.reverse();
+                    //document.body.classList.add('swap');
                 }
             
         }
@@ -527,7 +527,15 @@
 			var player = maker(),
                 limit = 0,
                 pass = false,
-				cb = (img) => best(partial(gtEq, img.width, img.height), [l, p])();
+                goCompare = function(a, b){return a = (a === b); },
+				cb = (img) => best(partial(gtEq, img.width, img.height), [l, p])(),
+                determine = (img) => img.width > img.height,
+                test = function(){
+                    var b = getBaseChild(),
+                        s = getSlideChild(),
+                        pass = [b,s].map(determine).reduce(goCompare);
+                        if(!pass) document.body.classList.add('swap');
+                };
 			return function() {
 				if (!recur.t) {//initial
 					//swap next image into base because initial pic is a duplicate
@@ -545,10 +553,10 @@
                         //reset opacity
                         //swap next into base
                         player.reset();
-						loader(films.play.bind(films), 'base');
+						loader(films.play.bind(films), 'base').then(test);
 					}
                     player = maker();
-                    recur();
+                    recur.t = window.requestAnimationFrame(recur);
                     
 				} else {
                    // console.log('hello3')
