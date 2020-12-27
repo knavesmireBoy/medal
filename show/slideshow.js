@@ -13,7 +13,7 @@
         validate: () => recur.i >= 250,
         inc: () => {
         if(recur.i >= 100){
-        document.body.classList.remove('swap');
+        //document.body.classList.remove('swap');
     }
                  recur.i += 1;
                  },
@@ -533,8 +533,9 @@
                 test = function(){
                     var b = getBaseChild(),
                         s = getSlideChild(),
-                        pass = [b,s].map(determine).reduce(goCompare);
-                        if(!pass) document.body.classList.add('swap');
+                        pass = [b,s].map(determine).reduce(goCompare),
+                        m = pass ? 'remove' : 'add';
+                    document.body.classList[m]('swap');
                 };
 			return function() {
 				if (!recur.t) {//initial
@@ -542,24 +543,19 @@
 					loader(films.play.bind(films), 'base');
 				}
 				if (player.validate()) {
-                    //console.log('hello1')
                     //reach the desired goal
                     limit = Math.min(player.limit, 0);
 					if (recur.i <= limit) {
-                        //console.log('hello2')
+                        //console.log(player.limit)
                         //usually zero
                         //swap base into slide
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
-                        //reset opacity
-                        //swap next into base
                         player.reset();
 						loader(films.play.bind(films), 'base').then(test);
 					}
                     player = maker();
-                    recur.t = window.requestAnimationFrame(recur);
-                    
+                    recur();                    
 				} else {
-                   // console.log('hello3')
                     var style,
                         slide = $('slide');
 					if (slide) {
