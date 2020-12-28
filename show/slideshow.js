@@ -2,23 +2,18 @@
 	"use strict";
 	var maker = (function(flag) {
         var fadeOut = {
-            validate: () => recur.i <= -51,
+            validate: () => recur.i <= -41,
             inc: () => recur.i -= 1,
             reset: () => {
-            recur.i = -51;
+            recur.i = -41;
         },
-            limit: -51
+            limit: -41
     },
                  fadeIn = {
-        validate: () => recur.i >= 250,
-        inc: () => {
-        if(recur.i >= 100){
-        //document.body.classList.remove('swap');
-    }
-                 recur.i += 1;
-                 },
+        validate: () => recur.i >= 270,
+        inc: () => recur.i += 1,
                  reset: () => recur.i = 0,
-                 limit: 250,
+                 limit: 270,
 			},
                 fade = {
                     validate: () => recur.i <= 0,
@@ -316,7 +311,6 @@
 			return result;
 		}
 		play() {
-            this.compare();
 			return this.next(true).value;
 		}
 		find(tgt) {
@@ -330,17 +324,6 @@
 			};
 			return result;
 		}
-        compare(){
-            var next = this.getImg(this.enquire().value),
-                current = this.getImg(this.current().value),
-                pass = [next, current].every(this.outcomes[0]);
-                if(!pass){
-                    console.log('swap!*');
-                    //this.outcomes = this.outcomes.reverse();
-                    //document.body.classList.add('swap');
-                }
-            
-        }
         getImg(tgt){
             var pic = new Image();
             pic.src = tgt.value ? tgt.value : tgt;
@@ -533,9 +516,10 @@
                 test = function(){
                     var b = getBaseChild(),
                         s = getSlideChild(),
-                        pass = [b,s].map(determine).reduce(goCompare),
-                        m = pass ? 'remove' : 'add';
+                        pass = [b,s].map(determine),
+                        m = pass[0] === pass[1] ? 'remove' : 'add';
                     document.body.classList[m]('swap');
+                    console.log(m);
                 };
 			return function() {
 				if (!recur.t) {//initial
@@ -551,11 +535,15 @@
                         //swap base into slide
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
                         player.reset();
+                        console.log('limit: '+player.limit)
 						loader(films.play.bind(films), 'base').then(test);
 					}
                     player = maker();
                     recur();                    
 				} else {
+                    if(recur.i > 358){
+                        console.log(recur.i);
+                    }
                     var style,
                         slide = $('slide');
 					if (slide) {
