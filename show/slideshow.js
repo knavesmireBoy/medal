@@ -10,16 +10,16 @@
             limit: -41
     },
                  fadeIn = {
-        validate: () => recur.i >= 270,
+        validate: () => recur.i >= 300,
         inc: () => recur.i += 1,
-                 reset: () => recur.i = 0,
-                 limit: 270,
+                 reset: () => recur.i = 300,
+                 limit: 300,
 			},
                 fade = {
-                    validate: () => recur.i <= 0,
+                    validate: () => recur.i <= -1,
 				inc: () => recur.i -= 1,
                     reset: () => recur.i = 360,
-                    limit: 0,
+                    limit: -1,
                 },
     actions = [fadeIn, fadeOut];
  return function(flag) {
@@ -510,34 +510,51 @@
 			var player = maker(),
                 limit = 0,
                 pass = false,
-                goCompare = function(a, b){return a = (a === b); },
+                //goCompare = function(a, b){return a = (a === b); },
 				cb = (img) => best(partial(gtEq, img.width, img.height), [l, p])(),
-                determine = (img) => img.width > img.height,
                 test = function(){
-                    var b = getBaseChild(),
-                        s = getSlideChild(),
-                        pass = [b,s].map(determine),
-                        m = pass[0] === pass[1] ? 'remove' : 'add';
-                    document.body.classList[m]('swap');
-                };
+                    return [getBaseChild(), getSlideChild()].map((img) => img.width > img.height);
+                },
+                quiz = function(coll){
+                    return coll[0] === coll[1];
+                },
+                paint = function(str){
+                var coll = test(),
+                    bool = quiz(coll),
+                    m = bool ? 'remove' : 'add';
+                document.body.classList[m]('swap');
+                    return !bool;
+            };
 			return function() {
 				if (!recur.t) {//initial
 					//swap next image into base because initial pic is a duplicate
 					loader(films.play.bind(films), 'base');
 				}
 				if (player.validate()) {
+                    console.log(player.limit)
                     //reach the desired goal
                     limit = Math.min(player.limit, 0);
-					if (recur.i <= limit) {
-                        //console.log(player.limit)
-                        //usually zero
-                        //swap base into slide
+					if (recur.i === -1) {
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
                         player.reset();
-						loader(films.play.bind(films), 'base').then(test);
+                        console.log(recur.i);
+						loader(films.play.bind(films), 'base').then(paint).then((arg) => player = maker(arg)).then(recur);
 					}
-                    player = maker();
-                    recur();                    
+                    else if (recur.i === 300) {
+						//loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
+                        //player.reset();
+                        console.log(recur.i);
+						loader(films.play.bind(films), 'base').then(paint).then((arg) => player = maker(arg)).then(recur);
+					}
+                    else {
+                        loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
+                        //player.reset();
+                         console.log(recur.i);
+						//loader(films.play.bind(films), 'base');
+                        player = maker();
+                        recur(); 
+                    }
+                                        
 				} else {
                     var style,
                         slide = $('slide');
