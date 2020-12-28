@@ -519,7 +519,6 @@
                         pass = [b,s].map(determine),
                         m = pass[0] === pass[1] ? 'remove' : 'add';
                     document.body.classList[m]('swap');
-                    console.log(m);
                 };
 			return function() {
 				if (!recur.t) {//initial
@@ -535,15 +534,11 @@
                         //swap base into slide
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
                         player.reset();
-                        console.log('limit: '+player.limit)
 						loader(films.play.bind(films), 'base').then(test);
 					}
                     player = maker();
                     recur();                    
 				} else {
-                    if(recur.i > 358){
-                        console.log(recur.i);
-                    }
                     var style,
                         slide = $('slide');
 					if (slide) {
