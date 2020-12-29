@@ -2,12 +2,12 @@
 	"use strict";
 	var maker = (function(flag) {
         var fadeOut = {
-            validate: () => recur.i <= -41,
+            validate: () => recur.i <= -111,
             inc: () => recur.i -= 1,
             reset: () => {
-            recur.i = -41;
+            recur.i = -111;
         },
-            limit: -41
+            limit: -111
     },
                  fadeIn = {
         validate: () => recur.i >= 300,
@@ -537,20 +537,13 @@
 					if (recur.i === -1) {
 						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
                         player.reset();
-                        console.log(recur.i);
 						loader(films.play.bind(films), 'base').then(paint).then((arg) => player = maker(arg)).then(recur);
 					}
                     else if (recur.i === 300) {
-						//loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
-                        //player.reset();
-                        console.log(recur.i);
 						loader(films.play.bind(films), 'base').then(paint).then((arg) => player = maker(arg)).then(recur);
 					}
                     else {
                         loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
-                        //player.reset();
-                         console.log(recur.i);
-						//loader(films.play.bind(films), 'base');
                         player = maker();
                         recur(); 
                     }
