@@ -6,6 +6,7 @@ body {
 	display: flex;
 	flex-direction: column;
 }
+
 html, body {
 	height: 100%;
 	min-height: 100vh;
@@ -55,6 +56,7 @@ h1:after {
 	box-shadow: 4px 4px 4px black;
 	text-shadow: 4px 4px 4px black;
 }
+
 footer a:before {
 	content: '';
 	position: relative;
@@ -118,9 +120,7 @@ section {
 .inplay {
 	background-color: hsl(30, 100%, 95%);
 }
-body.swap {
-    background-color: magenta;
-}
+
 .gallery {
 	display: flex;
 	flex-wrap: wrap;
@@ -136,6 +136,7 @@ body.swap {
 	border-radius: 20px;
 	box-shadow: 1px 1px 20px rgba(166, 133, 77, .75);
 }
+
 .gallery>* {
 	flex: 1 1 7em;
 }
@@ -151,6 +152,7 @@ body.swap {
 	border-width: 0;
 	padding: 0;
 }
+
 .showtime .gallery a {
 	border: solid 1px white;
 	border-radius: 20px;
@@ -198,8 +200,12 @@ a img {
 	left: 0;
 }
 .swap #base {
-    visibility: hidden;
+    display: none;
 }
+.swap #slide {
+    margin-left: 0%;
+}
+
 #caption {
 	text-align: center;
 	font-size: 1em;

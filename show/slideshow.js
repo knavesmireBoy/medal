@@ -106,8 +106,8 @@
     return new Promise((resolve, reject) => {
       //remove then append to produce a fresh promise
       let img = $(id).firstChild;
-      img = removeElement(img);
-      $(id).appendChild(img);
+      //img = removeElement(img);
+      //$(id).appendChild(img);
       img.addEventListener('load', e => resolve(img));
       img.addEventListener('error', () => {
         reject(new Error(`Failed to load image's URL: ${url()}`));
