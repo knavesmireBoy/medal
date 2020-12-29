@@ -490,10 +490,26 @@
       function doSlide() {
         loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(doFormat);
       }
-        
-        function wow(){
-            $('caption').classList.toggle('caption');
+
+
+      function doFade() {
+        var style,
+          slide = $('slide');
+        if (slide) {
+          style = new Map([
+            ['opacity', recur.i / 100]
+          ]);
+          doMap(slide, new Map([
+            ['style', [style]]
+          ]));
         }
+        player.inc();
+        recur.t = window.requestAnimationFrame(recur);
+      }
+
+      function wow() {
+        $('caption').classList.toggle('caption');
+      }
 
       var doFormat = (img) => best(partial(gtEq, img.width, img.height), [l, p])(),
         test = function() {
@@ -531,6 +547,7 @@
               reset: () => {
                 recur.i = 360;
                 doSlide();
+                doFade();
                 doBase();
               }
             },
@@ -543,22 +560,6 @@
           player = playmaker(arg);
           recur();
         },
-    
-    doFade = function(){
-    var style,
-            slide = $('slide');
-          if (slide) {
-            style = new Map([
-              ['opacity', recur.i / 100]
-            ]);
-            doMap(slide, new Map([
-              ['style', [style]]
-            ]));
-          }
-            player.inc();
-          recur.t = window.requestAnimationFrame(recur);
-},
-
         player = playmaker();
       //goCompare = function(a, b){return a = (a === b); },
 
@@ -568,7 +569,7 @@
           loader(films.play.bind(films), 'base');
         }
         if (player.validate()) {
-            player.reset();
+          player.reset();
         } else {
           doFade();
         }
