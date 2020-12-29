@@ -511,21 +511,19 @@
         },
         playmaker = (function(flag) {
           var fadeOut = {
-              validate: () => recur.i <= -111,
+              validate: () => recur.i <= -81,
               inc: () => recur.i -= 1,
               reset: () => {
                 doSlide();
                 setPlayer(document.body.classList.contains('swap'));
-              },
-              limit: -111
+              }
             },
             fadeIn = {
               validate: () => recur.i >= 300,
               inc: () => recur.i += 1,
               reset: () => {
                 doBase();
-              },
-              limit: 300
+              }
             },
             fade = {
               validate: () => recur.i <= -1,
@@ -534,8 +532,7 @@
                 recur.i = 360;
                 doSlide();
                 doBase();
-              },
-              limit: -1
+              }
             },
             actions = [fadeIn, fadeOut];
           return function(flag) {
