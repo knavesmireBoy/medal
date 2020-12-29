@@ -207,6 +207,10 @@ a img {
 	margin: .5em 0;
 	background: none;
 	display: block;
+    transition: color 1s;
+}
+#caption.caption {
+   color: blue; 
 }
 .showtime #close {
 	border-radius: 3px;
