@@ -503,9 +503,12 @@
             ['style', [style]]
           ]));
         }
-        player.inc();
-        recur.t = window.requestAnimationFrame(recur);
       }
+        
+        function doRecur() {
+         player.inc();
+        recur.t = window.requestAnimationFrame(recur);
+        }
 
       function wow() {
         $('caption').classList.toggle('caption');
@@ -572,6 +575,7 @@
           player.reset();
         } else {
           doFade();
+            doRecur();
         }
       };
     }(lcsp, ptrt)),
