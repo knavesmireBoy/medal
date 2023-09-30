@@ -1,12 +1,75 @@
+/*jslint es6:true*/
+
 (function() {
   "use strict";
 
-  function noOp() {
-    return function() {};
+  /*
+  var x = partial(invoke, gtEq);
+  console.log(x(...[22,22]));
+  //console.log(x.apply(null,[22,5]));
+  */
+
+/*
+  function composeES5() {
+    for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
+      fns[_key] = arguments[_key];
+    }
+    return fns.reduce(function(f, g) {
+      //anon is the iteratee
+      return function anon() {
+        //expects arguments to first function
+        return f(g.apply(void 0, arguments)); //SETS THE NEW f AND g
+      };
+    });
   }
 
-  function identity(arg) {
-    return arg;
+  function negate(predicate) {
+    return function() {
+      return !predicate.apply(this, arguments);
+    };
+  }
+
+  function getPredicate(cond, predicate) {
+    return predicate(getResult(cond)) ? predicate : negate(predicate);
+  }
+
+  function clone(node) {
+    return node.parentNode.parentNode.appendChild(node.parentNode.cloneNode(true));
+  }
+  */
+
+  function always(arg){
+    return function(){
+      return arg;
+    };
+  }
+  function validateProperty(o, p) {
+    return o & o[p];
+  }
+  function equals (a, b) {
+    return a === b;
+  }
+
+  function getter(o, p) {
+    return o[p];
+  }
+
+  function caller (v, o, p) {
+    return o[p](v);
+  }
+  function add (a, b) {
+    return a + b;
+  }
+  function subtract (a, b) {
+    return a - b;
+  }
+
+  function allEqual(arr) {
+    return arr.every(val => val === arr[0]);
+  }
+
+  function noOp() {
+    return function() {};
   }
 
   function existy(x) {
@@ -28,16 +91,6 @@
       return undefined;
     }
   }
-
-  function wrap(wrapper, ...argz) {
-    var method = this;
-    return function(...args) {
-      if (wrapper) {
-        return wrapper.apply(this, [method.bind(this)].concat(argz).concat(args));
-      }
-    }
-  }
-  Function.prototype.wrap = wrap;
 
   function curryFactory(i, defer) {
     let once = {
@@ -86,11 +139,6 @@
     var arg = v instanceof Map ? v : new Map([
       [k, v]
     ]);
-    /*
-		return attrMap(getResult(el), new Map([
-			[k, v]
-		]));
-        */
     return attrMap(getResult(el), arg);
   }
 
@@ -100,20 +148,6 @@
 
   function lazyVal(v, el, k) {
     return invoke(doMap, el, v, k);
-  }
-
-  function loadImage(url, id) {
-    return new Promise((resolve, reject) => {
-      //remove then append to produce a fresh promise
-      let img = $(id).firstChild;
-      //img = removeElement(img);
-      //$(id).appendChild(img);
-      img.addEventListener('load', e => resolve(img));
-      img.addEventListener('error', () => {
-        reject(new Error(`Failed to load image's URL: ${url()}`));
-      });
-      img.src = doParse(url());
-    });
   }
 
   function cat(first, ...rest) {
@@ -162,33 +196,11 @@
     return [...coll].reduce((champ, contender) => fun(champ, contender) ? champ : contender);
   }
 
-  function composeES5() {
-    for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
-      fns[_key] = arguments[_key];
-    }
-    return fns.reduce(function(f, g) {
-      //anon is the iteratee
-      return function anon() {
-        //expects arguments to first function
-        return f(g.apply(void 0, arguments)); //SETS THE NEW f AND g
-      };
-    });
-  }
   //simple version that simply expects the remainder of the arguments on the second call
   function partial(func, ...args) {
     return function(...rest) {
       return func.apply(null, args.concat(rest));
     }
-  }
-
-  function negate(predicate) {
-    return function() {
-      return !predicate.apply(this, arguments);
-    };
-  }
-
-  function getPredicate(cond, predicate) {
-    return predicate(getResult(cond)) ? predicate : negate(predicate);
   }
 
   function getNextElement(node) {
@@ -206,10 +218,6 @@
     return node.cloneNode(deep);
   }
 
-  function clone(node) {
-    return node.parentNode.parentNode.appendChild(node.parentNode.cloneNode(true));
-  }
-
   function validateRemove(node) {
     return node && node.parentNode;
   }
@@ -217,6 +225,21 @@
   function removeElement(node) {
     return node.parentNode.removeChild(node);
   }
+
+  function loadImage(url, id) {
+    return new Promise((resolve, reject) => {
+      //remove then append to produce a fresh promise
+      let img = $(id).firstChild;
+      //img = removeElement(img);
+      //$(id).appendChild(img);
+      img.addEventListener('load', e => resolve(img));
+      img.addEventListener('error', () => {
+        reject(new Error(`Failed to load image's URL: ${url()}`));
+      });
+      img.src = doParse(url());
+    });
+  }
+
   class Group {
     constructor() {
       this.members = [];
@@ -246,7 +269,6 @@
       this.group = group;
       this.position = 0;
       this.rev = false;
-      this.outcomes = [(arg) => arg.width > arg.height, (arg) => !(arg.width > arg.height)];
     }
     next(flag) {
       if (!flag && this.rev) {
@@ -260,12 +282,6 @@
       };
       return result;
     }
-    enquire() {
-      var i = (this.position + 1) % this.group.members.length;
-      return {
-        value: this.group.members[i]
-      }
-    }
     previous(flag) {
       if (!this.rev || flag) {
         this.group.members = this.group.members.reverse();
@@ -277,31 +293,17 @@
         return this.next(this.rev);
       }
     }
-    current() {
-      let result = {
-        value: this.group.members[this.position],
-        index: this.position
-      };
-      return result;
-    }
+
     play() {
       return this.next(true).value;
     }
     find(tgt) {
       this.position = this.group.members.findIndex(m => m === tgt);
-      if (!this.outcomes[0](this.getImg(tgt))) {
-        this.outcomes = this.outcomes.reverse();
-      }
       let result = {
         value: this.group.members[this.position],
         index: this.position
       };
       return result;
-    }
-    getImg(tgt) {
-      var pic = new Image();
-      pic.src = tgt.value ? tgt.value : tgt;
-      return pic;
     }
   }
   //https://medium.com/@dtipson/creating-an-es6ish-compose-in-javascript-ac580b95104a
@@ -336,9 +338,6 @@
       let _curry = (args) => args.length < fn.length ? (..._args) => _curry([...args, ..._args]) : fn(...args);
       return () => _curry(args);
     },
-    always = (arg) => () => arg,
-    validateProperty = (o, p) => o & o[p],
-    equals = (a, b) => a === b,
     greaterOrEqual = partial(invoke, (a, b) => a >= b),
     gtEq = curryLeft((a, b) => a >= b),
     doAlt = actions => actions.reverse()[0](),
@@ -349,16 +348,12 @@
     thricedefer = curryFactory(2, true),
     quart = curryFactory(3),
     driller = twice(searcher),
-    getter = (o, p) => o[p],
     zero = twice(getter)(0),
     setter = thrice((v, o, p) => {
       o[p] = v;
     }),
-    caller = (v, o, p) => o[p](v),
     defercall = thricedefer(caller),
     parser = thrice((o, v, p) => o[p](v))('match')(/[^\/]+\.(jpg|png)$/),
-    add = (a, b) => a + b,
-    subtract = (a, b) => a - b,
     divideBy = twice((a, b) => a / b),
     $ = thrice(caller)('getElementById')(document),
     $q = thrice(caller)('querySelector')(document),
@@ -412,6 +407,7 @@
           return res;
         };
       }(divideBy(2), subtract, greaterOrEqual));
+
       return function(e) {
         return best(function(agg) {
           return agg[0](e);
@@ -443,7 +439,7 @@
     },
     close_cb = function(ancr) {
       return ancr;
-      return compose(thrice(doMap)('class')('contain'), thrice(doMap)('src')('poppy.png'), anCr(ancr))('img');
+      //return compose(thrice(doMap)('class')('contain'), thrice(doMap)('src')('poppy.png'), anCr(ancr))('img');
     },
     close_aside = function() {
       return compose(thrice(doMap)('id')('close'), anCrIn(gallery, document.querySelector('main')))('aside');
@@ -473,13 +469,27 @@
       };
     },
     loader = function(caller, id) {
-      return loadImage(caller, id).catch(error => console.error(error))
+      return loadImage(caller, id).catch(error => console.error(error));
     },
     locate = eventing('click', function(e) {
       locator(twicedefer(loader)('base')(nextcaller), twicedefer(loader)('base')(prevcaller))(e)[1]();
       orient(lcsp, ptrt)(e.target);
       publish();
     }, gallery),
+    doOpacity = function(flag) {
+      var style,
+        slide = $('slide'),
+        val;
+      if (slide) {
+        val = flag ? 1 : recur.i / 100;
+        style = new Map([
+          ['opacity', val]
+        ]);
+        doMap(slide, new Map([
+          ['style', [style]]
+        ]));
+      }
+    },
 
     recur = (function(l, p) {
 
@@ -491,44 +501,23 @@
         loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(doFormat);
       }
 
-
-      function doFade() {
-        var style,
-          slide = $('slide');
-        if (slide) {
-          style = new Map([
-            ['opacity', recur.i / 100]
-          ]);
-          doMap(slide, new Map([
-            ['style', [style]]
-          ]));
-        }
-      }
-        
-        function doRecur() {
-         player.inc();
+      function doRecur() {
+        player.inc();
         recur.t = window.requestAnimationFrame(recur);
-        }
-
-      function wow() {
-        $('caption').classList.toggle('caption');
       }
 
       var doFormat = (img) => best(partial(gtEq, img.width, img.height), [l, p])(),
         test = function() {
           return [getBaseChild(), getSlideChild()].map((img) => img.width > img.height);
         },
-        quiz = function(coll) {
-          return coll[0] === coll[1];
-        },
         paint = function(str) {
           var coll = test(),
-            bool = quiz(coll),
+            bool = coll[0] === coll[1],
             m = bool ? 'remove' : 'add';
           document.body.classList[m]('swap');
           return !bool;
         },
-        playmaker = (function(flag) {
+        playmaker = (function() {
           var fadeOut = {
               validate: () => recur.i <= -81,
               inc: () => recur.i -= 1,
@@ -550,7 +539,7 @@
               reset: () => {
                 recur.i = 360;
                 doSlide();
-                doFade();
+                doOpacity();
                 doBase();
               }
             },
@@ -564,31 +553,22 @@
           recur();
         },
         player = playmaker();
-      //goCompare = function(a, b){return a = (a === b); },
-
       return function() {
         if (!recur.t) { //initial
           //swap next image into base because initial pic is a duplicate
-          loader(films.play.bind(films), 'base');
+          //loader(films.play.bind(films), 'base');
         }
         if (player.validate()) {
           player.reset();
         } else {
-          doFade();
-            doRecur();
+          doOpacity();
+          doRecur();
         }
       };
     }(lcsp, ptrt)),
+
     clear = function(flag) {
-      if ($('slide')) {
-        var val = flag ? 1 : recur.i / 100,
-          style = new Map([
-            ['opacity', val]
-          ]);
-        doMap($('slide'), new Map([
-          ['style', [style]]
-        ]));
-      }
+      doOpacity(flag);
       window.cancelAnimationFrame(recur.t);
       recur.t = null;
     },
@@ -698,7 +678,7 @@
       };
       mynext.setSuccessor(myprev);
       myprev.setSuccessor(myplayer);
-      recur.i = 300;
+      recur.i = 50;//slide is clone of base initially, so fade can start
       return mynext;
     },
     setup = eventing('click', function(e) {
@@ -736,9 +716,4 @@
     }, gallery);
 
   setup.render();
-  /*
-  var x = partial(invoke, subtract);
-  console.log(x(...[22,5]));
-  console.log(x.apply(null,[22,5]));
-  */
 }());
