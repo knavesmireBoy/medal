@@ -1,186 +1,11 @@
-"use strict";
-
-function _classCallCheck(instance, Constructor) {
-	if (!_instanceof(instance, Constructor)) {
-		throw new TypeError("Cannot call a class as a function");
-	}
-}
-
-function _defineProperties(target, props) {
-	for (var i = 0; i < props.length; i++) {
-		var descriptor = props[i];
-		descriptor.enumerable = descriptor.enumerable || false;
-		descriptor.configurable = true;
-		if ("value" in descriptor) descriptor.writable = true;
-		Object.defineProperty(target, descriptor.key, descriptor);
-	}
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-	if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-	if (staticProps) _defineProperties(Constructor, staticProps);
-	return Constructor;
-}
-
-function _toConsumableArray(arr) {
-	return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-
-function _nonIterableSpread() {
-	throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-function _iterableToArray(iter) {
-	if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
-}
-
-function _arrayWithoutHoles(arr) {
-	if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-
-function _instanceof(left, right) {
-	if (right != null && typeof Symbol !== "undefined" && right[Symbol.hasInstance]) {
-		return !!right[Symbol.hasInstance](left);
-	} else {
-		return left instanceof right;
-	}
-}
-
-function _slicedToArray(arr, i) {
-	return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-
-function _nonIterableRest() {
-	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-function _iterableToArrayLimit(arr, i) {
-	if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
-	var _arr = [];
-	var _n = true;
-	var _d = false;
-	var _e = undefined;
-	try {
-		for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-			_arr.push(_s.value);
-			if (i && _arr.length === i) break;
-		}
-	} catch (err) {
-		_d = true;
-		_e = err;
-	} finally {
-		try {
-			if (!_n && _i["return"] != null) _i["return"]();
-		} finally {
-			if (_d) throw _e;
-		}
-	}
-	return _arr;
-}
-
-function _arrayWithHoles(arr) {
-	if (Array.isArray(arr)) return arr;
-}
-
-function _createForOfIteratorHelper(o, allowArrayLike) {
-	var it;
-	if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
-		if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-			if (it) o = it;
-			var i = 0;
-			var F = function F() {};
-			return {
-				s: F,
-				n: function n() {
-					if (i >= o.length) return {
-						done: true
-					};
-					return {
-						done: false,
-						value: o[i++]
-					};
-				},
-				e: function e(_e2) {
-					throw _e2;
-				},
-				f: F
-			};
-		}
-		throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-	}
-	var normalCompletion = true,
-		didErr = false,
-		err;
-	return {
-		s: function s() {
-			it = o[Symbol.iterator]();
-		},
-		n: function n() {
-			var step = it.next();
-			normalCompletion = step.done;
-			return step;
-		},
-		e: function e(_e3) {
-			didErr = true;
-			err = _e3;
-		},
-		f: function f() {
-			try {
-				if (!normalCompletion && it.return != null) it.return();
-			} finally {
-				if (didErr) throw err;
-			}
-		}
-	};
-}
-
-function _unsupportedIterableToArray(o, minLen) {
-	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-	var n = Object.prototype.toString.call(o).slice(8, -1);
-	if (n === "Object" && o.constructor) n = o.constructor.name;
-	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-
-function _arrayLikeToArray(arr, len) {
-	if (len == null || len > arr.length) len = arr.length;
-	for (var i = 0, arr2 = new Array(len); i < len; i++) {
-		arr2[i] = arr[i];
-	}
-	return arr2;
-}
-(function() {
+/*jslint nomen: true */
+/*global window: false */
+/*global document: false */
+(function () {
 	"use strict";
-	var maker = function(flag) {
-		var fadeOut = {
-				validate: function validate() {
-					return recur.i <= -51;
-				},
-				inc: function inc() {
-					return recur.i -= 1;
-				}
-			},
-			fadeIn = {
-				validate: function validate() {
-					return recur.i >= 200;
-				},
-				inc: function inc() {
-					return recur.i += 1;
-				}
-			},
-			actions = [fadeIn, fadeOut];
-		return function() {
-			return actions.reverse()[0];
-		};
-	}();
 
 	function noOp() {
-		return function() {};
-	}
-
-	function identity(arg) {
-		return arg;
+		return function () {};
 	}
 
 	function existy(x) {
@@ -204,13 +29,19 @@ function _arrayLikeToArray(arr, len) {
 	}
 
 	function wrap(wrapper) {
-		for (var _len2 = arguments.length, argz = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        var method = this,
+            _len2 = arguments.length,
+            argz = new Array(_len2 > 1 ? _len2 - 1 : 0),
+            _key2;
+		for (_key2 = 1; _key2 < _len2; _key2++) {
 			argz[_key2 - 1] = arguments[_key2];
 		}
-		var method = this;
-		return function() {
+		return function () {
 			if (wrapper) {
-				for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+                var _len3 = arguments.length,
+                    args = new Array(_len3),
+                    _key3;
+				for (_key3 = 0; _key3 < _len3; _key3++) {
 					args[_key3] = arguments[_key3];
 				}
 				return wrapper.apply(this, [method.bind(this)].concat(argz).concat(args));
@@ -221,31 +52,31 @@ function _arrayLikeToArray(arr, len) {
 
 	function curryFactory(i, defer) {
 		var once = {
-				defer: function defer(f) {
-					return function(arg) {
-						return function() {
-							return f(arg);
-						};
+				imm: function imm(f) {
+					return function (arg) {
+						return f(arg);
 					};
 				},
-				imm: function imm(f) {
-					return function(arg) {
-						return f(arg);
+				defer: function defer(f) {
+					return function (arg) {
+						return function () {
+							return f(arg);
+						};
 					};
 				}
 			},
 			twice = {
 				imm: function imm(f) {
-					return function(arg1) {
-						return function(arg2) {
+					return function (arg1) {
+						return function (arg2) {
 							return f(arg2, arg1);
 						};
 					};
 				},
 				defer: function defer(f) {
-					return function(arg1) {
-						return function(arg2) {
-							return function() {
+					return function (arg1) {
+						return function (arg2) {
+							return function () {
 								return f(arg2, arg1);
 							};
 						};
@@ -254,19 +85,19 @@ function _arrayLikeToArray(arr, len) {
 			},
 			thrice = {
 				imm: function imm(f) {
-					return function(arg1) {
-						return function(arg2) {
-							return function(arg3) {
+					return function (arg1) {
+						return function (arg2) {
+							return function (arg3) {
 								return f(arg3, arg2, arg1);
 							};
 						};
 					};
 				},
 				defer: function defer(f) {
-					return function(arg1) {
-						return function(arg2) {
-							return function(arg3) {
-								return function() {
+					return function (arg1) {
+						return function (arg2) {
+							return function (arg3) {
+								return function () {
 									return f(arg3, arg2, arg1);
 								};
 							};
@@ -276,10 +107,10 @@ function _arrayLikeToArray(arr, len) {
 			},
 			quart = {
 				imm: function imm(f) {
-					return function(arg1) {
-						return function(arg2) {
-							return function(arg3) {
-								return function(arg4) {
+					return function (arg1) {
+						return function (arg2) {
+							return function (arg3) {
+								return function (arg4) {
 									return f(arg4, arg3, arg2, arg1);
 								};
 							};
@@ -287,11 +118,11 @@ function _arrayLikeToArray(arr, len) {
 					};
 				},
 				defer: function defer(f) {
-					return function(arg1) {
-						return function(arg2) {
-							return function(arg3) {
-								return function(arg4) {
-									return function() {
+					return function (arg1) {
+						return function (arg2) {
+							return function (arg3) {
+								return function (arg4) {
+									return function () {
 										return f(arg4, arg3, arg2, arg1);
 									};
 								};
@@ -302,7 +133,7 @@ function _arrayLikeToArray(arr, len) {
 			},
 			coll = [once, twice, thrice, quart],
 			ret = coll[i];
-		return ret && defer ? ret.defer : ret ? ret.imm : function() {};
+		return ret && defer ? ret.defer : ret ? ret.imm : function () {};
 	}
 
 	function attrMap(el, map, style) {
@@ -314,7 +145,7 @@ function _arrayLikeToArray(arr, len) {
 					k = _step$value[0],
 					v = _step$value[1];
 				if (Array.isArray(v)) {
-					v.forEach(function(prop) {
+					v.forEach(function (prop) {
 						attrMap(el, prop, true);
 					});
 					break;
@@ -341,11 +172,6 @@ function _arrayLikeToArray(arr, len) {
 		var arg = _instanceof(v, Map) ? v : new Map([
 			[k, v]
 		]);
-		/*
-		return attrMap(getResult(el), new Map([
-		[k, v]
-		]));
-		*/
 		return attrMap(getResult(el), arg);
 	}
 
@@ -356,30 +182,27 @@ function _arrayLikeToArray(arr, len) {
 		return f.apply(null, args.map(getResult));
 	}
 
+	function compare(coll, pred) {
+		for (var _len5 = arguments.length, props = new Array(_len5 > 2 ? _len5 - 2 : 0), _key5 = 2; _key5 < _len5; _key5++) {
+			props[_key5 - 2] = arguments[_key5];
+		}
+		return pred(coll[props[0]], coll[props[1]]);
+	}
+
 	function lazyVal(v, el, k) {
 		return invoke(doMap, el, v, k);
 	}
 
-	function loadImage(url, id) {
-		return new Promise(function(resolve, reject) {
-			//remove then append to produce a fresh promise 
-			var img = $(id).firstChild;
-			img = removeElement(img);
-			$(id).appendChild(img);
-			img.addEventListener('load', function(e) {
-				return resolve(img);
-			});
-			img.addEventListener('error', function() {
-				reject(new Error("Failed to load image's URL: ".concat(url())));
-			});
-			img.src = doParse(url());
+	function allEqual(arr) {
+		return arr.every(function (val) {
+			return val === arr[0];
 		});
 	}
 
 	function cat(first) {
 		if (existy(first)) {
-			for (var _len5 = arguments.length, rest = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-				rest[_key5 - 1] = arguments[_key5];
+			for (var _len6 = arguments.length, rest = new Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
+				rest[_key6 - 1] = arguments[_key6];
 			}
 			return first.concat.apply(first, rest);
 		} else {
@@ -388,21 +211,21 @@ function _arrayLikeToArray(arr, len) {
 	}
 
 	function construct(head) {
-		for (var _len6 = arguments.length, tail = new Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
-			tail[_key6 - 1] = arguments[_key6];
+		for (var _len7 = arguments.length, tail = new Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
+			tail[_key7 - 1] = arguments[_key7];
 		}
 		return head && cat([head], tail);
 	}
 
 	function dispatch() {
-		for (var _len7 = arguments.length, funcs = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-			funcs[_key7] = arguments[_key7];
+		for (var _len8 = arguments.length, funcs = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+			funcs[_key8] = arguments[_key8];
 		}
 		var size = funcs.length;
-		return function(tgt) {
+		return function (tgt) {
 			var ret, fn;
-			for (var _len8 = arguments.length, rest = new Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
-				rest[_key8 - 1] = arguments[_key8];
+			for (var _len9 = arguments.length, rest = new Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
+				rest[_key9 - 1] = arguments[_key9];
 			}
 			var _iterator2 = _createForOfIteratorHelper(funcs),
 				_step2;
@@ -431,14 +254,14 @@ function _arrayLikeToArray(arr, len) {
 		/*noticed an issue with parentNode where on supply of an element, the initial value for reduce is the parent
 		but THAT parent would get set on the second iteration to ITS parent so. When array has just one item reduce not really required*/
 		if (ary && ary[1]) {
-			return ary.reduce(function(acc, cur) {
+			return ary.reduce(function (acc, cur) {
 				return acc[cur] ? acc[cur] : acc;
 			}, obj[ary[0]]);
 		}
 		return ary[0] ? obj[ary[0]] : obj;
 	} //note a function that ignores any state of x or y will return the first element if true and last if false
 	function best(fun, coll) {
-		return _toConsumableArray(coll).reduce(function(champ, contender) {
+		return _toConsumableArray(coll).reduce(function (champ, contender) {
 			return fun(champ, contender) ? champ : contender;
 		});
 	}
@@ -447,7 +270,7 @@ function _arrayLikeToArray(arr, len) {
 		for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
 			fns[_key] = arguments[_key];
 		}
-		return fns.reduce(function(f, g) {
+		return fns.reduce(function (f, g) {
 			//anon is the iteratee
 			return function anon() {
 				//expects arguments to first function
@@ -456,19 +279,19 @@ function _arrayLikeToArray(arr, len) {
 		});
 	} //simple version that simply expects the remainder of the arguments on the second call
 	function partial(func) {
-		for (var _len9 = arguments.length, args = new Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
-			args[_key9 - 1] = arguments[_key9];
+		for (var _len10 = arguments.length, args = new Array(_len10 > 1 ? _len10 - 1 : 0), _key10 = 1; _key10 < _len10; _key10++) {
+			args[_key10 - 1] = arguments[_key10];
 		}
-		return function() {
-			for (var _len10 = arguments.length, rest = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-				rest[_key10] = arguments[_key10];
+		return function () {
+			for (var _len11 = arguments.length, rest = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+				rest[_key11] = arguments[_key11];
 			}
 			return func.apply(null, args.concat(rest));
 		};
 	}
 
 	function negate(predicate) {
-		return function() {
+		return function () {
 			return !predicate.apply(this, arguments);
 		};
 	}
@@ -503,7 +326,22 @@ function _arrayLikeToArray(arr, len) {
 	function removeElement(node) {
 		return node.parentNode.removeChild(node);
 	}
-	var Group = /*#__PURE__*/ function() {
+
+	function loadImage(url, id) {
+		return new Promise(function (resolve, reject) {
+			//remove then append to produce a fresh promise
+			var img = $(id).firstChild; //img = removeElement(img);
+			//$(id).appendChild(img);
+			img.addEventListener('load', function (e) {
+				return resolve(img);
+			});
+			img.addEventListener('error', function () {
+				reject(new Error("Failed to load image's URL: ".concat(url())));
+			});
+			img.src = doParse(url());
+		});
+	}
+	var Group = /*#__PURE__*/ function () {
 		function Group() {
 			_classCallCheck(this, Group);
 			this.members = [];
@@ -518,7 +356,7 @@ function _arrayLikeToArray(arr, len) {
 		}, {
 			key: "delete",
 			value: function _delete(value) {
-				this.members = this.members.filter(function(v) {
+				this.members = this.members.filter(function (v) {
 					return v !== value;
 				});
 			}
@@ -548,7 +386,7 @@ function _arrayLikeToArray(arr, len) {
 		}]);
 		return Group;
 	}();
-	var LoopIterator = /*#__PURE__*/ function() {
+	var LoopIterator = /*#__PURE__*/ function () {
 		function LoopIterator(group) {
 			_classCallCheck(this, LoopIterator);
 			this.group = group;
@@ -599,7 +437,7 @@ function _arrayLikeToArray(arr, len) {
 		}, {
 			key: "find",
 			value: function find(tgt) {
-				this.position = this.group.members.findIndex(function(m) {
+				this.position = this.group.members.findIndex(function (m) {
 					return m === tgt;
 				});
 				var result = {
@@ -615,7 +453,7 @@ function _arrayLikeToArray(arr, len) {
 			var actions = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : ['preventDefault'];
 
 			function preventer(wrapped, actions, e) {
-				actions.forEach(function(a) {
+				actions.forEach(function (a) {
 					return e[a]();
 				});
 				return wrapped(e);
@@ -634,11 +472,11 @@ function _arrayLikeToArray(arr, len) {
 			};
 		},
 		compose = function compose() {
-			for (var _len11 = arguments.length, fns = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-				fns[_key11] = arguments[_key11];
+			for (var _len12 = arguments.length, fns = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+				fns[_key12] = arguments[_key12];
 			}
-			return fns.reduce(function(f, g) {
-				return function() {
+			return fns.reduce(function (f, g) {
+				return function () {
 					return f(g.apply(void 0, arguments));
 				};
 			});
@@ -646,37 +484,37 @@ function _arrayLikeToArray(arr, len) {
 		//https://tech.mybuilder.com/partial-application-currying-and-composition-using-javascript-es6/
 		curryLeft = function curryLeft(fn) {
 			var _curry = function _curry(args) {
-				return args.length < fn.length ? function() {
-					for (var _len13 = arguments.length, _args = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-						_args[_key13] = arguments[_key13];
+				return args.length < fn.length ? function () {
+					for (var _len14 = arguments.length, _args = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+						_args[_key14] = arguments[_key14];
 					}
 					return _curry([].concat(_toConsumableArray(args), _args));
 				} : fn.apply(void 0, _toConsumableArray(args));
 			};
-			for (var _len12 = arguments.length, args = new Array(_len12 > 1 ? _len12 - 1 : 0), _key12 = 1; _key12 < _len12; _key12++) {
-				args[_key12 - 1] = arguments[_key12];
+			for (var _len13 = arguments.length, args = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
+				args[_key13 - 1] = arguments[_key13];
 			}
 			return _curry(args);
 		},
 		curryLeftDefer = function curryLeftDefer(fn) {
-			for (var _len14 = arguments.length, args = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
-				args[_key14 - 1] = arguments[_key14];
+			for (var _len15 = arguments.length, args = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
+				args[_key15 - 1] = arguments[_key15];
 			}
 			var _curry = function _curry(args) {
-				return args.length < fn.length ? function() {
-					for (var _len15 = arguments.length, _args = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
-						_args[_key15] = arguments[_key15];
+				return args.length < fn.length ? function () {
+					for (var _len16 = arguments.length, _args = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+						_args[_key16] = arguments[_key16];
 					}
 					return _curry([].concat(_toConsumableArray(args), _args));
 				} : fn.apply(void 0, _toConsumableArray(args));
 			};
-			return function() {
+			return function () {
 				return _curry(args);
 			};
 		},
 		always = function always(arg) {
-			return function() {
-				arg;
+			return function () {
+				return arg;
 			};
 		},
 		validateProperty = function validateProperty(o, p) {
@@ -685,10 +523,10 @@ function _arrayLikeToArray(arr, len) {
 		equals = function equals(a, b) {
 			return a === b;
 		},
-		greaterOrEqual = (invoke, function(a, b) {
+		greaterOrEqual = partial(invoke, function (a, b) {
 			return a >= b;
 		}),
-		gtEq = curryLeft(function(a, b) {
+		gtEq = curryLeft(function (a, b) {
 			return a >= b;
 		}),
 		doAlt = function doAlt(actions) {
@@ -705,14 +543,14 @@ function _arrayLikeToArray(arr, len) {
 			return o[p];
 		},
 		zero = twice(getter)(0),
-		setter = thrice(function(v, o, p) {
+		setter = thrice(function (v, o, p) {
 			o[p] = v;
 		}),
 		caller = function caller(v, o, p) {
 			return o[p](v);
 		},
 		defercall = thricedefer(caller),
-		parser = thrice(function(o, v, p) {
+		parser = thrice(function (o, v, p) {
 			return o[p](v);
 		})('match')(/[^\/]+\.(jpg|png)$/),
 		add = function add(a, b) {
@@ -721,7 +559,7 @@ function _arrayLikeToArray(arr, len) {
 		subtract = function subtract(a, b) {
 			return a - b;
 		},
-		divideBy = twice(function(a, b) {
+		divideBy = twice(function (a, b) {
 			return a / b;
 		}),
 		$ = thrice(caller)('getElementById')(document),
@@ -734,19 +572,19 @@ function _arrayLikeToArray(arr, len) {
 		target = twice(getter)('target'),
 		text_target = twice(getter)('innerHTML'),
 		node_target = twice(getter)('nodeName'),
-		text_from_target = thrice(function(e, s, g) {
+		text_from_target = thrice(function (e, s, g) {
 			return s(g(e));
 		})(target)(text_target),
-		node_from_target = thrice(function(e, s, g) {
+		node_from_target = thrice(function (e, s, g) {
 			return s(g(e));
 		})(target)(node_target),
 		getChild = compose(getNextElement, driller(['firstChild'])),
 		getNewElement = dispatch(document.createElement.bind(document), twice(cloneNode)(true), document.createDocumentFragment.bind(document)),
-		setAnchor = function(render) {
-			return function(anchor, refnode, strategy) {
+		setAnchor = function (render) {
+			return function (anchor, refnode, strategy) {
 				return compose(partial(partial(invoke, render), anchor, refnode), strategy);
 			};
-		}(function(anc, ref, el) {
+		}(function (anc, ref, el) {
 			return anc.insertBefore(el, ref);
 		}),
 		append = function append(flag) {
@@ -757,31 +595,32 @@ function _arrayLikeToArray(arr, len) {
 		},
 		insert = function insert(flag) {
 			if (flag) {
-				return function(ref, anc) {
+				return function (ref, anc) {
 					return thricedefer(setAnchor)(getNewElement)(ref)(anc);
 				};
 			}
-			return function(ref, anc) {
+			return function (ref, anc) {
 				return thrice(setAnchor)(getNewElement)(ref)(anc);
 			};
 		},
 		anCr = append(),
 		anCrIn = insert(),
-		removeNodeOnComplete = removeElement.wrap(function(f, node) {
+		removeNodeOnComplete = removeElement.wrap(function (f, node) {
 			if (validateRemove(node)) {
 				return f(node);
 			}
 		}),
 		locator = function locator(forward, back) {
-			var getLoc = function(div, subtract, isGreaterEq) {
+			var getLoc = function (div, subtract, isGreaterEq) {
 				var getThreshold = compose(div, subtract);
-				return function(e) {
-					var box = e.target.getBoundingClientRect();
-					return isGreaterEq(partial(subtract, e.clientX, box.left), partial(getThreshold, box.right, box.left));
+				return function (e) {
+					var box = e.target.getBoundingClientRect(),
+						res = isGreaterEq(partial(subtract, e.clientX, box.left), partial(getThreshold, box.right, box.left)); //return e.clientX-box.left > (box.right-box.left)/2;
+					return res;
 				};
 			}(divideBy(2), subtract, greaterOrEqual);
-			return function(e) {
-				return best(function(agg) {
+			return function (e) {
+				return best(function (agg) {
 					return agg[0](e);
 				}, [
 					[getLoc, forward],
@@ -791,10 +630,10 @@ function _arrayLikeToArray(arr, len) {
 		},
 		//myconsole = thrice(caller)('log')(console),
 		doParse = compose(zero, parser),
-		setCap = compose(quart(function(o, v, k, p) {
+		setCap = compose(quart(function (o, v, k, p) {
 			return o[p](k, v);
 		})('slice')(0)(-4), decodeURIComponent, doParse),
-		setCaption = setCap.wrap(function(f, str) {
+		setCaption = setCap.wrap(function (f, str) {
 			var res = f(str);
 			return res.match(/^Is\s.+/i) ? res + '?' : res;
 		}),
@@ -809,7 +648,7 @@ function _arrayLikeToArray(arr, len) {
 			[
 				["innerHTML", str],
 				["id", str]
-			].forEach(function(_ref) {
+			].forEach(function (_ref) {
 				var _ref2 = _slicedToArray(_ref, 2),
 					k = _ref2[0],
 					v = _ref2[1];
@@ -818,20 +657,19 @@ function _arrayLikeToArray(arr, len) {
 			return el;
 		},
 		close_cb = function close_cb(ancr) {
-			return ancr;
-			return compose(thrice(doMap)('class')('contain'), thrice(doMap)('src')('poppy.png'), anCr(ancr))('img');
+			return ancr; //return compose(thrice(doMap)('class')('contain'), thrice(doMap)('src')('poppy.png'), anCr(ancr))('img');
 		},
 		close_aside = function close_aside() {
 			return compose(thrice(doMap)('id')('close'), anCrIn(gallery, document.querySelector('main')))('aside');
 		},
-		films = new LoopIterator(Group.from(imgs.map(function(img) {
+		films = new LoopIterator(Group.from(imgs.map(function (img) {
 			return img.src;
 		}))),
 		setindex = thrice(caller)('find')(films),
-		nextcaller = thricedefer(function(v, o, p) {
+		nextcaller = thricedefer(function (v, o, p) {
 			return o[p]()[v];
 		})('next')(films)('value'),
-		prevcaller = thricedefer(function(v, o, p) {
+		prevcaller = thricedefer(function (v, o, p) {
 			return o[p]()[v];
 		})('previous')(films)('value'),
 		showtime = curryLeftDefer(enable, 'showtime'),
@@ -839,92 +677,155 @@ function _arrayLikeToArray(arr, len) {
 		exitplay = curryLeftDefer(disable, 'inplay'),
 		exitshow = curryLeftDefer(disable, 'showtime'),
 		setCaptionOn = compose(thrice(lazyVal)('txt')($$('caption')), setCaption),
-		setCaptionOnWrap = setCaptionOn.wrap(function(f, img) {
+		setCaptionOnWrap = setCaptionOn.wrap(function (f, img) {
 			f(img.src);
 			return img;
 		}),
 		observers = [thrice(lazyVal)('txt')($$('caption')), thrice(lazyVal)('href')($$('base'))],
-		publish = defercall('forEach')(observers)(function(ptl, i) {
+		publish = defercall('forEach')(observers)(function (ptl, i) {
 			var val = i ? getImgSrc() : compose(setCaption, getImgSrc);
 			return ptl(val);
 		}),
 		orient = function orient(l, p) {
-			return function(img) {
+			return function (img) {
 				best(partial(gtEq, getResult(img).clientWidth, getResult(img).clientHeight), [l, p])();
 				return img.src;
 			};
 		},
 		loader = function loader(caller, id) {
-			return loadImage(caller, id).catch(function(error) {
+			return loadImage(caller, id).catch(function (error) {
 				return console.error(error);
 			});
 		},
-		locate = eventing('click', function(e) {
+		locate = eventing('click', function (e) {
 			locator(twicedefer(loader)('base')(nextcaller), twicedefer(loader)('base')(prevcaller))(e)[1]();
 			orient(lcsp, ptrt)(e.target);
 			publish();
 		}, gallery),
-		recur = function(l, p) {
-			var player = maker(),
-				cb = function cb(img) {
+		doOpacity = function doOpacity(flag) {
+			var style,
+				slide = $('slide'),
+				val;
+			if (slide) {
+				val = flag ? 1 : recur.i / 100;
+				style = new Map([
+					['opacity', val]
+				]);
+				doMap(slide, new Map([
+					['style', [style]]
+				]));
+			}
+		},
+		recur = function (l, p) {
+			function doBase() {
+				loader(films.play.bind(films), 'base').then(paint).then(setPlayer);
+			}
+
+			function doSlide() {
+				loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(doFormat);
+			}
+
+			function doRecur() {
+				player.inc();
+				recur.t = window.requestAnimationFrame(recur);
+			}
+			var doFormat = function doFormat(img) {
 					return best(partial(gtEq, img.width, img.height), [l, p])();
-				};
-			return function() {
+				},
+				test = function test() {
+					return [getBaseChild(), getSlideChild()].map(function (img) {
+						return img.width > img.height;
+					});
+				},
+				paint = function paint(str) {
+					var coll = test(),
+						bool = coll[0] === coll[1],
+						m = bool ? 'remove' : 'add';
+					document.body.classList[m]('swap');
+					return !bool;
+				},
+				playmaker = function () {
+					var fadeOut = {
+							validate: function validate() {
+								return recur.i <= -81;
+							},
+							inc: function inc() {
+								return recur.i -= 1;
+							},
+							reset: function reset() {
+								doSlide();
+								setPlayer(document.body.classList.contains('swap'));
+							}
+						},
+						fadeIn = {
+							validate: function validate() {
+								return recur.i >= 300;
+							},
+							inc: function inc() {
+								return recur.i += 1;
+							},
+							reset: function reset() {
+								doBase();
+							}
+						},
+						fade = {
+							validate: function validate() {
+								return recur.i <= -1;
+							},
+							inc: function inc() {
+								return recur.i -= 1;
+							},
+							reset: function reset() {
+								recur.i = 360;
+								doSlide();
+								doOpacity();
+								doBase();
+							}
+						},
+						actions = [fadeIn, fadeOut];
+					return function (flag) {
+						return flag ? actions.reverse()[0] : fade;
+					};
+				}(),
+				setPlayer = function setPlayer(arg) {
+					player = playmaker(arg);
+					recur();
+				},
+				player = playmaker();
+			return function () {
 				if (!recur.t) {
+					//initial
 					//swap next image into base because initial pic is a duplicate
 					loader(films.play.bind(films), 'base');
 				}
 				if (player.validate()) {
-					if (recur.i <= 0) {
-						loader(compose(driller(['src']), getChild, $$('base')), 'slide').then(setCaptionOnWrap).then(cb);
-						loader(films.play.bind(films), 'base');
-					}
-					player = maker();
-					recur();
+					player.reset();
 				} else {
-					var style,
-						slide = $('slide');
-					if (slide) {
-						style = new Map([
-							['opacity', recur.i / 100]
-						]);
-						doMap(slide, new Map([
-							['style', [style]]
-						]));
-					}
-					player.inc();
-					recur.t = window.requestAnimationFrame(recur);
+					doOpacity();
+					doRecur();
 				}
 			};
 		}(lcsp, ptrt),
 		clear = function clear(flag) {
-			if ($('slide')) {
-				var val = flag ? 1 : recur.i / 100,
-					style = new Map([
-						['opacity', val]
-					]);
-				doMap($('slide'), new Map([
-					['style', [style]]
-				]));
-			}
+			doOpacity(flag);
 			window.cancelAnimationFrame(recur.t);
 			recur.t = null;
 		},
 		machBase = function machBase(source, target) {
-			return new Promise(function(resolve, reject) {
+			return new Promise(function (resolve, reject) {
 				var el = anCr($q('.gallery'))('a'),
 					img = anCr(el)('img'),
 					ptL = partial(doMap, el);
 				[
 					['href', doParse(source.src)],
 					['id', target]
-				].forEach(function(_ref3) {
+				].forEach(function (_ref3) {
 					var _ref4 = _slicedToArray(_ref3, 2),
 						k = _ref4[0],
 						v = _ref4[1];
 					return ptL(v, k);
 				});
-				img.addEventListener('load', function(e) {
+				img.addEventListener('load', function (e) {
 					return resolve(img);
 				});
 				img.src = doParse(el.href);
@@ -940,27 +841,27 @@ function _arrayLikeToArray(arr, len) {
 				doSlide = defer_once(doAlt)([clear, recur]),
 				doDisplay = defer_once(doAlt)([playtime]),
 				machSlide = function machSlide(source, target) {
-					return new Promise(function(resolve, reject) {
+					return new Promise(function (resolve, reject) {
 						var el = anCr($q('.gallery'))('a'),
 							img = anCr(el)('img'),
 							ptL = partial(doMap, el);
 						[
 							['href', doParse($(source).href)],
 							['id', target]
-						].forEach(function(_ref5) {
+						].forEach(function (_ref5) {
 							var _ref6 = _slicedToArray(_ref5, 2),
 								k = _ref6[0],
 								v = _ref6[1];
 							return ptL(v, k);
 						});
-						img.addEventListener('load', function(e) {
+						img.addEventListener('load', function (e) {
 							return resolve(img);
 						});
 						img.src = doParse(el.href);
 					});
 				},
 				machPause = function machPause(src) {
-					return new Promise(function(resolve, reject) {
+					return new Promise(function (resolve, reject) {
 						var el = anCr($q('.gallery'))('a'),
 							img = anCr(el)('img'),
 							ptL = partial(doMap, el),
@@ -970,20 +871,21 @@ function _arrayLikeToArray(arr, len) {
 						[
 							['id', 'pause'],
 							['style', [styleAttrs]]
-						].forEach(function(_ref7) {
+						].forEach(function (_ref7) {
 							var _ref8 = _slicedToArray(_ref7, 2),
 								k = _ref8[0],
 								v = _ref8[1];
 							return ptL(v, k);
 						});
-						img.addEventListener('load', function(e) {
+						img.addEventListener('load', function (e) {
 							return resolve(img);
 						});
 						img.src = doParse(src);
+						img.id = "pauser";
 					});
 				},
 				unpauser = function unpauser() {
-					machPause('pause.png').then(function(el) {
+					machPause('pause.png').then(function (el) {
 						eventing('click', invoke_player, el).render();
 					});
 				},
@@ -996,7 +898,7 @@ function _arrayLikeToArray(arr, len) {
 				prev_driver = defercall('forEach')([defer_once(clear)(true), twicedefer(loader)('base')(prevcaller), playbutton('play'), exitplay, doReLocate, setOrient, publish, removal])(getResult),
 				pauser = function pauser() {
 					if (!$('slide')) {
-						machSlide('base', 'slide').then(function(el) {
+						machSlide('base', 'slide').then(function (el) {
 							eventing('click', invoke_player, el).render();
 							locate.unrender();
 						});
@@ -1026,11 +928,11 @@ function _arrayLikeToArray(arr, len) {
 				mynext = COR(partial(invoke, equals, 'next'), next_driver),
 				myprev = COR(partial(invoke, equals, 'previous'), prev_driver),
 				listen,
-				myplayer = COR(function() {
+				myplayer = COR(function () {
 					pauser();
 					return true;
 				}, invoke_player);
-			myplayer.validate = function() {
+			myplayer.validate = function () {
 				return this;
 			};
 			mynext.setSuccessor(myprev);
@@ -1038,20 +940,19 @@ function _arrayLikeToArray(arr, len) {
 			recur.i = 300;
 			return mynext;
 		},
-		setup = eventing('click', function(e) {
+		setup = eventing('click', function (e) {
 			if (!node_from_target(e).match(/img/i)) {
 				return;
 			}
 			compose(setindex, driller(['target', 'src']))(e);
 			compose(thrice(doMap)('id')('caption'), anCr(document.querySelector('main')))('aside');
 			compose(thrice(doMap)('id')('controls'), anCr(document.querySelector('main')))('section');
-			machBase(e.target, 'base').then(orient(lcsp, ptrt)).then(function(v) {
+			machBase(e.target, 'base').then(orient(lcsp, ptrt)).then(function (v) {
 				return thrice(doMap)('txt')(setCaption(v))($$('caption'));
 			}).then(showtime);
-            
 			var buttons = ['previous', 'play', 'next'].map(buttons_cb),
 				chain = factory(),
-				controls = eventing('click', function(e) {
+				controls = eventing('click', function (e) {
 					var str = text_from_target(e),
 						node = node_from_target(e);
 					if (node.match(/button/i)) {
@@ -1060,7 +961,7 @@ function _arrayLikeToArray(arr, len) {
 						chain.handle(str);
 					}
 				}, $('controls')),
-				exit = eventing('click', function(e) {
+				exit = eventing('click', function (e) {
 					chain = chain.validate('next');
 					chain.handle('next');
 					exitshow();
@@ -1068,10 +969,15 @@ function _arrayLikeToArray(arr, len) {
 					locate.unrender();
 					setup.render();
 				}, compose(close_cb, close_aside)); //listeners...
-			[controls, exit, locate].forEach(function(o) {
+			[controls, exit, locate].forEach(function (o) {
 				return o.render();
 			});
 			setup.unrender();
 		}, gallery);
 	setup.render();
+	/*
+	var x = partial(invoke, gtEq);
+	console.log(x(...[22,22]));
+	//console.log(x.apply(null,[22,5]));
+	*/
 })();
